@@ -1,67 +1,46 @@
 <div class="login-card__wrapper">
-  <form [formGroup]="form">
+  <form [formGroup]="form" (ngSubmit)="submit(login.value,password.value)">
     <div class="login-card">
       <p class="login-title">Login</p>
       <div class="login-card__container">
         <div class="login-card__el">
           <p class="input-name">Login</p>
-          <input
-          class="form-control"
-          formControlName="email"
-          [ngClass]="{'has-error': form.get('email').dirty && form.get('email').invalid}" />
-          <div
-          *ngIf="form.get('email').dirty && form.get('email').invalid">
-            <p
-            class="login-validate"
-            *ngIf="form.get('email').errors?.['required']">
+          <input #login class="form-control" formControlName="email"
+            [ngClass]="{'has-error': form.get('email').dirty && form.get('email').invalid}" />
+          <div *ngIf="form.get('email').dirty && form.get('email').invalid">
+            <p class="login-validate" *ngIf="form.get('email').errors?.['required']">
               Please enter a login email
             </p>
-            <p
-            class="login-validate"
-            *ngIf="form.get('email').errors?.['email']">
-            The login email is invalid
-          </p>
+            <p class="login-validate" *ngIf="form.get('email').errors?.['email']">
+              The login email is invalid
+            </p>
           </div>
         </div>
         <div class="login-card__el">
           <p class="input-name">password</p>
-          <input
-          class="form-control"
-          formControlName="pass"
-          [ngClass]="{'has-error': form.get('pass').dirty && form.get('pass').invalid}" />
+          <input #password class="form-control" formControlName="pass"
+            [ngClass]="{'has-error': form.get('pass').dirty && form.get('pass').invalid}" />
           <div *ngIf="form.get('pass').dirty && form.get('pass').invalid">
-            <div
-            class="login-validate"
-            *ngIf="form.get('pass').errors?.['required']">
-            Please enter a password <br>
-          </div>
-            <div
-            class="login-validate"
-            *ngIf="form.get('pass').errors?.['lengthError'] ||
+            <div class="login-validate" *ngIf="form.get('pass').errors?.['required']">
+              Please enter a password <br>
+            </div>
+            <div class="login-validate" *ngIf="form.get('pass').errors?.['lengthError'] ||
             form.get('pass').errors?.['upperLowerError'] ||
             form.get('pass').errors?.['mixtureError'] ||
             form.get('pass').errors?.['specialCharError']">
               Your password isn't strong enough<br>
-              <p
-              class="login-validate__error"
-              *ngIf="form.get('pass').errors?.['lengthError']">
-              at least 8 characters <br>
+              <p class="login-validate__error" *ngIf="form.get('pass').errors?.['lengthError']">
+                at least 8 characters <br>
               </p>
-              <p
-              class="login-validate__error"
-              *ngIf="form.get('pass').errors?.['upperLowerError']">
-              a mixture of both uppercase and lowercase letters <br>
+              <p class="login-validate__error" *ngIf="form.get('pass').errors?.['upperLowerError']">
+                a mixture of both uppercase and lowercase letters <br>
               </p>
-              <p
-              class="login-validate__error"
-              *ngIf="form.get('pass').errors?.['mixtureError']">
-              a mixture of letters and numbers <br>
+              <p class="login-validate__error" *ngIf="form.get('pass').errors?.['mixtureError']">
+                a mixture of letters and numbers <br>
               </p>
-              <p
-              class="login-validate__error"
-              *ngIf="form.get('pass').errors?.['specialCharError']">
-              inclusion of at least one special character, e.g., ! @ # ? ] <br>
-            </p>
+              <p class="login-validate__error" *ngIf="form.get('pass').errors?.['specialCharError']">
+                inclusion of at least one special character, e.g., ! @ # ? ] <br>
+              </p>
             </div>
           </div>
         </div>

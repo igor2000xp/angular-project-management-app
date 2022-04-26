@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { User } from '../../models/user.model';
+import { ApiService } from '../../services/loginService';
 
 @Component({
   selector: 'app-login-card',
@@ -7,9 +9,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./login-card.component.scss'],
 })
 export class LoginCardComponent implements OnInit {
-  form!:FormGroup;
+  form!: FormGroup;
 
-  constructor() { }
+  constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -29,7 +31,7 @@ export class LoginCardComponent implements OnInit {
   }
 
   checkUpperLower(control: FormControl) {
-    const rexP:RegExp = /(?=.*[a-z])(?=.*[A-Z])/;
+    const rexP: RegExp = /(?=.*[a-z])(?=.*[A-Z])/;
     if (control.value.length === 0) { return; }
 
     if (!control.value.match(rexP)) {
@@ -40,8 +42,8 @@ export class LoginCardComponent implements OnInit {
   }
 
   checkMixture(control: FormControl) {
-    const rexP:RegExp = /[A-Z][a-z]+/;
-    const rexP2:RegExp = /[0-9]+/;
+    const rexP: RegExp = /[A-Z][a-z]+/;
+    const rexP2: RegExp = /[0-9]+/;
     if (control.value.length === 0) { return; }
     if (!control.value.match(rexP) && !control.value.match(rexP2)) {
       return {
@@ -51,12 +53,21 @@ export class LoginCardComponent implements OnInit {
   }
 
   checkSpecialChar(control: FormControl) {
-    const rexP:RegExp = /[!@#$&*%]+/;
+    const rexP: RegExp = /[!@#$&*%]+/;
     if (control.value.length === 0) { return; }
     if (!control.value.match(rexP)) {
       return {
         specialCharError: true,
       };
     }
+  }
+
+  submit(login: string, password: string) {
+    const USER: User = {
+      name: '123',
+      login: login,
+      password: password,
+    };
+    this.apiService.authenticate(USER, 'signup');
   }
 }
