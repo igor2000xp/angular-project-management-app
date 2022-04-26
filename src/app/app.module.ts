@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { MainPageComponent } from './pm/pages/main-page/main-page.component';
 import { CoreModule } from './core/core.module';
 import { AuthModule } from './auth/auth.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { AuthModule } from './auth/auth.module';
     BrowserAnimationsModule,
     CoreModule,
     AuthModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
