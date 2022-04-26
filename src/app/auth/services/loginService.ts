@@ -8,7 +8,10 @@ const SIGNUP = `${BASE}/signup`;
 const SIGNIN = `${BASE}/signin`;
 const USERS = `${BASE}/users`;
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
+
 export class ApiService {
   constructor(private httpClient: HttpClient) { }
 
