@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { User } from '../models/user.model';
 import { Board } from '../models/Board.model';
 import { Column } from '../models/column.model';
+import { Task } from '../models/Task.model';
 
 const BASE = 'http://localhost:4000';
 const SIGNUP = `${BASE}/signup`;
@@ -118,6 +119,24 @@ export class ApiService {
       .set('Authorization', `Bearer ${token}`);
     return this.httpClient
       .put<Column>(`${BOARDS}/${boardId}/columns/${columnId}`, body, { headers: headers });
+  }
+
+  public getTasks(token: string, boardId: string, columnId: string ): Observable<Task[]> {
+    const headers = new HttpHeaders()
+      .set('Accept', 'application/json')
+      .set('Authorization', `Bearer ${token}`);
+    return this.httpClient
+      .get<Task[]>(`${BOARDS}/${boardId}/columns/${columnId}/tasks`, { headers: headers });
+  }
+
+  public createTask(token: string, boardId: string, columnId: string, task: Task ): Observable<Task> {
+    const body = JSON.stringify(task);
+    const headers = new HttpHeaders()
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${token}`);
+    return this.httpClient
+      .post<Task>(`${BOARDS}/${boardId}/columns/${columnId}/tasks`, body, { headers: headers });
   }
 
 }
