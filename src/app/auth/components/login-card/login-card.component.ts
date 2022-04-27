@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../models/user.model';
-import { ApiService } from '../../services/loginService';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-login-card',
@@ -69,5 +69,6 @@ export class LoginCardComponent implements OnInit {
       password: password,
     };
     this.apiService.authenticate(USER, 'signup');
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlYjVkYTViNS1mNGMyLTQwZGEtOGRlNi1jMjA4OWQ1NTJjNTkiLCJsb2dpbiI6InVzZXIwMDEiLCJpYXQiOjE2NTEwODk1NzJ9.Q5oUjH4kPnZSjzQawZEDIoYjRwdAHFZ2Vxn4zY_kdJ0';
   }
 }
