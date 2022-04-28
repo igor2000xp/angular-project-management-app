@@ -73,11 +73,11 @@ export class RegistrationCardComponent implements OnInit {
     }
   }
 
-  submit(login: string, password: string) {
+  submit(name:string, login: string, password: string) {
     const USER: User = {
-      name: '123',
-      login: login,
-      password: password,
+      name,
+      login,
+      password,
     };
     this.apiService.authenticate(USER, 'signup').subscribe(el => console.log(el));
   }
