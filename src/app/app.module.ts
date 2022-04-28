@@ -9,6 +9,8 @@ import { MainPageComponent } from './pm/pages/main-page/main-page.component';
 import { CoreModule } from './core/core.module';
 import { HeaderComponent } from './core/components/header/header.component';
 import { FooterComponent } from './core/components/footer/footer.component';
+import { AuthModule } from './auth/auth.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { FooterComponent } from './core/components/footer/footer.component';
     BrowserModule,
     BrowserAnimationsModule,
     CoreModule,
+    AuthModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

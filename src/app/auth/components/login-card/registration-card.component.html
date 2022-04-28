@@ -1,0 +1,66 @@
+<div class="login-card__wrapper">
+  <form [formGroup]="form" (ngSubmit)="submit(name.value,login.value,password.value)">
+    <div class="login-card">
+      <p class="login-title">Registration</p>
+      <div class="login-card__container">
+        <div class="login-card__el">
+          <p class="input-name">Name</p>
+          <input #login class="form-control" formControlName="name" #name
+            [ngClass]="{'has-error': form.get('name').dirty && form.get('name').invalid}" />
+          <div *ngIf="form.get('name').dirty && form.get('name').invalid">
+            <p class="login-validate" *ngIf="form.get('name').errors?.['required']">
+              Please enter a login email
+            </p>
+            <p class="login-validate" *ngIf="form.get('name').errors?.['lengthError']">
+              at least 8 characters
+            </p>
+          </div>
+        </div>
+        <div class="login-card__el">
+          <p class="input-name">E-mail</p>
+          <input #login class="form-control" formControlName="email"
+            [ngClass]="{'has-error': form.get('email').dirty && form.get('email').invalid}" />
+          <div *ngIf="form.get('email').dirty && form.get('email').invalid">
+            <p class="login-validate" *ngIf="form.get('email').errors?.['required']">
+              Please enter a login email
+            </p>
+            <p class="login-validate" *ngIf="form.get('email').errors?.['email']">
+              The login email is invalid
+            </p>
+          </div>
+        </div>
+        <div class="login-card__el">
+          <p class="input-name">Password</p>
+          <input #password class="form-control" formControlName="pass"
+            [ngClass]="{'has-error': form.get('pass').dirty && form.get('pass').invalid}" />
+          <div *ngIf="form.get('pass').dirty && form.get('pass').invalid">
+            <div class="login-validate" *ngIf="form.get('pass').errors?.['required']">
+              Please enter a password <br>
+            </div>
+            <div class="login-validate" *ngIf="form.get('pass').errors?.['lengthError'] ||
+            form.get('pass').errors?.['upperLowerError'] ||
+            form.get('pass').errors?.['mixtureError'] ||
+            form.get('pass').errors?.['specialCharError']">
+              Your password isn't strong enough<br>
+              <p class="login-validate__error" *ngIf="form.get('pass').errors?.['lengthError']">
+                at least 8 characters <br>
+              </p>
+              <p class="login-validate__error" *ngIf="form.get('pass').errors?.['upperLowerError']">
+                a mixture of both uppercase and lowercase letters <br>
+              </p>
+              <p class="login-validate__error" *ngIf="form.get('pass').errors?.['mixtureError']">
+                a mixture of letters and numbers <br>
+              </p>
+              <p class="login-validate__error" *ngIf="form.get('pass').errors?.['specialCharError']">
+                inclusion of at least one special character, e.g., ! @ # ? ] <br>
+              </p>
+            </div>
+          </div>
+        </div>
+        <button class="login-card__btn" type="submit" [disabled]="form.invalid">
+          <p class="login-card-btn__text">Login</p>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
