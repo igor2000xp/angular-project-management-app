@@ -3,11 +3,9 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { PmModule } from '../pm/pm.module';
 import { AuthModule } from '../auth/auth.module';
-// import { HeaderComponent } from './header/header.component';
 
 @NgModule({
-  declarations: [
-  ],
+  declarations: [],
   imports: [CommonModule, SharedModule, PmModule, AuthModule],
 })
 export class CoreModule {}
