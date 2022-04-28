@@ -10,9 +10,12 @@ const routes: Routes = [
   },
   {
     path: 'auth',
-    pathMatch: 'full',
-    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
+    loadChildren: () => import('./auth/lazy-modules/login/login.module').then((m) => m.LoginModule),
   },
+  // {
+  //   path: 'registration',
+  //   loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
+  // },
 
   // { path: '**', component: Page404Component },
 ];
