@@ -1,0 +1,122 @@
+.main {
+  &-section {
+    background-image: url(../../assets/funky-lines.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 70px 0;
+    width: 100%;
+  }
+
+  &-title {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    padding-bottom: 5rem;
+  }
+
+  &-title p {
+    font-size: 25px;
+    width: 40%;
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  &-tutorial {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    padding-bottom: 5rem;
+
+    &__img {
+      padding-top: 20px;
+    }
+
+    &__img img {
+      width: 700px;
+      height: 500px;
+    }
+  }
+
+  &-tutorial p {
+    font-size: 25px;
+    width: 40%;
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  &-team {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  &-content__team-info {
+    display: flex;
+    width: 80%;
+    margin: 0 auto;
+    justify-content: center;
+    gap: 200px;
+    margin-bottom: 50px;
+    padding-top: 20px;
+
+    &-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &-item h2 {
+      padding-bottom: 10px;
+    }
+
+    &-item p {
+      text-align: center;
+      width: 230px;
+      padding-top: 10px;
+    }
+  }
+}
+
+h1 {
+  font-size: 80px;
+  margin: 0;
+  text-transform: uppercase;
+  color: #433147;
+}
+
+h2 {
+  font-size: 40px;
+  margin: 0;
+  text-transform: uppercase;
+  color: #433147;
+}
+
+h3 {
+  font-size: 30px;
+  margin: 0;
+  text-transform: uppercase;
+  color: #433147;
+}
+
+.team-info-item__photo {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 10px solid #a829c3;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-top: 10px;
+
+  &-igor {
+    background-image: url("../../assets/147140.png");
+  }
+
+  &-aleksandr {
+    background-image: url("../../assets/147142.png");
+  }
+
+  &-semyon {
+    background-image: url("../../assets/147144.png");
+  }
+}

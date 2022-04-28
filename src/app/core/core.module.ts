@@ -1,18 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {SharedModule} from "../shared/shared.module";
-import {PmModule} from "../pm/pm.module";
-import {AuthModule} from "../auth/auth.module";
-
-
+import { SharedModule } from '../shared/shared.module';
+import { PmModule } from '../pm/pm.module';
+import { AuthModule } from '../auth/auth.module';
+// import { HeaderComponent } from './header/header.component';
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule,
-    SharedModule,
-    PmModule,
-    AuthModule,
-  ]
+  declarations: [
+  ],
+  imports: [CommonModule, SharedModule, PmModule, AuthModule],
 })
-export class CoreModule { }
+export class CoreModule {}

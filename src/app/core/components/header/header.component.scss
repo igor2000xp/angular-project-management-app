@@ -1,0 +1,36 @@
+.header {
+    width: 100%;
+    height: 80px;
+    background-color: #a829c3;
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo {
+      margin-left: 20px;
+      font-size: 25px;
+      color: #ffffff;
+  }
+  
+  .admin-btn {
+    margin-top: 20px;
+    margin-bottom: 22px;
+    margin-right: 25px;
+    width: 100px;
+    height: 24px;
+    background-color: #412846;
+    border: none;
+    outline: none;
+    text-transform: uppercase;
+    border-radius: 3px;
+    box-shadow: 2px 0px 4px #412846;
+    font-size: 15px;
+    color: #ffffff;
+    cursor: pointer;
+    &:hover {
+      background-color: #433147;
+    }
+    float: right;
+  }
