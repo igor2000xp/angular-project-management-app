@@ -1,7 +1,7 @@
-import * as TaskActions from '../actions/app.actions';
-import {createReducer, on} from "@ngrx/store";
-import {initialState} from "../state.model";
-import {createTaskAction, deleteTaskAction, getTasksAction, updateTaskAction} from "../actions/app.actions";
+import * as TaskActions from '../actions/task.actions';
+// import {createTaskAction, deleteTaskAction, getTasksAction, updateTaskAction} from "../actions/app.actions";
+import {Action, createReducer, on} from "@ngrx/store";
+import {IAppState, initialState} from "../state.models";
 
 const reducer = createReducer(initialState,
   on(TaskActions.getTasksAction, state => {
@@ -25,8 +25,9 @@ const reducer = createReducer(initialState,
     console.log('!!! state', state);
     return {...state};
   }),
-
 );
 
-
+export function taskReducer (state: IAppState, action: Action) {
+  return reducer(state, action);
+};
 

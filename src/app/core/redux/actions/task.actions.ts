@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { ITask } from "../state.model";
+import { ITask } from "../state.models";
 
 export const getTasksAction = createAction('' +
   '[TASKS] GET ALL CURRENT TASKS'

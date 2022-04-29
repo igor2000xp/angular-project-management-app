@@ -7,8 +7,8 @@ import {
 } from '@ngrx/store';
 
 export * from '../app.state';
-export * from '../actions/app.actions';
-export * from '../reducers/app.reducer';
+export * from '../actions/task.actions';
+export * from './task.reducer';
 
 import { environment } from '../../../../environments/environment';
 

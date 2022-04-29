@@ -4,7 +4,7 @@ import { SharedModule } from '../shared/shared.module';
 import { PmModule } from '../pm/pm.module';
 import { AuthModule } from '../auth/auth.module';
 import { StoreModule } from '@ngrx/store';
-import { metaReducers, reducers } from './redux/reducers';
+import {metaReducers, reducers, taskReducer} from './redux/reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
@@ -28,6 +28,7 @@ import { AppEffects } from './redux/effects/app.effects';
         strictActionTypeUniqueness: true,
       },
     }),
+    StoreModule.forFeature('AppState', taskReducer),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([AppEffects]),
   ],
