@@ -5,6 +5,11 @@ import {
   createSelector,
   MetaReducer,
 } from '@ngrx/store';
+
+export * from '../app.state';
+export * from '../actions/app.actions';
+export * from '../reducers/app.reducer';
+
 import { environment } from '../../../../environments/environment';
 
 export interface State {

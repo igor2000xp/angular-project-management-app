@@ -1,19 +1,32 @@
-import { createAction, props } from "@ngrx/store";
-import { ITask } from "../state.model";
+import * as TaskActions from '../actions/app.actions';
+import {createReducer, on} from "@ngrx/store";
+import {initialState} from "../state.model";
+import {createTaskAction, deleteTaskAction, getTasksAction, updateTaskAction} from "../actions/app.actions";
 
-export const getTasksAction = createAction('' +
-  '[TASKS] GET ALL CURRENT TASKS'
-);
-export const getTaskAction = createAction('' +
-  '[TASKS] GET TASK BY ID'
-);
-export const createTaskAction = createAction('' +
-  '[TASKS] CREATE A TASK'
-);
-export const updateTaskAction = createAction('' +
-  '[TASKS] GET ALL CURRENT TASKS'
-);
+const reducer = createReducer(initialState,
+  on(TaskActions.getTasksAction, state => {
+    console.log('!!! state', state);
+    return {...state};
+  }),
+  on(TaskActions.getTaskAction, state => {
+    console.log('!!! state', state);
+    return {...state};
+  }),
+  on(TaskActions.createTaskAction, state => {
+      console.log('!!! state', state);
+      return {...state};
+    }),
+  on(TaskActions.updateTaskAction, state => {
+    console.log('!!! state', state);
+    return {...state};
+  }),
 
+  on(TaskActions.deleteTaskAction, state => {
+    console.log('!!! state', state);
+    return {...state};
+  }),
+
+);
 
 
 
