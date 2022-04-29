@@ -1,11 +1,11 @@
 <div class="login-card__wrapper">
   <form [formGroup]="form" (ngSubmit)="submit()">
     <div class="login-card">
-      <p class="login-title">Registration</p>
+      <p class="login-title">{{formTitle}}</p>
       <div class="login-card__container">
         <div class="login-card__el" *ngIf="checkRegPage()">
           <p class="input-name">Name</p>
-          <input #login class="form-control" formControlName="name" #name
+          <input #login class="form-control" formControlName="name"
             [ngClass]="{'has-error': form.get('name').dirty && form.get('name').invalid}" />
           <div *ngIf="form.get('name').dirty && form.get('name').invalid">
             <p class="login-validate" *ngIf="form.get('name').errors?.['required']">

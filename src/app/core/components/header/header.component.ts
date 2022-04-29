@@ -9,8 +9,12 @@ import { Router } from '@angular/router';
 export class HeaderComponent {
   constructor(private router: Router) {}
 
-  goToReg() {
+  goToRegPage() {
     this.router.navigateByUrl('/auth/registration');
+  }
+
+  goToLogPage() {
+    this.router.navigateByUrl('/auth/authorization');
   }
 
 }

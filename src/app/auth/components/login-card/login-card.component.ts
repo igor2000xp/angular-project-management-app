@@ -2,7 +2,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { User } from '../../models/user.model';
 import { ApiService } from '../../services/api.service';
 
 @Component({
@@ -15,16 +14,31 @@ export class LoginCardComponent implements OnInit {
 
   path: string;
 
+  formTitle: string;
+
+
   constructor(private apiService: ApiService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.form = new FormGroup({
-      name: new FormControl('', [Validators.required, this.checkNameForLength]),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      pass: new FormControl('', [Validators.required, this.checkForLength, this.checkUpperLower, this.checkMixture, this.checkSpecialChar]),
-    });
     this.route.url.subscribe(el => this.path = el[0].path);
-    console.log(this.form);
+    this.form = this.path === 'registration' ? this.createForm('signup') :  this.createForm('signin');
+    this.formTitle = this.path === 'registration' ? 'Registration' : 'Authorization';
+  }
+
+  createForm(action:string) {
+    if (action === 'signup') {
+      return new FormGroup({
+        name: new FormControl('', [Validators.required, this.checkNameForLength]),
+        email: new FormControl('', [Validators.required, Validators.email]),
+        pass: new FormControl('', [Validators.required, this.checkForLength, this.checkUpperLower, this.checkMixture, this.checkSpecialChar]),
+      });
+    }
+    if (action === 'signin') {
+      return new FormGroup({
+        email: new FormControl('', [Validators.required, Validators.email]),
+        pass: new FormControl('', [Validators.required, this.checkForLength, this.checkUpperLower, this.checkMixture, this.checkSpecialChar]),
+      });
+    }
   }
 
   checkForLength(control: FormControl) {
@@ -79,13 +93,31 @@ export class LoginCardComponent implements OnInit {
     }
   }
 
+  userInfo(action:string) {
+    if (action === 'signup') {
+      return {
+        name: this.form.value.name,
+        login: this.form.value.email,
+        password: this.form.value.pass,
+      };
+    }
+    if (action === 'signin') {
+      return {
+        login: this.form.value.email,
+        password: this.form.value.pass,
+      };
+    }
+
+  }
+
   submit() {
-    const USER: User = {
-      name: this.form.value.name,
-      login: this.form.value.email,
-      password: this.form.value.pass,
-    };
-    this.apiService.authenticate(USER, 'signup').subscribe(el => console.log(el));
+    if (this.path === 'registration') {
+      this.apiService.authenticate(this.userInfo('signup'), 'signup').subscribe(el => console.log(el));
+      return;
+    } else {
+      this.apiService.authenticate(this.userInfo('signin'), 'signin').subscribe(el => console.log(el));
+      return;
+    }
   }
 
   checkRegPage() {
