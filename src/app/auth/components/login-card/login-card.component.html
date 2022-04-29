@@ -1,9 +1,9 @@
 <div class="login-card__wrapper">
-  <form [formGroup]="form" (ngSubmit)="submit(name.value,login.value,password.value)">
+  <form [formGroup]="form" (ngSubmit)="submit()">
     <div class="login-card">
       <p class="login-title">Registration</p>
       <div class="login-card__container">
-        <div class="login-card__el">
+        <div class="login-card__el" *ngIf="checkRegPage()">
           <p class="input-name">Name</p>
           <input #login class="form-control" formControlName="name" #name
             [ngClass]="{'has-error': form.get('name').dirty && form.get('name').invalid}" />

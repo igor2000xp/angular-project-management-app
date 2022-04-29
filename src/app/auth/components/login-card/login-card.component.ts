@@ -1,17 +1,21 @@
+/* eslint-disable @typescript-eslint/default-param-last */
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { User } from '../../models/user.model';
 import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-login-card',
-  templateUrl: './registration-card.component.html',
-  styleUrls: ['./registration-card.component.scss'],
+  templateUrl: './login-card.component.html',
+  styleUrls: ['./login-card.component.scss'],
 })
-export class RegistrationCardComponent implements OnInit {
+export class LoginCardComponent implements OnInit {
   form!: FormGroup;
 
-  constructor(private apiService: ApiService) { }
+  path: string;
+
+  constructor(private apiService: ApiService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -19,6 +23,8 @@ export class RegistrationCardComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.email]),
       pass: new FormControl('', [Validators.required, this.checkForLength, this.checkUpperLower, this.checkMixture, this.checkSpecialChar]),
     });
+    this.route.url.subscribe(el => this.path = el[0].path);
+    console.log(this.form);
   }
 
   checkForLength(control: FormControl) {
@@ -73,12 +79,20 @@ export class RegistrationCardComponent implements OnInit {
     }
   }
 
-  submit(name:string, login: string, password: string) {
+  submit() {
     const USER: User = {
-      name,
-      login,
-      password,
+      name: this.form.value.name,
+      login: this.form.value.email,
+      password: this.form.value.pass,
     };
     this.apiService.authenticate(USER, 'signup').subscribe(el => console.log(el));
+  }
+
+  checkRegPage() {
+    return this.path === 'registration' ? true : false;
+  }
+
+  checkLogPage() {
+    return this.path === 'login' ? true : false;
   }
 }
