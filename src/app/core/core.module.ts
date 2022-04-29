@@ -4,11 +4,11 @@ import { SharedModule } from '../shared/shared.module';
 import { PmModule } from '../pm/pm.module';
 import { AuthModule } from '../auth/auth.module';
 import { StoreModule } from '@ngrx/store';
-import { metaReducers, reducers } from './reducers';
+import { metaReducers, reducers } from './redux/reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
-import { AppEffects } from './effects/app.effects';
+import { AppEffects } from './redux/effects/app.effects';
 
 @NgModule({
   declarations: [],
