@@ -2,7 +2,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { createUserAction } from 'src/app/redux/reducers';
 import { ApiService } from '../../services/api.service';
+import * as UserAction from '../../../redux/actions/user.actions';
 
 @Component({
   selector: 'app-login-card',
@@ -17,7 +20,7 @@ export class LoginCardComponent implements OnInit {
   formTitle: string;
 
 
-  constructor(private apiService: ApiService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private apiService: ApiService, private route: ActivatedRoute, private router: Router, private store: Store) { }
 
   ngOnInit(): void {
     this.route.url.subscribe(el => this.path = el[0].path);
@@ -130,5 +133,9 @@ export class LoginCardComponent implements OnInit {
 
   goToRegPage() {
     this.router.navigateByUrl('/auth/registration');
+  }
+
+  aaa(){
+    this.store.dispatch(UserAction.getUsersAction({token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlYjVkYTViNS1mNGMyLTQwZGEtOGRlNi1jMjA4OWQ1NTJjNTkiLCJsb2dpbiI6InVzZXIwMDEiLCJpYXQiOjE2NTEzNDYwMzR9._t-Bs2WNpDHNExGaKt6sXotWEqCBWnvYhBlJLE_e1dM'}));
   }
 }

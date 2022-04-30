@@ -5,6 +5,7 @@ const actionSource = '[USER]';
 
 export const getUsersAction = createAction(
   `${actionSource} GET ALL CURRENT USER`,
+  props<{token:string}>(),
 );
 export const getUsersActionSuccess = createAction(
   `${actionSource} GET ALL CURRENT USER, SUCCESS`,

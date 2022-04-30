@@ -10,12 +10,12 @@ export const initialUserState:IUsersState = {
 
 const usReducer = createReducer(
   initialUserState,
-  on(UserAction.getUsersAction, (state) => {
-    console.log('!!! state', state);
-    return ({
-      ...state,
-    });
-  }),
+  // on(UserAction.getUsersAction, (state) => {
+  //   console.log('!!! state', state);
+  //   return ({
+  //     ...state,
+  //   });
+  // }),
   on(UserAction.getUsersActionSuccess, (state, { users }) => ({
     ...state,
     users,
@@ -35,8 +35,10 @@ const usReducer = createReducer(
   on(UserAction.getUserActionFailed, (state) => ({
     ...state,
   })),
-  on(UserAction.createUserAction, (state) => ({
+  on(UserAction.createUserAction, (state, { user }) => ({
     ...state,
+    user,
+    isUserFetched: true,
   })),
   on(UserAction.createUsersActionSuccess, (state, { user }) => ({
     ...state,

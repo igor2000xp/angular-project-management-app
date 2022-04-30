@@ -11,9 +11,9 @@ export interface IUsersState {
 }
 
 export interface IUser {
-  id: string;
+  id?: string;
   name?: string;
-  login: string;
+  login?: string;
   password?: string;
   isUserFetched?: boolean;
 }
