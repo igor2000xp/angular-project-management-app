@@ -11,6 +11,14 @@ import { HeaderComponent } from './core/components/header/header.component';
 import { FooterComponent } from './core/components/footer/footer.component';
 import { AuthModule } from './auth/auth.module';
 import { HttpClientModule } from '@angular/common/http';
+import { StoreModule } from "@ngrx/store";
+// import { metaReducers, reducers } from './redux/reducers';
+import * as fromUser from './redux/reducers/user.reducer';
+import * as fromTask from './redux/reducers/task.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { AppEffects } from './redux/effects/app.effects';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -28,6 +36,24 @@ import { HttpClientModule } from '@angular/common/http';
     CoreModule,
     AuthModule,
     HttpClientModule,
+    StoreModule.forRoot(
+      {
+        user: fromUser.userReducer,
+        task: fromTask.taskReducer,
+      }, {
+      // metaReducers,
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true,
+        strictStateSerializability: true,
+        strictActionSerializability: true,
+        strictActionWithinNgZone: true,
+        strictActionTypeUniqueness: true,
+      },
+    }),
+    // StoreModule.forFeature('taskState', taskReducer),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    EffectsModule.forRoot([AppEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent],

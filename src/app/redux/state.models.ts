@@ -1,19 +1,4 @@
-export interface IAppState {
-  users: IUserState[];
-  token: string;
-  boards: IBoard[];
-  columns: IColumn[];
-  authState: boolean;
-}
-export const initialState:IAppState = {
-  users: [],
-  token: '',
-  boards: [],
-  columns: [],
-  authState: false,
-};
-
-export interface IUserState {
+export interface IUser {
   id: string;
   name?: string;
   login: string;
