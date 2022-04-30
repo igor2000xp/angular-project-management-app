@@ -1,15 +1,21 @@
-import { ITasksState, IUsersState } from './reducers';
-
+import { ITasksState } from './reducers';
 
 export interface IAppState {
   users: IUsersState;
   tasks: ITasksState;
 }
+export interface IUsersState {
+  users: IUser[] | null;
+  currentUser: IUser | null;
+  isUserFetched: boolean;
+}
+
 export interface IUser {
   id: string;
   name?: string;
   login: string;
   password?: string;
+  isUserFetched?: boolean;
 }
 export interface ITask {
   id: string;

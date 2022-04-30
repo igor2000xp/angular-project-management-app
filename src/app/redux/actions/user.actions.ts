@@ -8,7 +8,7 @@ export const getUsersAction = createAction(
 );
 export const getUsersActionSuccess = createAction(
   `${actionSource} GET ALL CURRENT USER, SUCCESS`,
-  props<{user:IUser}>(),
+  props<{users:IUser[]}>(),
 );
 export const getUsersActionFailed = createAction(
   `${actionSource} GET ALL CURRENT USER, FAILED`,
@@ -25,6 +25,7 @@ export const getUserActionFailed = createAction(
 );
 export const createUserAction = createAction(
   `${actionSource} CREATE A USER RECORD`,
+  props<{user:IUser}>(),
 );
 export const createUsersActionSuccess = createAction(
   `${actionSource} CREATE A USER RECORD, SUCCESS`,

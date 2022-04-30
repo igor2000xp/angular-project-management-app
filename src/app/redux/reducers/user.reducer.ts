@@ -1,12 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { IUser } from '../state.models';
+import { IUser, IUsersState } from '../state.models';
 import * as UserAction from '../actions/user.actions';
-
-export interface IUsersState {
-  users: IUser[] | null;
-  currentUser: IUser | null;
-  isUserFetched: boolean;
-}
 
 export const initialUserState:IUsersState = {
   users: null,
@@ -22,10 +16,9 @@ const usReducer = createReducer(
       ...state,
     });
   }),
-
-  on(UserAction.getUsersActionSuccess, (state, { user }) => ({
+  on(UserAction.getUsersActionSuccess, (state, { users }) => ({
     ...state,
-    user,
+    users,
     isUserFetched: true,
   })),
   on(UserAction.getUsersActionFailed, (state) => ({
