@@ -16,6 +16,6 @@ const materialModules = [
   imports: [
     CommonModule,
     ...materialModules,
-  ]
+  ],
 })
 export class SharedModule { }

@@ -2,15 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RegistrationCardComponent } from './components/login-card/registration-card.component';
+import { LoginCardComponent } from './components/login-card/login-card.component';
 
 @NgModule({
-  declarations: [
-    RegistrationCardComponent,
-  ],
-  exports: [
-    RegistrationCardComponent,
-  ],
+  declarations: [LoginCardComponent],
   imports: [
     BrowserModule,
     CommonModule,
