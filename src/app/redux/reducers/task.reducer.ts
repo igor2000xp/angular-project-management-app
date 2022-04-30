@@ -1,17 +1,18 @@
-import * as TaskActions from '../actions/task.actions';
 import { Action, createReducer, on } from '@ngrx/store';
 import { ITask } from '../state.models';
+import * as TaskActions from '../actions/task.actions';
 
 export interface ITaskState {
   task: ITask | null;
-  isFetched: boolean;
+  isTaskFetched: boolean;
 }
 export const initialTaskState:ITaskState = {
   task: null,
-  isFetched: false,
+  isTaskFetched: false,
 };
 
-const reducer = createReducer(initialTaskState,
+const tReducer = createReducer(
+  initialTaskState,
   on(TaskActions.getTasksAction, state => {
     console.log('!!! state', state);
     return ({
@@ -21,7 +22,7 @@ const reducer = createReducer(initialTaskState,
   on(TaskActions.getTasksActionSuccess, (state, { task }) => ({
     ...state,
     task,
-    isFetched: false,
+    isTaskFetched: false,
   })),
   on(TaskActions.getTasksActionFailed, state => {
     console.log('!!! state', state);
@@ -36,7 +37,7 @@ const reducer = createReducer(initialTaskState,
   on(TaskActions.getTaskActionSuccess, (state, { task }) => ({
     ...state,
     task,
-    isFetched: false,
+    isTaskFetched: false,
   })),
   on(TaskActions.getTaskActionFailed, state => {
     console.log('!!! state', state);
@@ -51,7 +52,7 @@ const reducer = createReducer(initialTaskState,
   on(TaskActions.createTaskActionSuccess, (state, { task }) => ({
     ...state,
     task,
-    isFetched: false,
+    isTaskFetched: false,
   })),
   on(TaskActions.createTaskActionFailed, state => {
     console.log('!!! state', state);
@@ -66,7 +67,7 @@ const reducer = createReducer(initialTaskState,
   on(TaskActions.updateTaskActionSuccess, (state, { task }) => ({
     ...state,
     task,
-    isFetched: false,
+    isTaskFetched: false,
   })),
   on(TaskActions.updateTaskActionFailed, state => {
     console.log('!!! state', state);
@@ -81,7 +82,7 @@ const reducer = createReducer(initialTaskState,
   on(TaskActions.deleteTaskActionSuccess, (state, { task }) => ({
     ...state,
     task,
-    isFetched: false,
+    isTaskFetched: false,
   })),
   on(TaskActions.deleteTaskActionFailed, state => {
     console.log('!!! state', state);
@@ -92,6 +93,6 @@ const reducer = createReducer(initialTaskState,
 );
 
 export function taskReducer (state: ITaskState, action: Action) {
-  return reducer(state, action);
+  return tReducer(state, action);
 }
 

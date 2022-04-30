@@ -4,23 +4,27 @@ import * as UserAction from '../actions/user.actions';
 
 export interface IUserState {
   user: IUser | null;
-  isFetched: boolean;
+  isUserFetched: boolean;
 }
 
 export const initialUserState:IUserState = {
   user: null,
-  isFetched: false,
+  isUserFetched: false,
 }
 
-const reducer = createReducer(
+const usReducer = createReducer(
   initialUserState,
-  on(UserAction.getUsersAction, (state) => ({
-    ...state,
-  })),
+  on(UserAction.getUsersAction, (state) => {
+    console.log('!!! state', state);
+    return ({
+      ...state,
+    });
+  }),
+
   on(UserAction.getUsersActionSuccess, (state, { user }) => ({
     ...state,
     user,
-    isFetched: true,
+    isUserFetched: true,
   })),
   on(UserAction.getUsersActionFailed, (state) => ({
     ...state,
@@ -31,7 +35,7 @@ const reducer = createReducer(
   on(UserAction.getUserActionSuccess, (state, { user }) => ({
     ...state,
     user,
-    isFetched: true,
+    isUserFetched: true,
   })),
   on(UserAction.getUserActionFailed, (state) => ({
     ...state,
@@ -42,7 +46,7 @@ const reducer = createReducer(
   on(UserAction.createUsersActionSuccess, (state, { user }) => ({
     ...state,
     user,
-    isFetched: true,
+    isUserFetched: true,
   })),
   on(UserAction.createUsersActionFailed, (state) => ({
     ...state,
@@ -53,7 +57,7 @@ const reducer = createReducer(
   on(UserAction.updateUsersActionSuccess, (state, { user }) => ({
     ...state,
     user,
-    isFetched: true,
+    isUserFetched: true,
   })),
   on(UserAction.updateUsersActionFailed, (state) => ({
     ...state,
@@ -64,7 +68,7 @@ const reducer = createReducer(
   on(UserAction.deleteUsersActionSuccess, (state, { user }) => ({
     ...state,
     user,
-    isFetched: true,
+    isUserFetched: true,
   })),
   on(UserAction.deleteUsersActionFailed, (state) => ({
     ...state,
@@ -72,5 +76,5 @@ const reducer = createReducer(
 );
 
 export function userReducer(state: IUserState, action: Action) {
-  return reducer(state, action);
+  return usReducer(state, action);
 }

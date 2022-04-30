@@ -38,8 +38,8 @@ import { environment } from '../environments/environment';
     HttpClientModule,
     StoreModule.forRoot(
       {
-        user: fromUser.userReducer,
         task: fromTask.taskReducer,
+        user: fromUser.userReducer,
       }, {
       // metaReducers,
       runtimeChecks: {
