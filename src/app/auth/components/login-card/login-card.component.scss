@@ -19,7 +19,7 @@ p {
   height: 75.8%;
 }
 
-.login-card__el{
+.login-card__el {
   display: flex;
   flex-direction: column;
 }
@@ -95,6 +95,18 @@ p {
   font-size: 16px;
   color: $white;
 }
+
 .has-error {
-  border: 2px solid red;
+  border: 2px solid $red;
+}
+
+.route-reg {
+  margin: 5% 0 0 5%;
+  font-size: 13px;
+  color: $darkgray;
+
+  &:hover {
+    color: $red;
+    cursor: pointer
+  }
 }

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/default-param-last */
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class LoginCardComponent implements OnInit {
   formTitle: string;
 
 
-  constructor(private apiService: ApiService, private route: ActivatedRoute) { }
+  constructor(private apiService: ApiService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.route.url.subscribe(el => this.path = el[0].path);
@@ -125,6 +125,10 @@ export class LoginCardComponent implements OnInit {
   }
 
   checkLogPage() {
-    return this.path === 'login' ? true : false;
+    return this.path === 'authorization' ? true : false;
+  }
+
+  goToRegPage() {
+    this.router.navigateByUrl('/auth/registration');
   }
 }
