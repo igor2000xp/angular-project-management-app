@@ -9,7 +9,6 @@ import { MainPageComponent } from './pm/pages/main-page/main-page.component';
 import { CoreModule } from './core/core.module';
 import { HeaderComponent } from './core/components/header/header.component';
 import { FooterComponent } from './core/components/footer/footer.component';
-import { AuthModule } from './auth/auth.module';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from "@ngrx/store";
 // import { metaReducers, reducers } from './redux/reducers';
@@ -34,7 +33,6 @@ import { environment } from '../environments/environment';
     BrowserModule,
     BrowserAnimationsModule,
     CoreModule,
-    AuthModule,
     HttpClientModule,
     StoreModule.forRoot(
       {
