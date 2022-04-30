@@ -2,13 +2,15 @@ import { Action, createReducer, on } from '@ngrx/store';
 import { IUser } from '../state.models';
 import * as UserAction from '../actions/user.actions';
 
-export interface IUserState {
-  user: IUser | null;
+export interface IUsersState {
+  users: IUser[] | null;
+  currentUser: IUser | null;
   isUserFetched: boolean;
 }
 
-export const initialUserState:IUserState = {
-  user: null,
+export const initialUserState:IUsersState = {
+  users: null,
+  currentUser: null,
   isUserFetched: false,
 }
 
@@ -75,6 +77,6 @@ const usReducer = createReducer(
   })),
 );
 
-export function userReducer(state: IUserState, action: Action) {
+export function userReducer(state: IUsersState, action: Action) {
   return usReducer(state, action);
 }

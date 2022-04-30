@@ -1,3 +1,10 @@
+import { ITasksState, IUsersState } from './reducers';
+
+
+export interface IAppState {
+  users: IUsersState;
+  tasks: ITasksState;
+}
 export interface IUser {
   id: string;
   name?: string;

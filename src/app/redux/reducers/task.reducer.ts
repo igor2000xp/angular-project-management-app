@@ -2,12 +2,14 @@ import { Action, createReducer, on } from '@ngrx/store';
 import { ITask } from '../state.models';
 import * as TaskActions from '../actions/task.actions';
 
-export interface ITaskState {
-  task: ITask | null;
+export interface ITasksState {
+  tasks: ITask[] | null;
+  currentTask: ITask | null;
   isTaskFetched: boolean;
 }
-export const initialTaskState:ITaskState = {
-  task: null,
+export const initialTaskState:ITasksState = {
+  tasks: null,
+  currentTask: null,
   isTaskFetched: false,
 };
 
@@ -92,7 +94,7 @@ const tReducer = createReducer(
   }),
 );
 
-export function taskReducer (state: ITaskState, action: Action) {
+export function taskReducer (state: ITasksState, action: Action) {
   return tReducer(state, action);
 }
 
