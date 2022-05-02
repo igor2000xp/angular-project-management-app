@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { createUserAction } from 'src/app/redux/reducers';
 import { ApiService } from '../../services/api.service';
 import * as UserAction from '../../../redux/actions/user.actions';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-login-card',
@@ -19,16 +20,18 @@ export class LoginCardComponent implements OnInit {
 
   formTitle: string;
 
+  currentUser: User;
+
 
   constructor(private apiService: ApiService, private route: ActivatedRoute, private router: Router, private store: Store) { }
 
   ngOnInit(): void {
     this.route.url.subscribe(el => this.path = el[0].path);
-    this.form = this.path === 'registration' ? this.createForm('signup') :  this.createForm('signin');
+    this.form = this.path === 'registration' ? this.createForm('signup') : this.createForm('signin');
     this.formTitle = this.path === 'registration' ? 'Registration' : 'Authorization';
   }
 
-  createForm(action:string) {
+  createForm(action: string) {
     if (action === 'signup') {
       return new FormGroup({
         name: new FormControl('', [Validators.required, this.checkNameForLength]),
@@ -96,29 +99,37 @@ export class LoginCardComponent implements OnInit {
     }
   }
 
-  userInfo(action:string) {
-    if (action === 'signup') {
+  userInfo(action: string) {
+    if (action === 'signup')
       return {
         name: this.form.value.name,
         login: this.form.value.email,
         password: this.form.value.pass,
       };
-    }
     if (action === 'signin') {
       return {
         login: this.form.value.email,
         password: this.form.value.pass,
-      };
+      }
     }
+
 
   }
 
   submit() {
     if (this.path === 'registration') {
-      this.apiService.authenticate(this.userInfo('signup'), 'signup').subscribe(el => console.log(el));
+      const currentUser = this.userInfo('signup');
+      this.store.dispatch(UserAction.createUserAction({ currentUser: currentUser }));
+      this.store.subscribe(el => console.log(el));
+      this.router.navigateByUrl('main');
       return;
     } else {
-      this.apiService.authenticate(this.userInfo('signin'), 'signin').subscribe(el => console.log(el));
+      const currentUser = this.userInfo('signin');
+      this.store.dispatch(UserAction.createTokenAction({ currentUser: currentUser }));
+      this.store.subscribe(el => console.log(el));
+      // this.userInfo('signin');
+      // this.apiService.authenticate(this.currentUser, 'signin').subscribe(el => console.log(el));
+      // this.router.navigateByUrl('main');
       return;
     }
   }
@@ -135,7 +146,16 @@ export class LoginCardComponent implements OnInit {
     this.router.navigateByUrl('/auth/registration');
   }
 
-  aaa(){
-    this.store.dispatch(UserAction.getUsersAction({token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlYjVkYTViNS1mNGMyLTQwZGEtOGRlNi1jMjA4OWQ1NTJjNTkiLCJsb2dpbiI6InVzZXIwMDEiLCJpYXQiOjE2NTEzNDYwMzR9._t-Bs2WNpDHNExGaKt6sXotWEqCBWnvYhBlJLE_e1dM'}));
+  aaa() {
+    this.store.dispatch(UserAction.getUsersAction({ token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlYjVkYTViNS1mNGMyLTQwZGEtOGRlNi1jMjA4OWQ1NTJjNTkiLCJsb2dpbiI6InVzZXIwMDEiLCJpYXQiOjE2NTEzNDYwMzR9._t-Bs2WNpDHNExGaKt6sXotWEqCBWnvYhBlJLE_e1dM' }));
+    // this.store.dispatch(UserAction.createUserAction({
+    //   user: {
+    //     name: this.form.value.name,
+    //     login: this.form.value.email,
+    //     password: this.form.value.pass,
+    //   }
+
+    // }));
+    this.store.subscribe((el) => console.log(el));
   }
 }

@@ -26,14 +26,22 @@ export const getUserActionFailed = createAction(
 );
 export const createUserAction = createAction(
   `${actionSource} CREATE A USER RECORD`,
-  props<{user:IUser}>(),
+  props<{currentUser:IUser}>(),
 );
 export const createUsersActionSuccess = createAction(
   `${actionSource} CREATE A USER RECORD, SUCCESS`,
-  props<{user:IUser}>(),
+  props<{currentUser:IUser}>(),
 );
 export const createUsersActionFailed = createAction(
   `${actionSource} CREATE A USER RECORD, FAILED`,
+);
+export const createTokenAction = createAction(
+  `${actionSource} CREATE A USER TOKEN`,
+  props<{currentUser:IUser}>(),
+);
+export const createTokenActionSuccess = createAction(
+  `${actionSource} CREATE A USER TOKEN SUCCES`,
+  props<{currentUser:IUser}>(),
 );
 export const updateUserAction = createAction(
   `${actionSource} UPDATE THE USER RECORD`,

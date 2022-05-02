@@ -2,7 +2,7 @@ import { Action, createReducer, on } from '@ngrx/store';
 import { IUser, IUsersState } from '../state.models';
 import * as UserAction from '../actions/user.actions';
 
-export const initialUserState:IUsersState = {
+export const initialUserState: IUsersState = {
   users: null,
   currentUser: null,
   isUserFetched: false,
@@ -35,18 +35,19 @@ const usReducer = createReducer(
   on(UserAction.getUserActionFailed, (state) => ({
     ...state,
   })),
-  on(UserAction.createUserAction, (state, { user }) => ({
+  on(UserAction.createUsersActionSuccess, (state, { currentUser }) => ({
     ...state,
-    user,
-    isUserFetched: true,
-  })),
-  on(UserAction.createUsersActionSuccess, (state, { user }) => ({
-    ...state,
-    user,
+    currentUser: currentUser,
     isUserFetched: true,
   })),
   on(UserAction.createUsersActionFailed, (state) => ({
     ...state,
+  })),
+  on(UserAction.createTokenActionSuccess, (state, { currentUser }) => (
+    {
+    ...state,
+    currentUser: {...state.currentUser, currentUser},
+    isUserFetched: true,
   })),
   on(UserAction.updateUserAction, (state) => ({
     ...state,

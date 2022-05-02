@@ -6,7 +6,7 @@ export interface IAppState {
 }
 export interface IUsersState {
   users: IUser[] | null;
-  currentUser: IUser | null;
+  currentUser: IUser | null| any;
   isUserFetched: boolean;
 }
 
@@ -16,6 +16,7 @@ export interface IUser {
   login?: string;
   password?: string;
   isUserFetched?: boolean;
+  token?: string;
 }
 export interface ITask {
   id: string;
