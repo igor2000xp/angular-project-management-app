@@ -22,7 +22,7 @@ export class LoginCardComponent implements OnInit {
   currentUser: User;
 
 
-  constructor(private route: ActivatedRoute, private router: Router, private store: Store, private validator:ValidatorsService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private store: Store, private validator: ValidatorsService) { }
 
   ngOnInit(): void {
     this.route.url.subscribe(el => this.path = el[0].path);
@@ -46,10 +46,10 @@ export class LoginCardComponent implements OnInit {
     }
   }
 
-  checkError(formControlName: string){
+  checkError(formControlName: string) {
     return (this.form.get(formControlName).dirty && this.form.get(formControlName).invalid) ? true : false;
   }
-  viewError(formControlName: string, errorName: string){
+  viewError(formControlName: string, errorName: string) {
     return (this.form.get(formControlName).errors?.[errorName]) ? true : false;
   }
 
