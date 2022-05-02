@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { catchError, Observable, throwError } from 'rxjs';
 import { User } from '../models/user.model';
 import { Board } from '../models/Board.model';
 import { Column } from '../models/column.model';
 import { Task } from '../models/Task.model';
+import { ErrorService } from 'src/app/shared/services/errors.service';
 
 const BASE = 'http://localhost:4000';
 const SIGNUP = `${BASE}/signup`;
@@ -17,7 +18,13 @@ const BOARDS = `${BASE}/boards`;
 })
 
 export class ApiService {
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private errorService: ErrorService) { }
+
+  private checkError(error:HttpErrorResponse){
+    if (error.status === 201) this.errorService.takeErrorMessage('')
+    else this.errorService.takeErrorMessage(error.error.message)
+    return throwError(() => new Error('Something gone wrong'))
+  }
 
   public authenticate(user: User, mode: string): Observable<User> {
     const url = mode === 'signup' ? SIGNUP : SIGNIN;
@@ -25,7 +32,10 @@ export class ApiService {
       .set('Accept', 'application/json')
       .set('Content-Type', 'application/json');
     const body = JSON.stringify(user);
-    return this.httpClient.post<User>(url, body, { headers: headers });
+    return this.httpClient.post<User>(url, body, { headers: headers })
+    .pipe(
+      catchError(err => this.checkError(err))
+    );
   }
 
   public getUsers(token: string): Observable<User[]> {
