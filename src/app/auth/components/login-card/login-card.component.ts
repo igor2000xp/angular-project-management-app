@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { ValidatorsService } from 'src/app/shared/services/validator.service';
 import * as UserAction from '../../../redux/actions/user.actions';
 import { User } from '../../models/user.model';
 
@@ -21,7 +22,7 @@ export class LoginCardComponent implements OnInit {
   currentUser: User;
 
 
-  constructor(private route: ActivatedRoute, private router: Router, private store: Store) { }
+  constructor(private route: ActivatedRoute, private router: Router, private store: Store, private validator:ValidatorsService) { }
 
   ngOnInit(): void {
     this.route.url.subscribe(el => this.path = el[0].path);
@@ -32,68 +33,16 @@ export class LoginCardComponent implements OnInit {
   createForm(action: string) {
     if (action === 'signup') {
       return new FormGroup({
-        name: new FormControl('', [Validators.required, this.checkNameForLength]),
+        name: new FormControl('', [Validators.required, this.validator.checkNameForLength]),
         email: new FormControl('', [Validators.required, Validators.email]),
-        pass: new FormControl('', [Validators.required, this.checkForLength, this.checkUpperLower, this.checkMixture, this.checkSpecialChar]),
+        pass: new FormControl('', [Validators.required, this.validator.checkForLength, this.validator.checkUpperLower, this.validator.checkMixture, this.validator.checkSpecialChar]),
       });
     }
     if (action === 'signin') {
       return new FormGroup({
         email: new FormControl('', [Validators.required, Validators.email]),
-        pass: new FormControl('', [Validators.required, this.checkForLength, this.checkUpperLower, this.checkMixture, this.checkSpecialChar]),
+        pass: new FormControl('', [Validators.required, this.validator.checkForLength, this.validator.checkUpperLower, this.validator.checkMixture, this.validator.checkSpecialChar]),
       });
-    }
-  }
-
-  checkForLength(control: FormControl) {
-    if (control.value.length === 0) { return; }
-
-    if (control.value.length < 8) {
-      return {
-        lengthError: true,
-      };
-    }
-  }
-
-  checkNameForLength(control: FormControl) {
-    if (control.value.length === 0) { return; }
-
-    if (control.value.length < 5) {
-      return {
-        lengthError: true,
-      };
-    }
-  }
-
-  checkUpperLower(control: FormControl) {
-    const rexP: RegExp = /(?=.*[a-z])(?=.*[A-Z])/;
-    if (control.value.length === 0) { return; }
-
-    if (!control.value.match(rexP)) {
-      return {
-        upperLowerError: true,
-      };
-    }
-  }
-
-  checkMixture(control: FormControl) {
-    const rexP: RegExp = /[A-Z][a-z]+/;
-    const rexP2: RegExp = /[0-9]+/;
-    if (control.value.length === 0) { return; }
-    if (!control.value.match(rexP) && !control.value.match(rexP2)) {
-      return {
-        mixtureError: true,
-      };
-    }
-  }
-
-  checkSpecialChar(control: FormControl) {
-    const rexP: RegExp = /[!@#$&*%]+/;
-    if (control.value.length === 0) { return; }
-    if (!control.value.match(rexP)) {
-      return {
-        specialCharError: true,
-      };
     }
   }
 
