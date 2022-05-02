@@ -146,16 +146,4 @@ export class LoginCardComponent implements OnInit {
     this.router.navigateByUrl('/auth/registration');
   }
 
-  aaa() {
-    this.store.dispatch(UserAction.getUsersAction({ token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlYjVkYTViNS1mNGMyLTQwZGEtOGRlNi1jMjA4OWQ1NTJjNTkiLCJsb2dpbiI6InVzZXIwMDEiLCJpYXQiOjE2NTEzNDYwMzR9._t-Bs2WNpDHNExGaKt6sXotWEqCBWnvYhBlJLE_e1dM' }));
-    // this.store.dispatch(UserAction.createUserAction({
-    //   user: {
-    //     name: this.form.value.name,
-    //     login: this.form.value.email,
-    //     password: this.form.value.pass,
-    //   }
-
-    // }));
-    this.store.subscribe((el) => console.log(el));
-  }
 }
