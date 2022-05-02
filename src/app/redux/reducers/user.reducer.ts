@@ -43,10 +43,10 @@ const usReducer = createReducer(
   on(UserAction.createUsersActionFailed, (state) => ({
     ...state,
   })),
-  on(UserAction.createTokenActionSuccess, (state, { currentUser }) => (
+  on(UserAction.createTokenActionSuccess, (state, { token }) => (
     {
     ...state,
-    currentUser: {...state.currentUser, currentUser},
+    currentUser: {...state.currentUser, token},
     isUserFetched: true,
   })),
   on(UserAction.updateUserAction, (state) => ({

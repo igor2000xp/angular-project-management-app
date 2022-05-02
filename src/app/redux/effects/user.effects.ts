@@ -18,7 +18,8 @@ export class UserEffects {
       ofType(UserActions.createUserAction),
       pluck('currentUser'),
       switchMap((user) => { console.log(user); return this.apiService.authenticate(user, 'signup') }),
-      map((currentUser) => { return UserActions.createUsersActionSuccess({ currentUser }) }),
+      map((currentUser) => {return UserActions.createUsersActionSuccess({ currentUser })
+      }),
       catchError(() => of(UserActions.getUsersActionFailed())),
     ),
   )
@@ -28,7 +29,9 @@ export class UserEffects {
       ofType(UserActions.createTokenAction),
       pluck('currentUser'),
       switchMap((user) => { console.log(user); return this.apiService.authenticate(user, 'signin') }),
-      map((currentUser) => { return UserActions.createTokenActionSuccess({ currentUser }) }),
+      map((currentUser) => {
+        const token = currentUser.token;
+        return UserActions.createTokenActionSuccess({ token }) }),
       catchError(() => of(UserActions.getUsersActionFailed())),
     ),
   )
