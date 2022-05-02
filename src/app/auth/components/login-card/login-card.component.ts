@@ -23,7 +23,7 @@ export class LoginCardComponent implements OnInit {
   currentUser: User;
 
 
-  constructor(private apiService: ApiService, private route: ActivatedRoute, private router: Router, private store: Store) { }
+  constructor(private route: ActivatedRoute, private router: Router, private store: Store) { }
 
   ngOnInit(): void {
     this.route.url.subscribe(el => this.path = el[0].path);
@@ -112,8 +112,6 @@ export class LoginCardComponent implements OnInit {
         password: this.form.value.pass,
       }
     }
-
-
   }
 
   submit() {
@@ -131,7 +129,7 @@ export class LoginCardComponent implements OnInit {
   checkRegPage() {
     return this.path === 'registration' ? true : false;
   }
-  
+
   checkLogPage() {
     return this.path === 'authorization' ? true : false;
   }
