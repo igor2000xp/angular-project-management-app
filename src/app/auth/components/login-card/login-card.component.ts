@@ -3,8 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { createUserAction } from 'src/app/redux/reducers';
-import { ApiService } from '../../services/api.service';
 import * as UserAction from '../../../redux/actions/user.actions';
 import { User } from '../../models/user.model';
 
@@ -97,6 +95,13 @@ export class LoginCardComponent implements OnInit {
         specialCharError: true,
       };
     }
+  }
+
+  checkError(formControlName: string){
+    return (this.form.get(formControlName).dirty && this.form.get(formControlName).invalid) ? true : false;
+  }
+  viewError(formControlName: string, errorName: string){
+    return (this.form.get(formControlName).errors?.[errorName]) ? true : false;
   }
 
   userInfo(action: string) {

@@ -6,12 +6,12 @@
         <div class="login-card__el" *ngIf="checkRegPage()">
           <p class="input-name">Name</p>
           <input #login class="form-control" formControlName="name"
-            [ngClass]="{'has-error': form.get('name').dirty && form.get('name').invalid}" />
-          <div *ngIf="form.get('name').dirty && form.get('name').invalid">
-            <p class="login-validate" *ngIf="form.get('name').errors?.['required']">
-              Please enter a login email
+            [ngClass]="{'has-error': checkError('name')}" />
+          <div *ngIf="checkError('name')">
+            <p class="login-validate" *ngIf="viewError('name', 'required')">
+              Please enter a name
             </p>
-            <p class="login-validate" *ngIf="form.get('name').errors?.['lengthError']">
+            <p class="login-validate" *ngIf="viewError('name', 'lengthError')">
               at least 8 characters
             </p>
           </div>
@@ -19,12 +19,12 @@
         <div class="login-card__el">
           <p class="input-name">E-mail</p>
           <input #login class="form-control" formControlName="email"
-            [ngClass]="{'has-error': form.get('email').dirty && form.get('email').invalid}" />
-          <div *ngIf="form.get('email').dirty && form.get('email').invalid">
-            <p class="login-validate" *ngIf="form.get('email').errors?.['required']">
+            [ngClass]="{'has-error': checkError('email')}" />
+          <div *ngIf="checkError('email')">
+            <p class="login-validate" *ngIf="viewError('email', 'required')">
               Please enter a login email
             </p>
-            <p class="login-validate" *ngIf="form.get('email').errors?.['email']">
+            <p class="login-validate" *ngIf="viewError('email', 'email')">
               The login email is invalid
             </p>
           </div>
@@ -32,26 +32,26 @@
         <div class="login-card__el">
           <p class="input-name">Password</p>
           <input #password class="form-control" formControlName="pass"
-            [ngClass]="{'has-error': form.get('pass').dirty && form.get('pass').invalid}" />
-          <div *ngIf="form.get('pass').dirty && form.get('pass').invalid">
-            <div class="login-validate" *ngIf="form.get('pass').errors?.['required']">
+            [ngClass]="{'has-error': checkError('pass')}" />
+          <div *ngIf="checkError('pass')">
+            <div class="login-validate" *ngIf="viewError('pass', 'required')">
               Please enter a password <br>
             </div>
-            <div class="login-validate" *ngIf="form.get('pass').errors?.['lengthError'] ||
-            form.get('pass').errors?.['upperLowerError'] ||
-            form.get('pass').errors?.['mixtureError'] ||
-            form.get('pass').errors?.['specialCharError']">
+            <div class="login-validate" *ngIf="viewError('pass', 'lengthError') ||
+            viewError('pass', 'upperLowerError') ||
+            viewError('pass', 'mixtureError') ||
+            viewError('pass', 'specialCharError')">
               Your password isn't strong enough<br>
-              <p class="login-validate__error" *ngIf="form.get('pass').errors?.['lengthError']">
+              <p class="login-validate__error" *ngIf="viewError('pass', 'lengthError')">
                 at least 8 characters <br>
               </p>
-              <p class="login-validate__error" *ngIf="form.get('pass').errors?.['upperLowerError']">
+              <p class="login-validate__error" *ngIf=" viewError('pass', 'upperLowerError')">
                 a mixture of both uppercase and lowercase letters <br>
               </p>
-              <p class="login-validate__error" *ngIf="form.get('pass').errors?.['mixtureError']">
+              <p class="login-validate__error" *ngIf="viewError('pass', 'mixtureError')">
                 a mixture of letters and numbers <br>
               </p>
-              <p class="login-validate__error" *ngIf="form.get('pass').errors?.['specialCharError']">
+              <p class="login-validate__error" *ngIf="viewError('pass', 'specialCharError')">
                 inclusion of at least one special character, e.g., ! @ # ? ] <br>
               </p>
             </div>
