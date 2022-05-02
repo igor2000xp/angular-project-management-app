@@ -8,13 +8,13 @@
     align-items: center;
     position: fixed;
   }
-  
+
   .logo {
       margin-left: 20px;
       font-size: 25px;
       color: #ffffff;
   }
-  
+
   .admin-btn {
     margin-top: 20px;
     margin-bottom: 22px;
@@ -34,4 +34,12 @@
       background-color: #433147;
     }
     float: right;
+  }
+  .admin-btn_active{
+    background-color: rgb(35, 35, 173);
+    opacity: 0.8;
+    &:hover {
+      background-color: rgb(35, 35, 173);
+      opacity: 0.6;
+    }
   }

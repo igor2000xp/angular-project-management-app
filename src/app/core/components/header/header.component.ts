@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,10 +7,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  constructor(private router: Router) {}
+
+  constructor(private router: Router ) {}
 
   switchPage(page:string) {
     this.router.navigateByUrl(`/auth/${page}`);
+    localStorage.setItem('currentPage',page);
+  }
+
+  checkPage(page:string) {
+   return localStorage.getItem('currentPage') === page ? true : false;
   }
 
 }
