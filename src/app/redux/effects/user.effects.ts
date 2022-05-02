@@ -3,10 +3,13 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ApiService } from '../../auth/services/api.service';
 
 import * as UserActions from '../actions/user.actions';
-import { catchError, map, of, pluck, switchMap, } from 'rxjs';
+import { catchError, map, mergeMap, of, pluck, switchMap, } from 'rxjs';
+import { User } from 'src/app/auth/models/user.model';
 
 @Injectable()
 export class UserEffects {
+
+  currentUser: User;
 
   constructor(
     private actions$: Actions,
@@ -17,8 +20,12 @@ export class UserEffects {
     () => this.actions$.pipe(
       ofType(UserActions.createUserAction),
       pluck('currentUser'),
-      switchMap((user) => { console.log(user); return this.apiService.authenticate(user, 'signup') }),
-      map((currentUser) => {return UserActions.createUsersActionSuccess({ currentUser })
+      mergeMap((user) => { this.currentUser = user; return this.apiService.authenticate(user, 'signup') }),
+      mergeMap(() => this.apiService.authenticate({login:this.currentUser.login, password: this.currentUser.password}, 'signin')),
+      map((currentUser) => {
+        const user:User = Object.assign({}, this.currentUser, currentUser);
+        delete user.password;
+        return UserActions.createUsersActionSuccess({ currentUser:user })
       }),
       catchError(() => of(UserActions.getUsersActionFailed())),
     ),
