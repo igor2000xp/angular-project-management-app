@@ -35,7 +35,7 @@ export class UserEffects {
     () => this.actions$.pipe(
       ofType(UserActions.createTokenAction),
       pluck('currentUser'),
-      switchMap((user) => { this.currentUser = user; console.log(user); return this.apiService.authenticate(user, 'signin') }),
+      switchMap((user) => { this.currentUser = user; return this.apiService.authenticate(user, 'signin') }),
       map((currentUser) => {
         const user: User = Object.assign({}, this.currentUser, currentUser);
         delete user.password;
