@@ -2,6 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { DragulaModule } from 'ng2-dragula';
 
 import { PmRoutingModule } from './pm-routing.module';
 import { PmComponent } from './pm.component';
@@ -9,6 +13,9 @@ import { MainPageComponent } from './pages/main-page/main-page.component';
 import { ToolsMenuComponent } from './components/tools-menu/tools-menu.component';
 import { ColumnModalComponent } from './components/column-modal/column-modal.component';
 import { TaskModalComponent } from './components/task-modal/task-modal.component';
+import { ColumnCardComponent } from './components/column-card/column-card.component';
+import { TaskCardComponent } from './components/task-card/task-card.component';
+import { TaskCardModalComponent } from './components/task-card-modal/task-card-modal.component';
 
 
 
@@ -19,6 +26,9 @@ import { TaskModalComponent } from './components/task-modal/task-modal.component
     ToolsMenuComponent,
     ColumnModalComponent,
     TaskModalComponent,
+    ColumnCardComponent,
+    TaskCardComponent,
+    TaskCardModalComponent,
   ],
   imports: [
     CommonModule,
@@ -26,7 +36,10 @@ import { TaskModalComponent } from './components/task-modal/task-modal.component
     MatDialogModule,
     FormsModule,
     ReactiveFormsModule,
-
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
+    DragulaModule,
   ],
 })
 export class PmModule { }
