@@ -120,24 +120,18 @@ export class LoginCardComponent implements OnInit {
     if (this.path === 'registration') {
       const currentUser = this.userInfo('signup');
       this.store.dispatch(UserAction.createUserAction({ currentUser: currentUser }));
-      this.store.subscribe(el => console.log(el));
       this.router.navigateByUrl('main');
-      return;
     } else {
       const currentUser = this.userInfo('signin');
       this.store.dispatch(UserAction.createTokenAction({ currentUser: currentUser }));
-      this.store.subscribe(el => console.log(el));
-      // this.userInfo('signin');
-      // this.apiService.authenticate(this.currentUser, 'signin').subscribe(el => console.log(el));
-      // this.router.navigateByUrl('main');
-      return;
+      this.router.navigateByUrl('main');
     }
   }
 
   checkRegPage() {
     return this.path === 'registration' ? true : false;
   }
-
+  
   checkLogPage() {
     return this.path === 'authorization' ? true : false;
   }
