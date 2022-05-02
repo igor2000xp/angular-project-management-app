@@ -21,11 +21,11 @@ export class UserEffects {
       ofType(UserActions.createUserAction),
       pluck('currentUser'),
       mergeMap((user) => { this.currentUser = user; return this.apiService.authenticate(user, 'signup') }),
-      mergeMap(() => this.apiService.authenticate({login:this.currentUser.login, password: this.currentUser.password}, 'signin')),
+      mergeMap(() => this.apiService.authenticate({ login: this.currentUser.login, password: this.currentUser.password }, 'signin')),
       map((currentUser) => {
-        const user:User = Object.assign({}, this.currentUser, currentUser);
+        const user: User = Object.assign({}, this.currentUser, currentUser);
         delete user.password;
-        return UserActions.createUsersActionSuccess({ currentUser:user })
+        return UserActions.createUsersActionSuccess({ currentUser: user })
       }),
       catchError(() => of(UserActions.getUsersActionFailed())),
     ),
@@ -35,10 +35,12 @@ export class UserEffects {
     () => this.actions$.pipe(
       ofType(UserActions.createTokenAction),
       pluck('currentUser'),
-      switchMap((user) => { console.log(user); return this.apiService.authenticate(user, 'signin') }),
+      switchMap((user) => { this.currentUser = user; console.log(user); return this.apiService.authenticate(user, 'signin') }),
       map((currentUser) => {
-        const token = currentUser.token;
-        return UserActions.createTokenActionSuccess({ token }) }),
+        const user: User = Object.assign({}, this.currentUser, currentUser);
+        delete user.password;
+        return UserActions.createTokenActionSuccess({ currentUser: user })
+      }),
       catchError(() => of(UserActions.getUsersActionFailed())),
     ),
   )

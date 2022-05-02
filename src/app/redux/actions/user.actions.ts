@@ -41,7 +41,7 @@ export const createTokenAction = createAction(
 );
 export const createTokenActionSuccess = createAction(
   `${actionSource} CREATE A USER TOKEN SUCCES`,
-  props<{token:string}>(),
+  props<{currentUser:IUser}>(),
 );
 export const updateUserAction = createAction(
   `${actionSource} UPDATE THE USER RECORD`,
