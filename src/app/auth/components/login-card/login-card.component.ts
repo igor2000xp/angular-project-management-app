@@ -21,7 +21,6 @@ export class LoginCardComponent implements OnInit {
 
   currentUser: User;
 
-
   constructor(private route: ActivatedRoute, private router: Router, private store: Store, private validator: ValidatorsService) { }
 
   ngOnInit(): void {
@@ -73,14 +72,15 @@ export class LoginCardComponent implements OnInit {
       const currentUser = this.userInfo('signup');
       this.store.dispatch(UserAction.createUserAction({ currentUser: currentUser }));
       this.router.navigateByUrl('main');
-    } else {
+    };
+    if (this.path === 'authorization') {
       const currentUser = this.userInfo('signin');
       this.store.dispatch(UserAction.createTokenAction({ currentUser: currentUser }));
       this.router.navigateByUrl('main');
     }
   }
 
-  checkPage(page:string) {
+  checkPage(page: string) {
     return this.path === page ? true : false;
   }
 
