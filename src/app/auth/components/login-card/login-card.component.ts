@@ -80,12 +80,8 @@ export class LoginCardComponent implements OnInit {
     }
   }
 
-  checkRegPage() {
-    return this.path === 'registration' ? true : false;
-  }
-
-  checkLogPage() {
-    return this.path === 'authorization' ? true : false;
+  checkPage(page:string) {
+    return this.path === page ? true : false;
   }
 
   goToRegPage() {

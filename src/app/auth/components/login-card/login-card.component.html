@@ -3,7 +3,7 @@
     <div class="login-card">
       <p class="login-title">{{formTitle}}</p>
       <div class="login-card__container">
-        <div class="login-card__el" *ngIf="checkRegPage()">
+        <div class="login-card__el" *ngIf="checkPage('registration')">
           <p class="input-name">Name</p>
           <input #login class="form-control" formControlName="name"
             [ngClass]="{'has-error': checkError('name')}" />
@@ -56,7 +56,7 @@
               </p>
             </div>
           </div>
-          <p *ngIf="checkLogPage()" class="route-reg" (click)="goToRegPage()">No account yet?</p>
+          <p *ngIf="checkPage('authorization')" class="route-reg" (click)="goToRegPage()">No account yet?</p>
         </div>
         <button class="login-card__btn" type="submit" [disabled]="form.invalid">
           <p class="login-card-btn__text">Login</p>
