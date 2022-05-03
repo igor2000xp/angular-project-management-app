@@ -89,6 +89,7 @@ export class LoginCardComponent implements OnInit {
           if ((el.token && (this.error === '' || this.error === null))) {
             this.router.navigateByUrl('main');
             this.auth.errors$.next(null);
+            this.auth.errors$.subscribe(error => this.error = error);
           } else {
             return this.error === 'User login already exists! ' ? this.auth.errors$.next(null) : null;
           }
