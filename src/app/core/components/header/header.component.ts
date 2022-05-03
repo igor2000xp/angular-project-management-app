@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ApiService } from 'src/app/auth/services/api.service';
+import { getCurrentUser } from 'src/app/redux/selectors/user.selectors';
 
 @Component({
   selector: 'app-header',
@@ -18,7 +19,17 @@ export class HeaderComponent implements OnInit {
   constructor(private router: Router, private store: Store, private route: ActivatedRoute, private auth: ApiService) { }
 
   ngOnInit(): void {
-    this.userLogin = localStorage.getItem('login');
+    this.auth.errors$.subscribe(er => this.error = er);
+    this.store.
+      select((getCurrentUser))
+      .subscribe(el => {
+        console.log('aaaaaa', el);
+        if (el && this.error === '') {
+          this.userLogin = el.login;
+        } else {
+          this.userLogin = localStorage.getItem('login');
+        }
+      });
   }
 
   switchPage(page: string) {
