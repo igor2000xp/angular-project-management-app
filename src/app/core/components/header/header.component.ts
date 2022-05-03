@@ -47,6 +47,7 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.store.dispatch(UserAction.deleteUserAction({ token: this.currentUser.token, id: this.currentUser.id }));
+    this.auth.errors$.next('User was deleted');
   }
 
 }

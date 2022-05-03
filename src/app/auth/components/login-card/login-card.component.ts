@@ -121,7 +121,7 @@ export class LoginCardComponent implements OnInit {
     this.store.pipe(select(getCurrentUser)).subscribe((el) => {
       if (this.error) {
         this._snackBar.open(this.error, 'OK', {
-          duration: 4000,
+          duration: 3000,
         });
       }
       if (el) {
