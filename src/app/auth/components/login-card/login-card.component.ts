@@ -104,8 +104,4 @@ export class LoginCardComponent implements OnInit {
     this.router.navigateByUrl('/auth/registration');
   }
 
-  aaa() {
-    throw Error('name');
-  }
-
 }
