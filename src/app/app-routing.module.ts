@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CheckLoginClass } from './guards/check-login.guard';
+import { EntryLoginClass } from './guards/entry-login-guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'main', pathMatch: 'full' },
@@ -13,6 +14,7 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./auth/lazy-modules/login/login.module').then((m) => m.LoginModule),
+    canActivate:[EntryLoginClass],
   },
 ];
 
