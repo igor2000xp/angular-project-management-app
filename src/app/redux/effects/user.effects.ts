@@ -33,7 +33,6 @@ export class UserEffects {
           delete user.password;
           return UserActions.createUsersActionSuccess({ currentUser: user });
         }),
-        catchError(() => of(UserActions.getUsersActionFailed())),
       );
     },
   );
@@ -45,6 +44,7 @@ export class UserEffects {
         pluck('currentUser'),
         switchMap((user) => { this.currentUser = user; return this.apiService.authenticate(user, 'signin'); }),
         map((currentUser) => {
+          if (currentUser.token) this.apiService.errors$.next('');
           const user: User = Object.assign({}, this.currentUser, currentUser);
           delete user.password;
           return UserActions.createTokenActionSuccess({ currentUser: user });
