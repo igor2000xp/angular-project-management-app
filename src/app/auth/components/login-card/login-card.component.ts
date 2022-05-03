@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable ngrx/select-style */
 /* eslint-disable ngrx/no-store-subscription */
 /* eslint-disable @typescript-eslint/default-param-last */
@@ -75,29 +76,24 @@ export class LoginCardComponent implements OnInit {
   }
 
   submit() {
-    if (this.path === 'registration') {
-      const currentUser = this.userInfo('signup');
-      this.store.dispatch(UserAction.createUserAction({ currentUser: currentUser }));
-      // this.auth.errors$.subscribe(el => {
-      //   this.error = el
-      //   if (this.error === 'its Ok') { this.router.navigateByUrl('main') }
-      //   else { return };
-      // })
-    }
-    if (this.path === 'authorization') {
-      const currentUser = this.userInfo('signin');
-      this.store.dispatch(UserAction.createTokenAction({ currentUser: currentUser }));
-      this.store.pipe(
-        select(getCurrentUser))
-        .subscribe((el) => {
-          if (el.token === undefined)
+    const userAction = this.path === 'registration' ? 'signup' : 'signin';
+    const currentUser = this.userInfo(userAction);
+    userAction === 'signup' ? this.store.dispatch(UserAction.createUserAction({ currentUser: currentUser })) : this.store.dispatch(UserAction.createTokenAction({ currentUser: currentUser }));
+    this.store.dispatch(UserAction.createTokenAction({ currentUser: currentUser }));
+    this.store.pipe(
+      select(getCurrentUser))
+      .subscribe((el) => {
+        console.log(el);
+        if (el) {
+          if (el.token === undefined || null)
             this.auth.errors$.subscribe(error => this.error = error);
           else {
             this.auth.errors$.next(null);
             this.router.navigateByUrl('main');
           }
-        });
-    }
+        } else return;
+      });
+
   }
 
   checkPage(page: string) {
