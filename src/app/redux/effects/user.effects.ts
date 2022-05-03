@@ -13,6 +13,8 @@ export class UserEffects {
 
   userError: string | boolean;
 
+  userPassword: string;
+
   constructor(
     private actions$: Actions,
     private apiService: ApiService,
@@ -23,13 +25,14 @@ export class UserEffects {
       return this.actions$.pipe(
         ofType(UserActions.createUserAction),
         pluck('currentUser'),
-        mergeMap((user) => { this.currentUser = user; return this.apiService.authenticate(user, 'signup'); }),
+        mergeMap((user) => { this.userPassword = user.password; return this.apiService.authenticate(user, 'signup'); }),
         mergeMap((user) => {
+          this.currentUser = user;
           if (user.id) {
             localStorage.setItem('login', user.login);
             this.apiService.errors$.next('');
           }
-          return this.apiService.authenticate({ login: this.currentUser.login, password: this.currentUser.password }, 'signin');
+          return this.apiService.authenticate({ login: this.currentUser.login, password: this.userPassword }, 'signin');
         }),
         map((currentUser) => {
           const user: User = Object.assign({}, this.currentUser, currentUser);
@@ -45,8 +48,9 @@ export class UserEffects {
       return this.actions$.pipe(
         ofType(UserActions.createTokenAction),
         pluck('currentUser'),
-        switchMap((user) => { this.currentUser = user; return this.apiService.authenticate(user, 'signin'); }),
+        switchMap((user) => {  return this.apiService.authenticate(user, 'signin'); }),
         map((currentUser) => {
+          this.currentUser = currentUser;
           if (currentUser.token) {
             localStorage.setItem('login', this.currentUser.login);
             this.apiService.errors$.next('');
@@ -72,5 +76,19 @@ export class UserEffects {
     },
   );
 
+  deleteUser$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(UserActions.deleteUserAction),
+        switchMap((currentUser) => { return this.apiService.deleteUser(currentUser.token, currentUser.id); }),
+        map(() => {
+          const empty = {};
+          localStorage.removeItem('login');
+          return UserActions.deleteUsersActionSuccess({ empty:empty });
+        }),
+        catchError(() => of(UserActions.getUsersActionFailed())),
+      );
+    },
+  );
 
 }

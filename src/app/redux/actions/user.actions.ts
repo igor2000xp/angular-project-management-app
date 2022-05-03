@@ -56,11 +56,9 @@ export const updateUsersActionFailed = createAction(
 
 export const deleteUserAction = createAction(
   `${actionSource} DELETE THE USER RECORD`,
+  props<{ token:string, id:string }>(),
 );
 export const deleteUsersActionSuccess = createAction(
   `${actionSource} DELETE THE USER RECORD, SUCCESS`,
-  props<{ user:IUser }>(),
-);
-export const deleteUsersActionFailed = createAction(
-  `${actionSource} DELETE THE USER RECORD, FAILED`,
+  props<{ empty:{} }>(),
 );

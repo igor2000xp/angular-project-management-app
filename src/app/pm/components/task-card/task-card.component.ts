@@ -5,7 +5,7 @@ import { TaskCardModalComponent } from '../task-card-modal/task-card-modal.compo
 @Component({
   selector: 'app-task-card',
   templateUrl: './task-card.component.html',
-  styleUrls: ['./task-card.component.scss']
+  styleUrls: ['./task-card.component.scss'],
 })
 export class TaskCardComponent implements OnInit {
 

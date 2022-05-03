@@ -2,7 +2,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { User } from 'src/app/auth/models/user.model';
 import { ApiService } from 'src/app/auth/services/api.service';
+import * as UserAction from '../../../redux/actions/user.actions';
 import { getCurrentUser } from 'src/app/redux/selectors/user.selectors';
 
 @Component({
@@ -16,6 +18,8 @@ export class HeaderComponent implements OnInit {
 
   error: string;
 
+  currentUser: User;
+
   constructor(private router: Router, private store: Store, private route: ActivatedRoute, private auth: ApiService) { }
 
   ngOnInit(): void {
@@ -23,7 +27,7 @@ export class HeaderComponent implements OnInit {
     this.store.
       select((getCurrentUser))
       .subscribe(el => {
-        console.log('aaaaaa', el);
+        this.currentUser = el;
         if (el && this.error === '') {
           this.userLogin = el.login;
         } else {
@@ -39,6 +43,10 @@ export class HeaderComponent implements OnInit {
 
   checkPage(page: string) {
     return localStorage.getItem('currentPage') === page ? true : false;
+  }
+
+  logout() {
+    this.store.dispatch(UserAction.deleteUserAction({ token: this.currentUser.token, id: this.currentUser.id }));
   }
 
 }

@@ -25,7 +25,6 @@ export class ApiService {
   privatehandleError<T>(result?: T) {
     return (error: any): Observable<T> => {
       this.errors$.next(error.error.message);
-      console.log(error);
       return of(result as T);
     };
   }
@@ -40,6 +39,13 @@ export class ApiService {
       .pipe(
         catchError(this.privatehandleError<any>([])),
       );
+  }
+
+  public deleteUser(token: string, id: string) {
+    const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${token}`);
+    return this.httpClient
+      .delete(`${USERS}/${id}`, { headers: headers });
   }
 
   public getUsers(token: string): Observable<User[]> {
@@ -91,7 +97,7 @@ export class ApiService {
       .put<Board>(`${BOARDS}/${id}`, body, { headers: headers });
   }
 
-  public getColumns(token: string, boardId: string ): Observable<Column[]> {
+  public getColumns(token: string, boardId: string): Observable<Column[]> {
     const headers = new HttpHeaders()
       .set('Accept', 'application/json')
       .set('Authorization', `Bearer ${token}`);
@@ -99,7 +105,7 @@ export class ApiService {
       .get<Column[]>(`${BOARDS}/${boardId}/columns`, { headers: headers });
   }
 
-  public createColumn(token: string, boardId: string, column: Column ): Observable<Column> {
+  public createColumn(token: string, boardId: string, column: Column): Observable<Column> {
     const body = JSON.stringify(column);
     const headers = new HttpHeaders()
       .set('Accept', 'application/json')
@@ -135,7 +141,7 @@ export class ApiService {
       .put<Column>(`${BOARDS}/${boardId}/columns/${columnId}`, body, { headers: headers });
   }
 
-  public getTasks(token: string, boardId: string, columnId: string ): Observable<Task[]> {
+  public getTasks(token: string, boardId: string, columnId: string): Observable<Task[]> {
     const headers = new HttpHeaders()
       .set('Accept', 'application/json')
       .set('Authorization', `Bearer ${token}`);
@@ -143,7 +149,7 @@ export class ApiService {
       .get<Task[]>(`${BOARDS}/${boardId}/columns/${columnId}/tasks`, { headers: headers });
   }
 
-  public createTask(token: string, boardId: string, columnId: string, task: Task ): Observable<Task> {
+  public createTask(token: string, boardId: string, columnId: string, task: Task): Observable<Task> {
     const body = JSON.stringify(task);
     const headers = new HttpHeaders()
       .set('Accept', 'application/json')
@@ -169,7 +175,7 @@ export class ApiService {
       .delete(`${BOARDS}/${boardId}/columns/${columnId}/tasks/${taskId}`, { headers: headers });
   }
 
-  public updateTask(token: string, boardId: string, columnId: string, taskId: string,  task: Task ): Observable<Task> {
+  public updateTask(token: string, boardId: string, columnId: string, taskId: string, task: Task): Observable<Task> {
     const body = JSON.stringify(task);
     const headers = new HttpHeaders()
       .set('Accept', 'application/json')

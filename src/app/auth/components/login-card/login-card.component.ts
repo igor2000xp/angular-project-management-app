@@ -36,7 +36,7 @@ export class LoginCardComponent implements OnInit {
     private validator: ValidatorsService,
     public auth: ApiService,
     private _snackBar: MatSnackBar,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.route.url.subscribe((el) => (this.path = el[0].path));
@@ -119,7 +119,6 @@ export class LoginCardComponent implements OnInit {
       this.error = error;
     });
     this.store.pipe(select(getCurrentUser)).subscribe((el) => {
-      console.log(this.error);
       if (this.error) {
         this._snackBar.open(this.error, 'OK', {
           duration: 4000,

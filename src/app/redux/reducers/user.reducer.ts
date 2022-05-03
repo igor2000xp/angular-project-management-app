@@ -64,13 +64,10 @@ const usReducer = createReducer(
   on(UserAction.deleteUserAction, (state) => ({
     ...state,
   })),
-  on(UserAction.deleteUsersActionSuccess, (state, { user }) => ({
+  on(UserAction.deleteUsersActionSuccess, (state, { empty }) => ({
     ...state,
-    user,
+    currentUser: empty,
     isUserFetched: true,
-  })),
-  on(UserAction.deleteUsersActionFailed, (state) => ({
-    ...state,
   })),
 );
 
