@@ -25,6 +25,7 @@ export class ApiService {
   privatehandleError<T>(result?: T) {
     return (error: any): Observable<T> => {
       this.errors$.next(error.error.message);
+      console.log(error);
       return of(result as T);
     };
   }

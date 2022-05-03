@@ -78,18 +78,19 @@ export class LoginCardComponent implements OnInit {
   submit() {
     const userAction = this.path === 'registration' ? 'signup' : 'signin';
     const currentUser = this.userInfo(userAction);
-    userAction === 'signup' ? this.store.dispatch(UserAction.createUserAction({ currentUser: currentUser })) : this.store.dispatch(UserAction.createTokenAction({ currentUser: currentUser }));
-    this.store.dispatch(UserAction.createTokenAction({ currentUser: currentUser }));
+    userAction === 'signup' ? this.store.dispatch(UserAction.createUserAction({ currentUser: currentUser })) :
+      this.store.dispatch(UserAction.createTokenAction({ currentUser: currentUser }));
     this.store.pipe(
       select(getCurrentUser))
       .subscribe((el) => {
         console.log(el);
         if (el) {
-          if (el.token === undefined || null)
-            this.auth.errors$.subscribe(error => this.error = error);
-          else {
-            this.auth.errors$.next(null);
+          this.auth.errors$.subscribe(error => this.error = error);
+          if ((el.token && (this.error === '' || this.error === null))) {
             this.router.navigateByUrl('main');
+            this.auth.errors$.next(null);
+          } else {
+            return this.error === 'User login already exists! ' ? this.auth.errors$.next(null) : null;
           }
         } else return;
       });
