@@ -24,7 +24,10 @@ export class UserEffects {
         ofType(UserActions.createUserAction),
         pluck('currentUser'),
         mergeMap((user) => { this.currentUser = user; return this.apiService.authenticate(user, 'signup'); }),
-        mergeMap(() => this.apiService.authenticate({ login: this.currentUser.login, password: this.currentUser.password }, 'signin')),
+        mergeMap((user) => {
+          if (user.id) this.apiService.errors$.next('');
+          return this.apiService.authenticate({ login: this.currentUser.login, password: this.currentUser.password }, 'signin');
+        }),
         map((currentUser) => {
           const user: User = Object.assign({}, this.currentUser, currentUser);
           delete user.password;

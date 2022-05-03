@@ -30,7 +30,7 @@ export class ApiService {
     };
   }
 
-  public authenticate(user: User, mode: string): Observable<User> {
+  public authenticate(user: User, mode: string): Observable<any> {
     const url = mode === 'signup' ? SIGNUP : SIGNIN;
     const headers = new HttpHeaders()
       .set('Accept', 'application/json')

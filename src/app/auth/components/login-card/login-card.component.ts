@@ -80,11 +80,12 @@ export class LoginCardComponent implements OnInit {
     const currentUser = this.userInfo(userAction);
     userAction === 'signup' ? this.store.dispatch(UserAction.createUserAction({ currentUser: currentUser })) :
       this.store.dispatch(UserAction.createTokenAction({ currentUser: currentUser }));
+    this.auth.errors$.subscribe(error => { this.error = error; });
     this.store.pipe(
       select(getCurrentUser))
       .subscribe((el) => {
+        console.log(this.error);
         if (el) {
-          this.auth.errors$.subscribe(error => this.error = error);
           if (this.error === '') {
             this.router.navigateByUrl('main');
           } else {
