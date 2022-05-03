@@ -15,6 +15,8 @@ export class UserEffects {
 
   userPassword: string;
 
+  userLogin:string;
+
   constructor(
     private actions$: Actions,
     private apiService: ApiService,
@@ -25,14 +27,14 @@ export class UserEffects {
       return this.actions$.pipe(
         ofType(UserActions.createUserAction),
         pluck('currentUser'),
-        mergeMap((user) => { this.userPassword = user.password; return this.apiService.authenticate(user, 'signup'); }),
+        mergeMap((user) => { this.userLogin = user.login; this.userPassword = user.password; return this.apiService.authenticate(user, 'signup'); }),
         mergeMap((user) => {
           this.currentUser = user;
           if (user.id) {
             localStorage.setItem('login', user.login);
             this.apiService.errors$.next('');
           }
-          return this.apiService.authenticate({ login: this.currentUser.login, password: this.userPassword }, 'signin');
+          return this.apiService.authenticate({ login: this.userLogin, password: this.userPassword }, 'signin');
         }),
         map((currentUser) => {
           const user: User = Object.assign({}, this.currentUser, currentUser);
