@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { RouterModule } from '@angular/router';
@@ -10,13 +10,14 @@ import { CoreModule } from './core/core.module';
 import { HeaderComponent } from './core/components/header/header.component';
 import { FooterComponent } from './core/components/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
-import { StoreModule } from "@ngrx/store";
+import { StoreModule } from '@ngrx/store';
 // import { metaReducers, reducers } from './redux/reducers';
 import * as fromUser from './redux/reducers/user.reducer';
 import * as fromTask from './redux/reducers/task.reducer';
 import { EffectsModule } from '@ngrx/effects';
-import { AppEffects } from './redux/effects/app.effects';
+// import { AppEffects } from './redux/effects/app.effects';
 import { UserEffects } from './redux/effects/user.effects';
+import { GlobalHandleErrorService } from './shared/services/global-error.handler';
 
 @NgModule({
   declarations: [
@@ -39,19 +40,19 @@ import { UserEffects } from './redux/effects/user.effects';
         user: fromUser.userReducer,
       }, {
       // metaReducers,
-      runtimeChecks: {
-        strictStateImmutability: true,
-        strictActionImmutability: true,
-        strictStateSerializability: true,
-        strictActionSerializability: true,
-        strictActionWithinNgZone: true,
-        strictActionTypeUniqueness: true,
-      },
-    }),
+        runtimeChecks: {
+          strictStateImmutability: true,
+          strictActionImmutability: true,
+          strictStateSerializability: true,
+          strictActionSerializability: true,
+          strictActionWithinNgZone: true,
+          strictActionTypeUniqueness: true,
+        },
+      }),
     // StoreModule.forFeature('taskState', taskReducer),
     EffectsModule.forRoot([UserEffects]),
   ],
-  providers: [],
+  providers: [{ provide: ErrorHandler, useClass: GlobalHandleErrorService }],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

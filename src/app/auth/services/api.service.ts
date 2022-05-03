@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, catchError, Observable, Subject, throwError } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { BehaviorSubject, catchError, Observable, of } from 'rxjs';
 import { User } from '../models/user.model';
 import { Board } from '../models/Board.model';
 import { Column } from '../models/column.model';
@@ -21,12 +21,12 @@ export class ApiService {
 
   constructor(private httpClient: HttpClient) { }
 
-  private handleError(error:HttpErrorResponse){
-    const {message} = error.error;
-    console.log(message);
-    this.errors$.next(message);
 
-    return throwError(()=>new Error('Something gone wrong'))
+  privatehandleError<T>(result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error);
+      return of(result as T);
+    };
   }
 
   public authenticate(user: User, mode: string): Observable<User> {
@@ -36,9 +36,9 @@ export class ApiService {
       .set('Content-Type', 'application/json');
     const body = JSON.stringify(user);
     return this.httpClient.post<User>(url, body, { headers: headers })
-    .pipe(
-      catchError((er) =>{console.log(er); return throwError(er)})
-    );
+      .pipe(
+        catchError(this.privatehandleError<any>([])),
+      );
   }
 
   public getUsers(token: string): Observable<User[]> {

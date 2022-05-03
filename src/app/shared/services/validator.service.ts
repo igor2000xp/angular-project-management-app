@@ -1,5 +1,5 @@
-import { Injectable } from "@angular/core";
-import { FormControl } from "@angular/forms";
+import { Injectable } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -7,7 +7,7 @@ import { FormControl } from "@angular/forms";
 
 export class ValidatorsService {
 
-  constructor(){}
+  constructor() {}
 
   checkForLength(control: FormControl) {
     if (control.value.length === 0) { return; }

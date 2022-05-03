@@ -51,6 +51,7 @@ export class LoginCardComponent implements OnInit {
   checkError(formControlName: string) {
     return (this.form.get(formControlName).dirty && this.form.get(formControlName).invalid) ? true : false;
   }
+
   viewError(formControlName: string, errorName: string) {
     return (this.form.get(formControlName).errors?.[errorName]) ? true : false;
   }
@@ -66,7 +67,7 @@ export class LoginCardComponent implements OnInit {
       return {
         login: this.form.value.email,
         password: this.form.value.pass,
-      }
+      };
     }
   }
 
@@ -79,7 +80,7 @@ export class LoginCardComponent implements OnInit {
       //   if (this.error === 'its Ok') { this.router.navigateByUrl('main') }
       //   else { return };
       // })
-    };
+    }
     if (this.path === 'authorization') {
       const currentUser = this.userInfo('signin');
       this.store.dispatch(UserAction.createTokenAction({ currentUser: currentUser }));
@@ -98,6 +99,10 @@ export class LoginCardComponent implements OnInit {
 
   goToRegPage() {
     this.router.navigateByUrl('/auth/registration');
+  }
+
+  aaa() {
+    throw Error('name');
   }
 
 }
