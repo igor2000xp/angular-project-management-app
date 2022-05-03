@@ -1,6 +1,6 @@
 <div class="header">
   <div class="logo">Project management</div>
-  <div>
+  <div *ngIf="!userLogin;else succes">
     <button class="admin-btn"
     (click)="switchPage('authorization')"
     [ngClass]="{'admin-btn_active': checkPage('authorization')}">
@@ -12,4 +12,11 @@
     sign up
   </button>
   </div>
+  <ng-template #succes>
+    <div class="login-container">
+      <div class="login">E-mail: {{userLogin}}</div>
+      <button class="logout-btn">Logout</button>
+    </div>
+  </ng-template>
+
 </div>

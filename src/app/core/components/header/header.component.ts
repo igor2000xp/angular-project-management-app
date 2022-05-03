@@ -1,22 +1,33 @@
+/* eslint-disable ngrx/no-store-subscription */
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { ApiService } from 'src/app/auth/services/api.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
 
-  constructor(private router: Router ) {}
+  userLogin: string;
 
-  switchPage(page:string) {
-    this.router.navigateByUrl(`/auth/${page}`);
-    localStorage.setItem('currentPage',page);
+  error: string;
+
+  constructor(private router: Router, private store: Store, private route: ActivatedRoute, private auth: ApiService) { }
+
+  ngOnInit(): void {
+    this.userLogin = localStorage.getItem('login');
   }
 
-  checkPage(page:string) {
-   return localStorage.getItem('currentPage') === page ? true : false;
+  switchPage(page: string) {
+    this.router.navigateByUrl(`/auth/${page}`);
+    localStorage.setItem('currentPage', page);
+  }
+
+  checkPage(page: string) {
+    return localStorage.getItem('currentPage') === page ? true : false;
   }
 
 }
