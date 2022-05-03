@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { ValidatorsService } from 'src/app/shared/services/validator.service';
 import * as UserAction from '../../../redux/actions/user.actions';
 import { User } from '../../models/user.model';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-login-card',
@@ -21,7 +22,9 @@ export class LoginCardComponent implements OnInit {
 
   currentUser: User;
 
-  constructor(private route: ActivatedRoute, private router: Router, private store: Store, private validator: ValidatorsService) { }
+  error: string;
+
+  constructor(private route: ActivatedRoute, private router: Router, private store: Store, private validator: ValidatorsService, public auth: ApiService) { }
 
   ngOnInit(): void {
     this.route.url.subscribe(el => this.path = el[0].path);
@@ -71,12 +74,21 @@ export class LoginCardComponent implements OnInit {
     if (this.path === 'registration') {
       const currentUser = this.userInfo('signup');
       this.store.dispatch(UserAction.createUserAction({ currentUser: currentUser }));
-      this.router.navigateByUrl('main');
+      // this.auth.errors$.subscribe(el => {
+      //   this.error = el
+      //   if (this.error === 'its Ok') { this.router.navigateByUrl('main') }
+      //   else { return };
+      // })
     };
     if (this.path === 'authorization') {
       const currentUser = this.userInfo('signin');
       this.store.dispatch(UserAction.createTokenAction({ currentUser: currentUser }));
-      this.router.navigateByUrl('main');
+      // this.auth.errors$.subscribe(el => {
+      //   this.error = el
+      //   console.log(el);
+      //   if (this.error === 'its Ok') { this.router.navigateByUrl('main') }
+      //   else { return };
+      // });
     }
   }
 
