@@ -1,4 +1,4 @@
-import { ErrorHandler, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { RouterModule } from '@angular/router';
@@ -17,7 +17,6 @@ import * as fromTask from './redux/reducers/task.reducer';
 import { EffectsModule } from '@ngrx/effects';
 // import { AppEffects } from './redux/effects/app.effects';
 import { UserEffects } from './redux/effects/user.effects';
-import { GlobalHandleErrorService } from './shared/services/global-error.handler';
 
 @NgModule({
   declarations: [
@@ -36,8 +35,8 @@ import { GlobalHandleErrorService } from './shared/services/global-error.handler
     HttpClientModule,
     StoreModule.forRoot(
       {
-        task: fromTask.taskReducer,
-        user: fromUser.userReducer,
+        tasks: fromTask.taskReducer,
+        users: fromUser.userReducer,
       }, {
       // metaReducers,
         runtimeChecks: {
@@ -52,7 +51,7 @@ import { GlobalHandleErrorService } from './shared/services/global-error.handler
     // StoreModule.forFeature('taskState', taskReducer),
     EffectsModule.forRoot([UserEffects]),
   ],
-  providers: [{ provide: ErrorHandler, useClass: GlobalHandleErrorService }],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

@@ -1,3 +1,4 @@
+/* eslint-disable ngrx/on-function-explicit-return-type */
 import { Action, createReducer, on } from '@ngrx/store';
 import { ITask } from '../state.models';
 import * as TaskActions from '../actions/task.actions';
@@ -34,7 +35,7 @@ const tReducer = createReducer(
   }),
   on(TaskActions.getTaskAction, state => {
     console.log('!!! state', state);
-    return {...state};
+    return { ...state };
   }),
   on(TaskActions.getTaskActionSuccess, (state, { task }) => ({
     ...state,
@@ -48,9 +49,9 @@ const tReducer = createReducer(
     });
   }),
   on(TaskActions.createTaskAction, state => {
-      console.log('!!! state', state);
-      return {...state};
-    }),
+    console.log('!!! state', state);
+    return { ...state };
+  }),
   on(TaskActions.createTaskActionSuccess, (state, { task }) => ({
     ...state,
     task,
@@ -64,7 +65,7 @@ const tReducer = createReducer(
   }),
   on(TaskActions.updateTaskAction, state => {
     console.log('!!! state', state);
-    return {...state};
+    return { ...state };
   }),
   on(TaskActions.updateTaskActionSuccess, (state, { task }) => ({
     ...state,
@@ -79,7 +80,7 @@ const tReducer = createReducer(
   }),
   on(TaskActions.deleteTaskAction, state => {
     console.log('!!! state', state);
-    return {...state};
+    return { ...state };
   }),
   on(TaskActions.deleteTaskActionSuccess, (state, { task }) => ({
     ...state,
@@ -94,7 +95,7 @@ const tReducer = createReducer(
   }),
 );
 
-export function taskReducer (state: ITasksState, action: Action) {
+export function taskReducer(state: ITasksState, action: Action) {
   return tReducer(state, action);
 }
 

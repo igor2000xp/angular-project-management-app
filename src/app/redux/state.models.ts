@@ -6,7 +6,7 @@ export interface IAppState {
 }
 export interface IUsersState {
   users: IUser[] | null;
-  currentUser: IUser | null| any;
+  currentUser: IUser | null | any;
   isUserFetched: boolean;
 }
 

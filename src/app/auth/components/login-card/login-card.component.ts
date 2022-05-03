@@ -1,8 +1,11 @@
+/* eslint-disable ngrx/select-style */
+/* eslint-disable ngrx/no-store-subscription */
 /* eslint-disable @typescript-eslint/default-param-last */
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
+import { getCurrentUser } from 'src/app/redux/selectors/user.selectors';
 import { ValidatorsService } from 'src/app/shared/services/validator.service';
 import * as UserAction from '../../../redux/actions/user.actions';
 import { User } from '../../models/user.model';
@@ -84,12 +87,16 @@ export class LoginCardComponent implements OnInit {
     if (this.path === 'authorization') {
       const currentUser = this.userInfo('signin');
       this.store.dispatch(UserAction.createTokenAction({ currentUser: currentUser }));
-      // this.auth.errors$.subscribe(el => {
-      //   this.error = el
-      //   console.log(el);
-      //   if (this.error === 'its Ok') { this.router.navigateByUrl('main') }
-      //   else { return };
-      // });
+      this.store.pipe(
+        select(getCurrentUser))
+        .subscribe((el) => {
+          if (el.token === null)
+            this.auth.errors$.subscribe(error => this.error = error);
+          else {
+            this.auth.errors$.next(null);
+            this.router.navigateByUrl('main');
+          }
+        });
     }
   }
 

@@ -61,7 +61,7 @@
         <button class="login-card__btn" type="submit" [disabled]="form.invalid">
           <p class="login-card-btn__text">Login</p>
         </button>
-        <button (click)="aaa()">aa</button>
+        <div *ngIf="error">{{error}}</div>
       </div>
     </div>
   </form>

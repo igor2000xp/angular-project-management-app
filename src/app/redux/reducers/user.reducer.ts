@@ -1,12 +1,13 @@
+/* eslint-disable ngrx/on-function-explicit-return-type */
 import { Action, createReducer, on } from '@ngrx/store';
-import { IUser, IUsersState } from '../state.models';
+import { IUsersState } from '../state.models';
 import * as UserAction from '../actions/user.actions';
 
 export const initialUserState: IUsersState = {
   users: null,
   currentUser: null,
   isUserFetched: false,
-}
+};
 
 const usReducer = createReducer(
   initialUserState,
@@ -45,10 +46,10 @@ const usReducer = createReducer(
   })),
   on(UserAction.createTokenActionSuccess, (state, { currentUser }) => (
     {
-    ...state,
-    currentUser: currentUser,
-    isUserFetched: true,
-  })),
+      ...state,
+      currentUser: currentUser,
+      isUserFetched: true,
+    })),
   on(UserAction.updateUserAction, (state) => ({
     ...state,
   })),
