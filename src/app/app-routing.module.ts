@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CheckLoginClass } from './guards/check-login.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'main', pathMatch: 'full' },
@@ -7,6 +8,7 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./pm/pm.module').then((m) => m.PmModule),
+    canActivate:[CheckLoginClass],
   },
   {
     path: 'auth',

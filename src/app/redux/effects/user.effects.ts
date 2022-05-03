@@ -25,7 +25,10 @@ export class UserEffects {
         pluck('currentUser'),
         mergeMap((user) => { this.currentUser = user; return this.apiService.authenticate(user, 'signup'); }),
         mergeMap((user) => {
-          if (user.id) this.apiService.errors$.next('');
+          if (user.id) {
+            localStorage.setItem('login', user.login);
+            this.apiService.errors$.next('');
+          }
           return this.apiService.authenticate({ login: this.currentUser.login, password: this.currentUser.password }, 'signin');
         }),
         map((currentUser) => {
@@ -44,7 +47,10 @@ export class UserEffects {
         pluck('currentUser'),
         switchMap((user) => { this.currentUser = user; return this.apiService.authenticate(user, 'signin'); }),
         map((currentUser) => {
-          if (currentUser.token) this.apiService.errors$.next('');
+          if (currentUser.token) {
+            localStorage.setItem('login', this.currentUser.login);
+            this.apiService.errors$.next('');
+          }
           const user: User = Object.assign({}, this.currentUser, currentUser);
           delete user.password;
           return UserActions.createTokenActionSuccess({ currentUser: user });
