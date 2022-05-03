@@ -90,7 +90,7 @@ export class LoginCardComponent implements OnInit {
       this.store.pipe(
         select(getCurrentUser))
         .subscribe((el) => {
-          if (el.token === null)
+          if (el.token === undefined)
             this.auth.errors$.subscribe(error => this.error = error);
           else {
             this.auth.errors$.next(null);
