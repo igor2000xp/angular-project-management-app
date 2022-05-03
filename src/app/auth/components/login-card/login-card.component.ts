@@ -122,7 +122,7 @@ export class LoginCardComponent implements OnInit {
       console.log(this.error);
       if (this.error) {
         this._snackBar.open(this.error, "OK", {
-          duration: 3000
+          duration: 4000
         });
       }
       if (el) {
