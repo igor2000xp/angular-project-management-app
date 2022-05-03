@@ -1,7 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+/* eslint-disable ngrx/select-style */
+/* eslint-disable ngrx/no-store-subscription */
 /* eslint-disable @typescript-eslint/default-param-last */
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { select, Store } from '@ngrx/store';
+import { getCurrentUser } from 'src/app/redux/selectors/user.selectors';
+import { ValidatorsService } from 'src/app/shared/services/validator.service';
+import * as UserAction from '../../../redux/actions/user.actions';
+import { User } from '../../models/user.model';
 import { ApiService } from '../../services/api.service';
 
 @Component({
@@ -16,119 +24,90 @@ export class LoginCardComponent implements OnInit {
 
   formTitle: string;
 
+  currentUser: User;
 
-  constructor(private apiService: ApiService, private route: ActivatedRoute, private router: Router) { }
+  error: string;
+
+  constructor(private route: ActivatedRoute, private router: Router, private store: Store, private validator: ValidatorsService, public auth: ApiService) { }
 
   ngOnInit(): void {
     this.route.url.subscribe(el => this.path = el[0].path);
-    this.form = this.path === 'registration' ? this.createForm('signup') :  this.createForm('signin');
+    this.form = this.path === 'registration' ? this.createForm('signup') : this.createForm('signin');
     this.formTitle = this.path === 'registration' ? 'Registration' : 'Authorization';
   }
 
-  createForm(action:string) {
+  createForm(action: string) {
     if (action === 'signup') {
       return new FormGroup({
-        name: new FormControl('', [Validators.required, this.checkNameForLength]),
+        name: new FormControl('', [Validators.required, this.validator.checkNameForLength]),
         email: new FormControl('', [Validators.required, Validators.email]),
-        pass: new FormControl('', [Validators.required, this.checkForLength, this.checkUpperLower, this.checkMixture, this.checkSpecialChar]),
+        pass: new FormControl('', [Validators.required, this.validator.checkForLength, this.validator.checkUpperLower, this.validator.checkMixture, this.validator.checkSpecialChar]),
       });
     }
     if (action === 'signin') {
       return new FormGroup({
         email: new FormControl('', [Validators.required, Validators.email]),
-        pass: new FormControl('', [Validators.required, this.checkForLength, this.checkUpperLower, this.checkMixture, this.checkSpecialChar]),
+        pass: new FormControl('', [Validators.required, this.validator.checkForLength, this.validator.checkUpperLower, this.validator.checkMixture, this.validator.checkSpecialChar]),
       });
     }
   }
 
-  checkForLength(control: FormControl) {
-    if (control.value.length === 0) { return; }
-
-    if (control.value.length < 8) {
-      return {
-        lengthError: true,
-      };
-    }
+  checkError(formControlName: string) {
+    return (this.form.get(formControlName).dirty && this.form.get(formControlName).invalid) ? true : false;
   }
 
-  checkNameForLength(control: FormControl) {
-    if (control.value.length === 0) { return; }
-
-    if (control.value.length < 5) {
-      return {
-        lengthError: true,
-      };
-    }
+  viewError(formControlName: string, errorName: string) {
+    return (this.form.get(formControlName).errors?.[errorName]) ? true : false;
   }
 
-  checkUpperLower(control: FormControl) {
-    const rexP: RegExp = /(?=.*[a-z])(?=.*[A-Z])/;
-    if (control.value.length === 0) { return; }
-
-    if (!control.value.match(rexP)) {
-      return {
-        upperLowerError: true,
-      };
-    }
-  }
-
-  checkMixture(control: FormControl) {
-    const rexP: RegExp = /[A-Z][a-z]+/;
-    const rexP2: RegExp = /[0-9]+/;
-    if (control.value.length === 0) { return; }
-    if (!control.value.match(rexP) && !control.value.match(rexP2)) {
-      return {
-        mixtureError: true,
-      };
-    }
-  }
-
-  checkSpecialChar(control: FormControl) {
-    const rexP: RegExp = /[!@#$&*%]+/;
-    if (control.value.length === 0) { return; }
-    if (!control.value.match(rexP)) {
-      return {
-        specialCharError: true,
-      };
-    }
-  }
-
-  userInfo(action:string) {
-    if (action === 'signup') {
+  userInfo(action: string) {
+    if (action === 'signup')
       return {
         name: this.form.value.name,
         login: this.form.value.email,
         password: this.form.value.pass,
       };
-    }
     if (action === 'signin') {
       return {
         login: this.form.value.email,
         password: this.form.value.pass,
       };
     }
-
   }
 
   submit() {
-    if (this.path === 'registration') {
-      this.apiService.authenticate(this.userInfo('signup'), 'signup').subscribe(el => console.log(el));
-      return;
-    } else {
-      this.apiService.authenticate(this.userInfo('signin'), 'signin').subscribe(el => console.log(el));
-      return;
-    }
+    const userAction = this.path === 'registration' ? 'signup' : 'signin';
+    const currentUser = this.userInfo(userAction);
+    userAction === 'signup' ? this.store.dispatch(UserAction.createUserAction({ currentUser: currentUser })) :
+      this.store.dispatch(UserAction.createTokenAction({ currentUser: currentUser }));
+    this.store.pipe(
+      select(getCurrentUser))
+      .subscribe((el) => {
+        console.log(el);
+        if (el) {
+          this.auth.errors$.subscribe(error => this.error = error);
+          if ((el.token && (this.error === '' || this.error === null))) {
+            this.router.navigateByUrl('main');
+            this.auth.errors$.next(null);
+            this.auth.errors$.subscribe(error => this.error = error);
+          } else {
+            return this.error === 'User login already exists! ' ? this.auth.errors$.next(null) : null;
+          }
+        } else return;
+      });
+
   }
 
-  checkRegPage() {
-    return this.path === 'registration' ? true : false;
-  }
-
-  checkLogPage() {
-    return this.path === 'authorization' ? true : false;
+  checkPage(page: string) {
+    return this.path === page ? true : false;
   }
 
   goToRegPage() {
     this.router.navigateByUrl('/auth/registration');
   }
+
+  aaa() {
+    throw Error('name');
+  }
+
 }

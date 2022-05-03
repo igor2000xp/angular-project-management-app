@@ -1,7 +1,15 @@
 <div class="header">
   <div class="logo">Project management</div>
   <div>
-    <button class="admin-btn" (click)="goToLogPage()">log in</button>
-    <button class="admin-btn" (click)="goToRegPage()">sign up</button>
+    <button class="admin-btn"
+    (click)="switchPage('authorization')"
+    [ngClass]="{'admin-btn_active': checkPage('authorization')}">
+    log in
+  </button>
+    <button class="admin-btn"
+    (click)="switchPage('registration')"
+    [ngClass]="{'admin-btn_active': checkPage('registration')}">
+    sign up
+  </button>
   </div>
 </div>

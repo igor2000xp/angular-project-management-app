@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, of } from 'rxjs';
 import { User } from '../models/user.model';
 import { Board } from '../models/Board.model';
 import { Column } from '../models/column.model';
@@ -17,7 +17,18 @@ const BOARDS = `${BASE}/boards`;
 })
 
 export class ApiService {
+  public errors$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+
   constructor(private httpClient: HttpClient) { }
+
+
+  privatehandleError<T>(result?: T) {
+    return (error: any): Observable<T> => {
+      this.errors$.next(error.error.message);
+      console.log(error);
+      return of(result as T);
+    };
+  }
 
   public authenticate(user: User, mode: string): Observable<User> {
     const url = mode === 'signup' ? SIGNUP : SIGNIN;
@@ -25,7 +36,10 @@ export class ApiService {
       .set('Accept', 'application/json')
       .set('Content-Type', 'application/json');
     const body = JSON.stringify(user);
-    return this.httpClient.post<User>(url, body, { headers: headers });
+    return this.httpClient.post<User>(url, body, { headers: headers })
+      .pipe(
+        catchError(this.privatehandleError<any>([])),
+      );
   }
 
   public getUsers(token: string): Observable<User[]> {

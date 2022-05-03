@@ -6,6 +6,11 @@ import { AuthModule } from '../auth/auth.module';
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule, SharedModule, PmModule, AuthModule],
+  imports: [
+    CommonModule,
+    SharedModule,
+    PmModule,
+    AuthModule,
+  ],
 })
 export class CoreModule {}
