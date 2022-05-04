@@ -59,7 +59,7 @@ export class UserEffects {
           }
           const trueUser = currentUser.filter((el) => el.login === this.currentUser.login);
           console.log(trueUser);
-          const user: User = Object.assign({}, trueUser[0], this.currentUser);
+          const user: User = Object.assign({}, trueUser[0], this.currentUser, this.userToken);
           delete user.password;
           return UserActions.createTokenActionSuccess({ currentUser: user });
         }),
@@ -86,9 +86,8 @@ export class UserEffects {
         ofType(UserActions.deleteUserAction),
         switchMap((currentUser) => { return this.apiService.deleteUser(currentUser.token, currentUser.id); }),
         map(() => {
-          const empty = {};
           localStorage.removeItem('login');
-          return UserActions.deleteUsersActionSuccess({ empty: empty });
+          return UserActions.deleteUsersActionSuccess({ empty: null });
         }),
         catchError(() => of(UserActions.getUsersActionFailed())),
       );

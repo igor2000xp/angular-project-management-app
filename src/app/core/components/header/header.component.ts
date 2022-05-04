@@ -27,6 +27,7 @@ export class HeaderComponent implements OnInit {
     this.store.
       select((getCurrentUser))
       .subscribe(el => {
+        if (el === null) {this.userLogin = undefined; return;}
         this.currentUser = el;
         if (el && this.error === '') {
           this.userLogin = el.login;
@@ -53,7 +54,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.store.dispatch(UserAction.deleteUsersActionSuccess({ empty:{} }));
+    this.store.dispatch(UserAction.deleteUsersActionSuccess({ empty: null }));
   }
 
 }

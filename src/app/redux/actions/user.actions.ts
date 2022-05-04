@@ -60,5 +60,5 @@ export const deleteUserAction = createAction(
 );
 export const deleteUsersActionSuccess = createAction(
   `${actionSource} DELETE THE USER RECORD, SUCCESS`,
-  props<{ empty:{} }>(),
+  props<{ empty:null }>(),
 );
