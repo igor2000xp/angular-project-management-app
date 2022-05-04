@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, catchError, Observable, of } from 'rxjs';
 import { User } from '../models/user.model';
 import { Board } from '../models/Board.model';
-import { Column } from '../models/column.model';
+import { Column } from '../models/Column.model';
 import { Task } from '../models/Task.model';
 
 const BASE = 'http://localhost:4000';

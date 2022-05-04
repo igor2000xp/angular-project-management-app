@@ -30,8 +30,6 @@ export class HeaderComponent implements OnInit {
         this.currentUser = el;
         if (el && this.error === '') {
           this.userLogin = el.login;
-        } else {
-          this.userLogin = localStorage.getItem('login');
         }
       });
   }
@@ -45,9 +43,13 @@ export class HeaderComponent implements OnInit {
     return localStorage.getItem('currentPage') === page ? true : false;
   }
 
-  logout() {
+  deleteUser() {
     this.store.dispatch(UserAction.deleteUserAction({ token: this.currentUser.token, id: this.currentUser.id }));
     this.auth.errors$.next('User was deleted');
+  }
+
+  logout() {
+    this.store.dispatch(UserAction.deleteUsersActionSuccess({ empty:{} }));
   }
 
 }

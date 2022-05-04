@@ -53,7 +53,7 @@ export class UserEffects {
         mergeMap((user) => { this.currentUser = user; return this.apiService.authenticate(user, 'signin'); }),
         mergeMap((user) => { this.userToken = user; return this.apiService.getUsers(user.token); }),
         map((currentUser) => {
-          if (this.userToken) {
+          if (currentUser.length > 0) {
             localStorage.setItem('login', this.currentUser.login);
             this.apiService.errors$.next('');
           }
