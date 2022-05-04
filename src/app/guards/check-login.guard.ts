@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
-import {  Store } from '@ngrx/store';
+import { CanActivate } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { getCurrentUser } from '../redux/selectors/user.selectors';
 // import { getCurrentUser } from '../redux/selectors/user.selectors';
 
 @Injectable({
@@ -11,17 +13,21 @@ export class CheckLoginClass implements CanActivate {
 
   currentUser: any;
 
-  constructor(private router: Router, private store: Store) { }
+  constructor(private store: Store) {
 
-  canActivate() {
-    return this.checkLogin();
   }
 
-  checkLogin() {
-    if (localStorage.getItem('login')) return true;
-    else {
-      this.router.navigate(['/main']);
-      return false;
-    }
+  canActivate():Observable<boolean> {
+    return new Observable<boolean>(obs=> {
+      this.store.
+        select((getCurrentUser))
+        .subscribe(el => {
+          if (el) {
+            return obs.next(true);
+          } else {
+            return obs.next(false);
+          }
+        });
+    });
   }
 }
