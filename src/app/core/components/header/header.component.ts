@@ -34,9 +34,13 @@ export class HeaderComponent implements OnInit {
       });
   }
 
-  switchPage(page: string) {
+  switchAuthPage(page: string) {
     this.router.navigateByUrl(`/auth/${page}`);
     localStorage.setItem('currentPage', page);
+  }
+
+  goToHomePage() {
+    this.router.navigateByUrl('/home');
   }
 
   checkPage(page: string) {
