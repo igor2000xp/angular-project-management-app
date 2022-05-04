@@ -50,7 +50,10 @@ export class ApiService {
 
   public getUsers(token: string): Observable<User[]> {
     const headers = new HttpHeaders().set('accept', 'application/json').set('Authorization', `Bearer ${token}`);
-    return this.httpClient.get<User[]>(USERS, { headers: headers });
+    return this.httpClient.get<User[]>(USERS, { headers: headers })
+      .pipe(
+        catchError(this.privatehandleError<any>([])),
+      );
   }
 
   public getBoards(token: string): Observable<Board[]> {
