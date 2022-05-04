@@ -11,11 +11,11 @@ export class UserEffects {
 
   currentUser: User;
 
-  userError: string | boolean;
-
   userPassword: string;
 
-  userLogin:string;
+  userLogin: string;
+
+  userToken : { token: string };
 
   constructor(
     private actions$: Actions,
@@ -50,14 +50,16 @@ export class UserEffects {
       return this.actions$.pipe(
         ofType(UserActions.createTokenAction),
         pluck('currentUser'),
-        switchMap((user) => {  return this.apiService.authenticate(user, 'signin'); }),
+        mergeMap((user) => { this.currentUser = user; return this.apiService.authenticate(user, 'signin'); }),
+        mergeMap((user) => { this.userToken = user; return this.apiService.getUsers(user.token); }),
         map((currentUser) => {
-          this.currentUser = currentUser;
-          if (currentUser.token) {
+          if (this.userToken) {
             localStorage.setItem('login', this.currentUser.login);
             this.apiService.errors$.next('');
           }
-          const user: User = Object.assign({}, this.currentUser, currentUser);
+          const trueUser = currentUser.filter((el) => el.login === this.currentUser.login);
+          console.log(trueUser);
+          const user: User = Object.assign({}, trueUser[0], this.currentUser);
           delete user.password;
           return UserActions.createTokenActionSuccess({ currentUser: user });
         }),
@@ -86,7 +88,7 @@ export class UserEffects {
         map(() => {
           const empty = {};
           localStorage.removeItem('login');
-          return UserActions.deleteUsersActionSuccess({ empty:empty });
+          return UserActions.deleteUsersActionSuccess({ empty: empty });
         }),
         catchError(() => of(UserActions.getUsersActionFailed())),
       );
