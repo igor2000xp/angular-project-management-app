@@ -51,11 +51,16 @@ export class UserEffects {
         ofType(UserActions.createTokenAction),
         pluck('currentUser'),
         mergeMap((user) => { this.currentUser = user; return this.apiService.authenticate(user, 'signin'); }),
-        mergeMap((user) => { this.userToken = user; return this.apiService.getUsers(user.token); }),
+        mergeMap((user) => {
+          this.userToken = user;
+          return this.apiService.getUsers(user.token);
+        }),
         map((currentUser) => {
           if (currentUser.length > 0) {
             localStorage.setItem('login', this.currentUser.login);
             this.apiService.errors$.next('');
+          } else {
+            this.apiService.errors$.next('User was not founded');
           }
           const trueUser = currentUser.filter((el) => el.login === this.currentUser.login);
           console.log(trueUser);

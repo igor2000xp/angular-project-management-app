@@ -46,6 +46,25 @@ export class LoginCardComponent implements OnInit {
         : this.createForm('signin');
     this.formTitle =
       this.path === 'registration' ? 'Registration' : 'Authorization';
+    this.auth.errors$.subscribe((error) => {
+      this.error = error;
+    });
+    this.store.pipe(select(getCurrentUser)).subscribe((el) => {
+      if (this.error) {
+        this._snackBar.open(this.error, 'OK', {
+          duration: 3000,
+        });
+      }
+      if (el && el.token && el.password.length !== 60) {
+        console.log(el.password.length);
+        if (this.error === '') {
+          this._snackBar.ngOnDestroy();
+          this.router.navigateByUrl('main');
+        } else {
+          return;
+        }
+      }
+    });
   }
 
   createForm(action: string) {
@@ -115,25 +134,6 @@ export class LoginCardComponent implements OnInit {
       : this.store.dispatch(
         UserAction.createTokenAction({ currentUser: currentUser }),
       );
-    this.auth.errors$.subscribe((error) => {
-      this.error = error;
-    });
-    this.store.pipe(select(getCurrentUser)).subscribe((el) => {
-      if (this.error) {
-        this._snackBar.open(this.error, 'OK', {
-          duration: 3000,
-        });
-      }
-      if (el && el.token && el.password.length !== 60) {
-        console.log(el.password.length);
-        if (this.error === '') {
-          this._snackBar.ngOnDestroy();
-          this.router.navigateByUrl('main');
-        } else {
-          return;
-        }
-      }
-    });
   }
 
   checkPage(page: string) {
