@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { select, Store } from '@ngrx/store';
-import { getCurrentUser } from 'src/app/redux/selectors/user.selectors';
+import { Store } from '@ngrx/store';
 import { ValidatorsService } from 'src/app/shared/services/validator.service';
-import * as UserAction from '../../../redux/actions/user.actions';
 import { User } from '../../models/user.model';
 import { ApiService } from '../../services/api.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -30,7 +28,6 @@ export class EditProfileComponent implements OnInit {
   constructor(public dialog: MatDialog, private route: ActivatedRoute, private router: Router, private store: Store, private validator: ValidatorsService, public auth: ApiService) { }
 
   ngOnInit(): void {}
-
 
 
   openDialog() {
