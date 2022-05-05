@@ -9,7 +9,7 @@ import { getCurrentUser } from '../redux/selectors/user.selectors';
   providedIn: 'root',
 })
 
-export class EntryLoginClass implements CanActivate {
+export class EditProfileClass implements CanActivate {
   constructor(private router: Router, private store: Store) {}
 
   canActivate() {
@@ -17,14 +17,9 @@ export class EntryLoginClass implements CanActivate {
       this.store.
         select((getCurrentUser))
         .subscribe(el => {
-          console.log('guard', el);
-          if (el) {
-            if (el.token && el.name) {
-              this.router.navigate(['/main']);
-              return obs.next(false);
-            } else {
-              return obs.next(true);
-            }
+          if (!el) {
+            this.router.navigate(['/main']);
+            return obs.next(false);
           } else {
             return obs.next(true);
           }
