@@ -37,6 +37,7 @@ export class UserEffects {
           return this.apiService.authenticate({ login: this.userLogin, password: this.userPassword }, 'signin');
         }),
         map((currentUser) => {
+          this.userToken = currentUser;
           const user: User = Object.assign({}, this.currentUser, currentUser, { password: this.userPassword });
           return UserActions.createUsersActionSuccess({ currentUser: user });
         }),
@@ -98,7 +99,10 @@ export class UserEffects {
       return this.actions$.pipe(
         ofType(UserActions.updateUserAction),
         switchMap((obj) => { return this.apiService.updateUser(obj.token, obj.id, obj.user); }),
-        map((user) => { return UserActions.createUsersActionSuccess({ currentUser:user }); }),
+        map((user) => {
+          const currentUser = Object.assign({}, user, this.userToken);
+          return UserActions.createUsersActionSuccess({ currentUser:currentUser });
+        }),
       );
     },
   );

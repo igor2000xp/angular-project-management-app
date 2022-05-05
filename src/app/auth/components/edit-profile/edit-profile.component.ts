@@ -49,7 +49,7 @@ export class EditProfileComponent implements OnInit {
     this.store.
       select((getCurrentUser))
       .subscribe(el => {
-        if (el === null) {return;}
+        if (el === null) { return; }
         if (el)
           this.currentUser = el;
         this.editForm.controls.name.setValue(el.name);
@@ -76,8 +76,13 @@ export class EditProfileComponent implements OnInit {
     this.navigation.back();
   }
 
-  // edit(){
-  //   this.store.dispatch(UserAction.updateUserAction({ token: this.currentUser.token, id: this.currentUser.id, user: {} }))
-  // }
+  edit() {
+    const user = {
+      name: this.editForm.value.name,
+      login: this.editForm.value.email,
+      password: this.editForm.value.pass,
+    };
+    this.store.dispatch(UserAction.updateUserAction({ token: this.currentUser.token, id: this.currentUser.id, user: user }));
+  }
 
 }
