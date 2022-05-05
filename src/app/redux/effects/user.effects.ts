@@ -38,7 +38,6 @@ export class UserEffects {
         }),
         map((currentUser) => {
           const user: User = Object.assign({}, this.currentUser, currentUser);
-          delete user.password;
           return UserActions.createUsersActionSuccess({ currentUser: user });
         }),
       );
@@ -60,7 +59,7 @@ export class UserEffects {
           const trueUser = currentUser.filter((el) => el.login === this.currentUser.login);
           console.log(trueUser);
           const user: User = Object.assign({}, trueUser[0], this.currentUser, this.userToken);
-          delete user.password;
+          console.log(user);
           return UserActions.createTokenActionSuccess({ currentUser: user });
         }),
         catchError(() => of(UserActions.getUsersActionFailed())),

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CheckLoginClass } from './guards/check-login.guard';
-import { EntryLoginClass } from './guards/entry-login-guard';
+// import { EntryLoginClass } from './guards/entry-login-guard';
 import { BoardPageComponent } from './pm/pages/board-page/board-page.component';
 
 const routes: Routes = [
@@ -15,7 +15,7 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./auth/lazy-modules/login/login.module').then((m) => m.LoginModule),
-    canActivate:[EntryLoginClass],
+    // canActivate:[EntryLoginClass],
   },
   { path: 'board', component: BoardPageComponent },
   //   path: 'registration',

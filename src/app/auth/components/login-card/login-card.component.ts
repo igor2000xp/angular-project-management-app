@@ -124,7 +124,7 @@ export class LoginCardComponent implements OnInit {
           duration: 3000,
         });
       }
-      if (el) {
+      if (el && el.token) {
         if (this.error === '') {
           this._snackBar.ngOnDestroy();
           this.router.navigateByUrl('main');

@@ -48,13 +48,11 @@ export class HeaderComponent implements OnInit {
     return localStorage.getItem('currentPage') === page ? true : false;
   }
 
-  deleteUser() {
-    this.store.dispatch(UserAction.deleteUserAction({ token: this.currentUser.token, id: this.currentUser.id }));
-    this.auth.errors$.next('User was deleted');
-  }
-
   logout() {
     this.store.dispatch(UserAction.deleteUsersActionSuccess({ empty: null }));
   }
 
+  edit() {
+    this.router.navigateByUrl('/auth/edit-profile');
+  }
 }
