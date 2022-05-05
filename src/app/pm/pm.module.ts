@@ -16,6 +16,10 @@ import { TaskModalComponent } from './components/task-modal/task-modal.component
 import { ColumnCardComponent } from './components/column-card/column-card.component';
 import { TaskCardComponent } from './components/task-card/task-card.component';
 import { TaskCardModalComponent } from './components/task-card-modal/task-card-modal.component';
+import { BoardPageComponent } from './pages/board-page/board-page.component';
+import { BoardMenuComponent } from './components/board-menu/board-menu.component';
+import { BoardCardModalComponent } from './components/board-card-modal/board-card-modal.component';
+import { BoardCardComponent } from './components/board-card/board-card.component';
 
 
 
@@ -29,6 +33,10 @@ import { TaskCardModalComponent } from './components/task-card-modal/task-card-m
     ColumnCardComponent,
     TaskCardComponent,
     TaskCardModalComponent,
+    BoardPageComponent,
+    BoardMenuComponent,
+    BoardCardModalComponent,
+    BoardCardComponent,
   ],
   imports: [
     CommonModule,

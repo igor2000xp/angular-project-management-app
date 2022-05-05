@@ -1,0 +1,52 @@
+<div class="login-card__wrapper">
+  <form [formGroup]="form">
+    <div class="login-card">
+      <p class="login-title">Edit profile</p>
+      <div class="login-card__container">
+        <div class="login-card__el">
+          <p class="input-name">Change name</p>
+          <input
+            placeholder="Сurrent name"
+            #login
+            class="form-control"
+            formControlName="name"
+          />
+        </div>
+        <div class="login-card__el">
+          <p class="input-name">Change login</p>
+          <input
+            placeholder="Сurrent login"
+            #login
+            class="form-control"
+            formControlName="email"
+          />
+          <div></div>
+        </div>
+        <div class="login-card__el">
+          <p class="input-name">Change password</p>
+          <input
+            placeholder="Сurrent password"
+            #password
+            class="form-control"
+            formControlName="pass"
+          />
+          <div></div>
+        </div>
+        <div class="button-wrapper">
+          <button (click)="openDialog()" class="delit-card__btn" type="submit">
+            <p class="login-card-btn__text">Delete</p>
+          </button>
+          <button class="back-card__btn" type="submit">
+            <p class="login-card-btn__text">Back</p>
+          </button>
+          <button
+            class="login-card__btn"
+            type="submit"
+          >
+            <p class="login-card-btn__text">Login</p>
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
