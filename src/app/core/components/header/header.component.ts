@@ -40,8 +40,8 @@ export class HeaderComponent implements OnInit {
     localStorage.setItem('currentPage', page);
   }
 
-  goToHomePage() {
-    this.router.navigateByUrl('/home');
+  switchPage(page:string) {
+    this.router.navigateByUrl(`/${page}`);
   }
 
   checkPage(page: string) {
