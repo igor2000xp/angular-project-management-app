@@ -1,12 +1,16 @@
 <div class="login-card__wrapper">
   <form [formGroup]="form" (ngSubmit)="submit()">
     <div class="login-card">
-      <p class="login-title">{{formTitle}}</p>
+      <p class="login-title">{{ formTitle }}</p>
       <div class="login-card__container">
         <div class="login-card__el" *ngIf="checkPage('registration')">
           <p class="input-name">Name</p>
-          <input #login class="form-control" formControlName="name"
-            [ngClass]="{'has-error': checkError('name')}" />
+          <input
+            #login
+            class="form-control"
+            formControlName="name"
+            [ngClass]="{ 'has-error': checkError('name') }"
+          />
           <div *ngIf="checkError('name')">
             <p class="login-validate" *ngIf="viewError('name', 'required')">
               Please enter a name
@@ -18,8 +22,12 @@
         </div>
         <div class="login-card__el">
           <p class="input-name">E-mail</p>
-          <input #login class="form-control" formControlName="email"
-            [ngClass]="{'has-error': checkError('email')}" />
+          <input
+            #login
+            class="form-control"
+            formControlName="email"
+            [ngClass]="{ 'has-error': checkError('email') }"
+          />
           <div *ngIf="checkError('email')">
             <p class="login-validate" *ngIf="viewError('email', 'required')">
               Please enter a login email
@@ -31,37 +39,65 @@
         </div>
         <div class="login-card__el">
           <p class="input-name">Password</p>
-          <input #password class="form-control" formControlName="pass"
-            [ngClass]="{'has-error': checkError('pass')}" />
+          <input
+            #password
+            class="form-control"
+            formControlName="pass"
+            [ngClass]="{ 'has-error': checkError('pass') }"
+          />
           <div *ngIf="checkError('pass')">
             <div class="login-validate" *ngIf="viewError('pass', 'required')">
-              Please enter a password <br>
+              Please enter a password <br />
             </div>
-            <div class="login-validate" *ngIf="viewError('pass', 'lengthError') ||
-            viewError('pass', 'upperLowerError') ||
-            viewError('pass', 'mixtureError') ||
-            viewError('pass', 'specialCharError')">
-              Your password isn't strong enough<br>
-              <p class="login-validate__error" *ngIf="viewError('pass', 'lengthError')">
-                at least 8 characters <br>
+            <div
+              class="login-validate"
+              *ngIf="
+                viewError('pass', 'lengthError') ||
+                viewError('pass', 'upperLowerError') ||
+                viewError('pass', 'mixtureError') ||
+                viewError('pass', 'specialCharError')
+              "
+            >
+              Your password isn't strong enough<br />
+              <p
+                class="login-validate__error"
+                *ngIf="viewError('pass', 'lengthError')"
+              >
+                at least 8 characters <br />
               </p>
-              <p class="login-validate__error" *ngIf=" viewError('pass', 'upperLowerError')">
-                a mixture of both uppercase and lowercase letters <br>
+              <p
+                class="login-validate__error"
+                *ngIf="viewError('pass', 'upperLowerError')"
+              >
+                a mixture of both uppercase and lowercase letters <br />
               </p>
-              <p class="login-validate__error" *ngIf="viewError('pass', 'mixtureError')">
-                a mixture of letters and numbers <br>
+              <p
+                class="login-validate__error"
+                *ngIf="viewError('pass', 'mixtureError')"
+              >
+                a mixture of letters and numbers <br />
               </p>
-              <p class="login-validate__error" *ngIf="viewError('pass', 'specialCharError')">
-                inclusion of at least one special character, e.g., ! @ # ? ] <br>
+              <p
+                class="login-validate__error"
+                *ngIf="viewError('pass', 'specialCharError')"
+              >
+                inclusion of at least one special character, e.g., ! @ # ? ]
+                <br />
               </p>
             </div>
           </div>
-          <p *ngIf="checkPage('authorization')" class="route-reg" (click)="goToRegPage()">No account yet?</p>
+          <p
+            *ngIf="checkPage('authorization')"
+            class="route-reg"
+            (click)="goToRegPage()"
+          >
+            No account yet?
+          </p>
         </div>
-        <button class="login-card__btn" type="submit" [disabled]="form.invalid">
+        <button  class="login-card__btn" type="submit" [disabled]="form.invalid">
           <p class="login-card-btn__text">Login</p>
         </button>
-        <div *ngIf="error">{{error}}</div>
+        <!-- <div *ngIf="error">{{ error }}</div> -->
       </div>
     </div>
   </form>

@@ -11,7 +11,11 @@ export class UserEffects {
 
   currentUser: User;
 
-  userError: string | boolean;
+  userPassword: string;
+
+  userLogin: string;
+
+  userToken : { token: string };
 
   constructor(
     private actions$: Actions,
@@ -23,14 +27,19 @@ export class UserEffects {
       return this.actions$.pipe(
         ofType(UserActions.createUserAction),
         pluck('currentUser'),
-        mergeMap((user) => { this.currentUser = user; return this.apiService.authenticate(user, 'signup'); }),
-        mergeMap(() => this.apiService.authenticate({ login: this.currentUser.login, password: this.currentUser.password }, 'signin')),
+        mergeMap((user) => { this.userLogin = user.login; this.userPassword = user.password; return this.apiService.authenticate(user, 'signup'); }),
+        mergeMap((user) => {
+          this.currentUser = user;
+          if (user.id) {
+            localStorage.setItem('login', user.login);
+            this.apiService.errors$.next('');
+          }
+          return this.apiService.authenticate({ login: this.userLogin, password: this.userPassword }, 'signin');
+        }),
         map((currentUser) => {
           const user: User = Object.assign({}, this.currentUser, currentUser);
-          delete user.password;
           return UserActions.createUsersActionSuccess({ currentUser: user });
         }),
-        catchError(() => of(UserActions.getUsersActionFailed())),
       );
     },
   );
@@ -40,10 +49,17 @@ export class UserEffects {
       return this.actions$.pipe(
         ofType(UserActions.createTokenAction),
         pluck('currentUser'),
-        switchMap((user) => { this.currentUser = user; return this.apiService.authenticate(user, 'signin'); }),
+        mergeMap((user) => { this.currentUser = user; return this.apiService.authenticate(user, 'signin'); }),
+        mergeMap((user) => { this.userToken = user; return this.apiService.getUsers(user.token); }),
         map((currentUser) => {
-          const user: User = Object.assign({}, this.currentUser, currentUser);
-          delete user.password;
+          if (currentUser.length > 0) {
+            localStorage.setItem('login', this.currentUser.login);
+            this.apiService.errors$.next('');
+          }
+          const trueUser = currentUser.filter((el) => el.login === this.currentUser.login);
+          console.log(trueUser);
+          const user: User = Object.assign({}, trueUser[0], this.currentUser, this.userToken);
+          console.log(user);
           return UserActions.createTokenActionSuccess({ currentUser: user });
         }),
         catchError(() => of(UserActions.getUsersActionFailed())),
@@ -63,5 +79,18 @@ export class UserEffects {
     },
   );
 
+  deleteUser$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(UserActions.deleteUserAction),
+        switchMap((currentUser) => { return this.apiService.deleteUser(currentUser.token, currentUser.id); }),
+        map(() => {
+          localStorage.removeItem('login');
+          return UserActions.deleteUsersActionSuccess({ empty: null });
+        }),
+        catchError(() => of(UserActions.getUsersActionFailed())),
+      );
+    },
+  );
 
 }
