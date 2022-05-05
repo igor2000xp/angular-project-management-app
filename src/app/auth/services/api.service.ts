@@ -56,6 +56,16 @@ export class ApiService {
       );
   }
 
+  public updateUser(token: string, id: string, user: User): Observable<User> {
+    const body = JSON.stringify(user);
+    const headers = new HttpHeaders()
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${token}`);
+    return this.httpClient
+      .put<User>(`${USERS}/${id}`, body, { headers: headers });
+  }
+
   public getBoards(token: string): Observable<Board[]> {
     const headers = new HttpHeaders()
       .set('accept', 'application/json')

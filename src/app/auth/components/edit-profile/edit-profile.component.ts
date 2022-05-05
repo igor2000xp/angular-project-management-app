@@ -21,8 +21,6 @@ export class EditProfileComponent implements OnInit {
 
   editForm!: FormGroup;
 
-  path: string;
-
   formTitle: string;
 
   currentUser: User;
@@ -51,7 +49,12 @@ export class EditProfileComponent implements OnInit {
     this.store.
       select((getCurrentUser))
       .subscribe(el => {
-        this.currentUser = el;
+        if (el === null) {return;}
+        if (el)
+          this.currentUser = el;
+        this.editForm.controls.name.setValue(el.name);
+        this.editForm.controls.email.setValue(el.login);
+        this.editForm.controls.pass.setValue(el.password);
       });
   }
 
@@ -72,5 +75,9 @@ export class EditProfileComponent implements OnInit {
   back() {
     this.navigation.back();
   }
+
+  // edit(){
+  //   this.store.dispatch(UserAction.updateUserAction({ token: this.currentUser.token, id: this.currentUser.id, user: {} }))
+  // }
 
 }
