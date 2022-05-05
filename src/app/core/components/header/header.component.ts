@@ -36,6 +36,7 @@ export class HeaderComponent implements OnInit {
   }
 
   switchAuthPage(page: string) {
+    this.auth.errors$.next('');
     this.router.navigateByUrl(`/auth/${page}`);
     localStorage.setItem('currentPage', page);
   }
