@@ -55,7 +55,7 @@ export class LoginCardComponent implements OnInit {
           duration: 3000,
         });
       }
-      if (el && el.token && el.password.length !== 60) {
+      if (el && el.token && el.password.length !== 60 && el.name) {
         console.log(el.password.length);
         if (this.error === '') {
           this._snackBar.ngOnDestroy();
