@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { DragulaModule } from 'ng2-dragula';
+import {MatIconModule} from '@angular/material/icon';
 
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -33,6 +34,7 @@ import { PmModule } from './pm/pm.module';
     BrowserAnimationsModule,
     CoreModule,
     HttpClientModule,
+    MatIconModule,
     StoreModule.forRoot(
       {
         tasks: fromTask.taskReducer,

@@ -18,20 +18,21 @@
           <div></div>
         </div>
       </div>
+      <div class="button-wrapper">
+        <button
+        class="delit-card__btn"
+        (click)="openDialog()">
+          <p class="login-card-btn__text">Delete</p>
+        </button>
+        <button class="back-card__btn"
+        (click)=" back()">
+          <p class="login-card-btn__text">Back</p>
+        </button>
+        <button class="login-card__btn" type="submit">
+          <p class="login-card-btn__text">Submit</p>
+        </button>
+      </div>
     </div>
+
   </form>
-  <div class="button-wrapper">
-    <button
-    class="delit-card__btn"
-    (click)="openDialog()">
-      <p class="login-card-btn__text">Delete</p>
-    </button>
-    <button class="back-card__btn"
-    (click)=" back()">
-      <p class="login-card-btn__text">Back</p>
-    </button>
-    <button class="login-card__btn" type="submit">
-      <p class="login-card-btn__text">Submit</p>
-    </button>
-  </div>
 </div>
