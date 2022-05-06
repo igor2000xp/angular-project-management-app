@@ -15,7 +15,7 @@ export class UserEffects {
 
   userLogin: string;
 
-  userToken : { token: string };
+  userToken: { token: string };
 
   constructor(
     private actions$: Actions,
@@ -31,15 +31,20 @@ export class UserEffects {
         mergeMap((user) => {
           this.currentUser = user;
           if (user.id) {
-            localStorage.setItem('login', user.login);
             this.apiService.errors$.next('');
           }
           return this.apiService.authenticate({ login: this.userLogin, password: this.userPassword }, 'signin');
         }),
         map((currentUser) => {
           this.userToken = currentUser;
-          const user: User = Object.assign({}, this.currentUser, currentUser, { password: this.userPassword });
-          return UserActions.createUsersActionSuccess({ currentUser: user });
+          if (this.currentUser.id) {
+            const user: User = Object.assign({}, this.currentUser, currentUser, { password: this.userPassword });
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            return UserActions.createUsersActionSuccess({ currentUser: user });
+          } else {
+            return UserActions.createUsersActionSuccess({ currentUser: {} });
+          }
+
         }),
       );
     },
@@ -57,18 +62,19 @@ export class UserEffects {
         }),
         map((currentUser) => {
           if (currentUser.length > 0) {
-            localStorage.setItem('login', this.currentUser.login);
             this.apiService.errors$.next('');
           } else {
             this.apiService.errors$.next('User was not founded');
           }
-          const trueUser = currentUser.filter((el) => el.login === this.currentUser.login);
-          console.log(trueUser);
-          const user: User = Object.assign({}, trueUser[0], this.currentUser, this.userToken);
-          console.log(user);
-          return UserActions.createTokenActionSuccess({ currentUser: user });
+          console.log(typeof this.userToken);
+          if (typeof this.userToken.token === 'string') {
+            const trueUser = currentUser.filter((el) => el.login === this.currentUser.login);
+            const user: User = Object.assign({}, trueUser[0], this.currentUser, this.userToken);
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            return UserActions.createTokenActionSuccess({ currentUser: user });
+          } else return UserActions.createTokenActionSuccess({ currentUser:{} });
+
         }),
-        catchError(() => of(UserActions.getUsersActionFailed())),
       );
     },
   );
@@ -91,7 +97,7 @@ export class UserEffects {
         ofType(UserActions.deleteUserAction),
         switchMap((currentUser) => { return this.apiService.deleteUser(currentUser.token, currentUser.id); }),
         map(() => {
-          localStorage.removeItem('login');
+          localStorage.removeItem('currentUser');
           return UserActions.deleteUsersActionSuccess({ empty: null });
         }),
         catchError(() => of(UserActions.getUsersActionFailed())),
@@ -106,7 +112,8 @@ export class UserEffects {
         switchMap((obj) => { return this.apiService.updateUser(obj.token, obj.id, obj.user); }),
         map((user) => {
           const currentUser = Object.assign({}, user, this.userToken);
-          return UserActions.createUsersActionSuccess({ currentUser:currentUser });
+          localStorage.setItem('currentUser', JSON.stringify(currentUser));
+          return UserActions.createUsersActionSuccess({ currentUser: currentUser });
         }),
       );
     },
