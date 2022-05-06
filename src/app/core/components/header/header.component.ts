@@ -34,7 +34,9 @@ export class HeaderComponent implements OnInit {
       .subscribe(el => {
         if (el === null) {
           this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+          console.log(this.currentUser);
           if (this.currentUser) this.userLogin = this.currentUser.login;
+          else { this.userLogin = undefined;}
         }
         this.currentUser = el;
         if (el && this.error === '') {
