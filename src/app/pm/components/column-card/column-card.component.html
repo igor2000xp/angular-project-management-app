@@ -10,17 +10,16 @@
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>
-          <span>Что нибудь 1</span>
+        <button (click)="openDialog()" mat-menu-item>
+          <span>Delete</span>
         </button>
         <button mat-menu-item>
           <span>Что нибудь 2</span>
         </button>
       </mat-menu>
     </div>
-    <app-task-card dragula="COLUMNS" ></app-task-card>
+    <app-task-card dragula="COLUMNS"></app-task-card>
     <app-task-card dragula="COLUMNS"></app-task-card>
     <app-task-card dragula="COLUMNS"></app-task-card>
   </div>
 </div>
-

@@ -50,6 +50,7 @@
 
 .login-container {
   display: flex;
+  align-items: center;
   gap: 25px;
 }
 
@@ -60,4 +61,10 @@
 
 .logout-btn {
   margin-right: 25px;
+}
+
+.edit {
+  font-size: 30px;
+  height: 31px;
+  cursor: pointer;
 }
