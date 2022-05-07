@@ -18,7 +18,8 @@ export class BoardEffects {
         ofType(BoardAction.createBoard),
         pluck('currentBoard'),
         mergeMap((board) => {
-          return this.apiService.createBoard('ad', board);
+          const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+          return this.apiService.createBoard(currentUser.token, board);
         },
         ),
         map((board) => BoardAction.createBoardSuccess({ currentBoard: board })),
