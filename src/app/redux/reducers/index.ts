@@ -13,6 +13,8 @@ export * from '../actions/board.actions';
 export * from '../actions/column.actions';
 export * from './task.reducer';
 export * from './user.reducer';
+export * from './board.reducer';
+export * from './column.reducer';
 
 // import { environment } from '../../../environments/environment';
 // import { taskReducer } from './task.reducer';

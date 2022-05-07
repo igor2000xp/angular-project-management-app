@@ -4,6 +4,7 @@ export interface IAppState {
   users: IUsersState;
   tasks: ITasksState;
   board: IBoardsState;
+  columns: IColumnState;
 }
 export interface IUsersState {
   users: IUser[] | null;

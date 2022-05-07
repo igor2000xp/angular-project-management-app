@@ -14,6 +14,8 @@ import { StoreModule } from '@ngrx/store';
 // import { metaReducers, reducers } from './redux/reducers';
 import * as fromUser from './redux/reducers/user.reducer';
 import * as fromTask from './redux/reducers/task.reducer';
+import * as fromBoard from './redux/reducers/board.reducer';
+import * as fromColumn from './redux/reducers/column.reducer';
 import { EffectsModule } from '@ngrx/effects';
 // import { AppEffects } from './redux/effects/app.effects';
 import { UserEffects } from './redux/effects/user.effects';
@@ -37,6 +39,8 @@ import { PmModule } from './pm/pm.module';
       {
         tasks: fromTask.taskReducer,
         users: fromUser.userReducer,
+        boards: fromBoard.boardReducer,
+        columns: fromColumn.ColumnReducer,
       }, {
       // metaReducers,
         runtimeChecks: {
