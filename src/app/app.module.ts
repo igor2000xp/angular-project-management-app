@@ -54,7 +54,10 @@ import { BoardEffects } from './redux/effects/board.effects';
         },
       }),
     // StoreModule.forFeature('taskState', taskReducer),
-    EffectsModule.forRoot([UserEffects, BoardEffects]),
+    EffectsModule.forRoot([
+      UserEffects,
+      BoardEffects,
+    ]),
     DragulaModule.forRoot(),
     PmModule,
     // EffectsModule.forFeature([BoardEffects]),

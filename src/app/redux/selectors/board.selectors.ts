@@ -1,7 +1,9 @@
-import { IBoardsState } from '../state.models';
+import { IAppState, IBoardsState } from '../state.models';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-export const selectBoard = createFeatureSelector<IBoardsState>('board-state');
+// export const selectBoard = createFeatureSelector<IBoardsState>('board-state');
+
+export const selectBoard = (state:IAppState) => state.board;
 
 export const selectCreateBoard = createSelector(selectBoard, (state:IBoardsState) => {
   return state.boards;

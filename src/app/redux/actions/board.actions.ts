@@ -24,6 +24,6 @@ export const deleteBoard = createAction(
 );
 
 export const updateBoard = createAction(
-  `${ actionsSource } CREATE BOARD`,
+  `${ actionsSource } UPDATE BOARD`,
   props<{ board: IBoard }>(),
 );
