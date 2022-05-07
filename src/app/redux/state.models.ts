@@ -3,13 +3,21 @@ import { ITasksState } from './reducers';
 export interface IAppState {
   users: IUsersState;
   tasks: ITasksState;
+  board: IBoardsState;
 }
 export interface IUsersState {
   users: IUser[] | null;
   currentUser: IUser | null | any;
   isUserFetched: boolean;
 }
-
+export interface IBoardsState {
+  boards: IBoard[] | null;
+  currentBoard: IBoard | null;
+}
+export interface IColumnState {
+  columns: IColumn[];
+  currentColumn: IColumn;
+}
 export interface IUser {
   id?: string;
   name?: string;
