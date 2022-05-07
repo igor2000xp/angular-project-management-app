@@ -9,7 +9,7 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./pm/pm.module').then((m) => m.PmModule),
-    canActivate:[CheckLoginClass],
+    // canActivate:[CheckLoginClass],
   },
   {
     path: 'auth',

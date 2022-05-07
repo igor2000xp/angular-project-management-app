@@ -20,6 +20,8 @@ import { BoardPageComponent } from './pages/board-page/board-page.component';
 import { BoardMenuComponent } from './components/board-menu/board-menu.component';
 import { BoardCardModalComponent } from './components/board-card-modal/board-card-modal.component';
 import { BoardCardComponent } from './components/board-card/board-card.component';
+import { DeleteBoardModalComponent } from './components/delete-board-modal/delete-board-modal.component';
+import { DeleteColumModalComponent } from './components/delete-colum-modal/delete-colum-modal.component';
 
 
 
@@ -37,6 +39,8 @@ import { BoardCardComponent } from './components/board-card/board-card.component
     BoardMenuComponent,
     BoardCardModalComponent,
     BoardCardComponent,
+    DeleteBoardModalComponent,
+    DeleteColumModalComponent,
   ],
   imports: [
     CommonModule,
