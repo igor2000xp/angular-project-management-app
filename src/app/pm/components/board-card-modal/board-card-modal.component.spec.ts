@@ -8,9 +8,9 @@ describe('BoardCardModalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BoardCardModalComponent ]
+      declarations: [ BoardCardModalComponent ],
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
