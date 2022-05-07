@@ -1,3 +1,4 @@
+import { Board } from '../auth/models/Board.model';
 import { ITasksState } from './reducers';
 
 export interface IAppState {
@@ -12,8 +13,8 @@ export interface IUsersState {
   isUserFetched: boolean;
 }
 export interface IBoardsState {
-  boards: IBoard[] | null;
-  currentBoard: IBoard | null;
+  boards: Board[] | null;
+  currentBoard: Board | null;
 }
 export interface IColumnState {
   columns: IColumn[];

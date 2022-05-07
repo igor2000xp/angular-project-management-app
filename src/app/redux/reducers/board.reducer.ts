@@ -1,4 +1,5 @@
-import { IBoard, IBoardsState } from '../state.models';
+/* eslint-disable ngrx/on-function-explicit-return-type */
+import { IBoardsState } from '../state.models';
 import { Action, createReducer, on } from '@ngrx/store';
 import * as BoardAction from '../actions/board.actions';
 
@@ -9,36 +10,36 @@ export const initialBoardState:IBoardsState = {
 
 const reducer = createReducer(
   initialBoardState,
-  on(BoardAction.createBoardSuccess, (state, { board }) => {
+  on(BoardAction.createBoardSuccess, (state, { currentBoard }) => {
     return ({
       ...state,
-      currentBoard: board,
+      currentBoard: currentBoard,
     });
   }),
 
-  on(BoardAction.getAllBoards, (state) => {
-    return({
-      ...state,
-    });
-  }),
+  // on(BoardAction.getAllBoards, (state) => {
+  //   return ({
+  //     ...state,
+  //   });
+  // }),
 
-  on(BoardAction.getBoardById, (state) => {
-    return ({
-      ...state,
-    });
-  }),
+  // on(BoardAction.getBoardById, (state) => {
+  //   return ({
+  //     ...state,
+  //   });
+  // }),
 
-  on(BoardAction.deleteBoard, (state) => {
-    return ({
-      ...state,
-    });
-  }),
+  // on(BoardAction.deleteBoard, (state) => {
+  //   return ({
+  //     ...state,
+  //   });
+  // }),
 
-  on(BoardAction.updateBoard, (state) => {
-    return ({
-      ...state,
-    });
-  }),
+  // on(BoardAction.updateBoard, (state) => {
+  //   return ({
+  //     ...state,
+  //   });
+  // }),
 );
 
 export function boardReducer(state: IBoardsState, action: Action) {
