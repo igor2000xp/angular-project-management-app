@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Observable, switchMap } from 'rxjs';
+import { mergeMap, Observable, pluck, switchMap } from 'rxjs';
 import { Action } from '@ngrx/store';
 import * as BoardAction from '../actions/board.actions';
 import { ApiService } from '../../auth/services/api.service';
@@ -9,7 +9,7 @@ import { IBoard } from '../state.models';
 
 
 @Injectable()
-export class BoardEffects {
+export class BoardEffects implements OnInit {
   private token: string;
 
   constructor(
@@ -17,16 +17,16 @@ export class BoardEffects {
     private readonly apiService: ApiService,
   ) {}
 
-  // createAllBoard: Observable<Action> = createEffect(() => (
-  //   this.actions$.pipe(
-  //     ofType(BoardAction.createBoard),
-  //     switchMapTo(
-  //       // this.token = localStorage.getItem('token');
-  //       this.apiService.getBoards(this.token).pipe(
-  //         map( user => user)
-  //       )
-  //     )
-  //
-  //   )
-  // ))
+  createAllBoard = createEffect(() => this.actions$.pipe(
+    ofType(BoardAction.createBoard),
+    // pluck('board'),
+    mergeMap((board) => this.apiService.createBoard(this.token, board.board).pipe(
+      // map((board) => board)
+    // ))
+    )
+  )
+
+  ngOnInit() {
+    this.token = localStorage.getItem('token');
+  }
 }

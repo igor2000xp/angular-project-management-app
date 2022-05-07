@@ -7,6 +7,11 @@ export const createBoard = createAction(
   `${actionsSource} CREATE BOARD`,
   props<{ board: IBoard }>(),
 );
+export const createBoardSuccess = createAction(
+  `${actionsSource} CREATE BOARD, SUCCESS`,
+  props<{ board: IBoard }>(),
+);
+
 
 export const getAllBoards = createAction(
   `${actionsSource} GET ALL BOARDS`,

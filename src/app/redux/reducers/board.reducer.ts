@@ -1,4 +1,4 @@
-import { IBoardsState } from '../state.models';
+import { IBoard, IBoardsState } from '../state.models';
 import { Action, createReducer, on } from '@ngrx/store';
 import * as BoardAction from '../actions/board.actions';
 
@@ -9,9 +9,10 @@ export const initialBoardState:IBoardsState = {
 
 const reducer = createReducer(
   initialBoardState,
-  on(BoardAction.getAllBoards, (state) => {
+  on(BoardAction.createBoardSuccess, (state, { board }) => {
     return ({
       ...state,
+      currentBoard: board,
     });
   }),
 
