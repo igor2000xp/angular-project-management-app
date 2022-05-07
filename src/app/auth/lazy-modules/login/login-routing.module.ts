@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EditProfileClass } from 'src/app/guards/edit-profile.guard';
-import { EntryLoginClass } from 'src/app/guards/entry-login-guard';
+import { UserLogOutClass } from 'src/app/guards/user-logout.guard';
+import { UserLogInClass } from 'src/app/guards/user-login.guard';
 import { EditProfileComponent } from '../../components/edit-profile/edit-profile.component';
 import { LoginCardComponent } from '../../components/login-card/login-card.component';
 
@@ -9,15 +9,15 @@ import { LoginCardComponent } from '../../components/login-card/login-card.compo
 const routes: Routes = [
   {
     path: 'registration', component: LoginCardComponent,
-    canActivate: [EntryLoginClass],
+    canActivate: [UserLogOutClass],
   },
   {
     path: 'authorization', component: LoginCardComponent,
-    canActivate: [EntryLoginClass],
+    canActivate: [UserLogOutClass],
   },
   {
     path: 'edit-profile', component: EditProfileComponent,
-    canActivate: [EditProfileClass],
+    canActivate: [UserLogInClass],
   },
 ];
 

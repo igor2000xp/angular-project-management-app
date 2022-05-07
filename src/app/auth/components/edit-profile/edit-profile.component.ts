@@ -21,8 +21,6 @@ export class EditProfileComponent implements OnInit {
 
   editForm!: FormGroup;
 
-  path: string;
-
   formTitle: string;
 
   currentUser: User;
@@ -48,11 +46,23 @@ export class EditProfileComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.email]),
       pass: new FormControl('', [Validators.required]),
     });
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.store.
       select((getCurrentUser))
       .subscribe(el => {
-        this.currentUser = el;
+        if (el === null) {
+          this.editForm.controls.name.setValue(this.currentUser.name);
+          this.editForm.controls.email.setValue(this.currentUser.login);
+          this.editForm.controls.pass.setValue(this.currentUser.password);
+          return;
+        }
+        if (el)
+          this.currentUser = el;
+        this.editForm.controls.name.setValue(el.name);
+        this.editForm.controls.email.setValue(el.login);
+        this.editForm.controls.pass.setValue(el.password);
       });
+
   }
 
   openDialog() {
@@ -64,6 +74,7 @@ export class EditProfileComponent implements OnInit {
   }
 
   deleteUser() {
+    localStorage.removeItem('currentUser');
     this.store.dispatch(UserAction.deleteUserAction({ token: this.currentUser.token, id: this.currentUser.id }));
     this.auth.errors$.next('User was deleted');
     this.router.navigateByUrl('/main');
@@ -71,6 +82,15 @@ export class EditProfileComponent implements OnInit {
 
   back() {
     this.navigation.back();
+  }
+
+  edit() {
+    const user = {
+      name: this.editForm.value.name,
+      login: this.editForm.value.email,
+      password: this.editForm.value.pass,
+    };
+    this.store.dispatch(UserAction.updateUserAction({ token: this.currentUser.token, id: this.currentUser.id, user: user }));
   }
 
 }

@@ -8,10 +8,10 @@ export const getTasksAction = createAction(
 );
 export const getTasksActionSuccess = createAction(
   `${actionSource} GET ALL CURRENT USER, SUCCESS`,
-  props<{task:ITask}>(),
+  props<{ task:ITask }>(),
 );
 export const getTasksActionFailed = createAction(
-  `${actionSource} GET ALL CURRENT USER, FAILED`
+  `${actionSource} GET ALL CURRENT USER, FAILED`,
 );
 
 export const getTaskAction = createAction(
@@ -19,10 +19,10 @@ export const getTaskAction = createAction(
 );
 export const getTaskActionSuccess = createAction(
   `${actionSource} GET TASK BY ID, SUCCESS`,
-  props<{task:ITask}>(),
+  props<{ task:ITask }>(),
 );
 export const getTaskActionFailed = createAction(
-  `${actionSource} GET TASK BY ID, FAILED`
+  `${actionSource} GET TASK BY ID, FAILED`,
 );
 
 export const createTaskAction = createAction(
@@ -30,21 +30,21 @@ export const createTaskAction = createAction(
 );
 export const createTaskActionSuccess = createAction(
   `${actionSource} CREATE A TASK, SUCCESS`,
-  props<{task:ITask}>(),
+  props<{ task:ITask }>(),
 );
 export const createTaskActionFailed = createAction(
-  `${actionSource} CREATE A TASK, FAILED`
+  `${actionSource} CREATE A TASK, FAILED`,
 );
 
 export const updateTaskAction = createAction(
-  `${actionSource} UPDATE THE TASK`
+  `${actionSource} UPDATE THE TASK`,
 );
 export const updateTaskActionSuccess = createAction(
   `${actionSource} UPDATE THE TASK, SUCCESS`,
-  props<{task:ITask}>(),
+  props<{ task:ITask }>(),
 );
 export const updateTaskActionFailed = createAction(
-  `${actionSource} UPDATE THE TASK, FAILED`
+  `${actionSource} UPDATE THE TASK, FAILED`,
 );
 
 export const deleteTaskAction = createAction(
@@ -52,8 +52,8 @@ export const deleteTaskAction = createAction(
 );
 export const deleteTaskActionSuccess = createAction(
   `${actionSource} DELETE THE TASK, SUCCESS`,
-  props<{task:ITask}>(),
+  props<{ task:ITask }>(),
 );
 export const deleteTaskActionFailed = createAction(
-  `${actionSource} DELETE THE TASK, FAILED`
+  `${actionSource} DELETE THE TASK, FAILED`,
 );
