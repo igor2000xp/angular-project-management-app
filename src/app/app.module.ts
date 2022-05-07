@@ -20,6 +20,7 @@ import { EffectsModule } from '@ngrx/effects';
 // import { AppEffects } from './redux/effects/app.effects';
 import { UserEffects } from './redux/effects/user.effects';
 import { PmModule } from './pm/pm.module';
+import { BoardEffects } from './redux/effects/board.effects';
 
 @NgModule({
   declarations: [
@@ -53,9 +54,10 @@ import { PmModule } from './pm/pm.module';
         },
       }),
     // StoreModule.forFeature('taskState', taskReducer),
-    EffectsModule.forRoot([UserEffects]),
+    EffectsModule.forRoot([UserEffects, BoardEffects]),
     DragulaModule.forRoot(),
     PmModule,
+    // EffectsModule.forFeature([BoardEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent],
