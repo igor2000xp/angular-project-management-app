@@ -1,5 +1,8 @@
+/* eslint-disable @typescript-eslint/no-useless-constructor */
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import * as BoardAction from '../../../redux/actions/board.actions';
 
 @Component({
   selector: 'app-board-card-modal',
@@ -10,12 +13,16 @@ export class BoardCardModalComponent implements OnInit {
 
   boadForm: FormGroup;
 
-  constructor() { }
+  constructor(private store: Store) { }
 
   ngOnInit(): void {
     this.boadForm = new FormGroup({
       title: new FormControl('', [Validators.required]),
     });
+  }
+
+  createBoard() {
+    this.store.dispatch(BoardAction.createBoard({ currentBoard: { title: this.boadForm.value.title } }));
   }
 
 }

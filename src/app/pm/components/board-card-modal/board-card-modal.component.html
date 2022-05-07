@@ -9,5 +9,5 @@
 </form>
 <mat-dialog-actions align="end">
   <button class="login__btn" mat-button mat-dialog-close>Cancel</button>
-  <button class="login__btn" mat-button [mat-dialog-close]="true" cdkFocusInitial>Сonfirm</button>
+  <button class="login__btn" mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="createBoard()">Сonfirm</button>
 </mat-dialog-actions>
