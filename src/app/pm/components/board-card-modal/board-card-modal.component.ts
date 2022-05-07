@@ -1,3 +1,4 @@
+/* eslint-disable ngrx/avoid-dispatching-multiple-actions-sequentially */
 /* eslint-disable @typescript-eslint/no-useless-constructor */
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -15,6 +16,8 @@ export class BoardCardModalComponent implements OnInit {
 
   constructor(private store: Store) { }
 
+  currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
   ngOnInit(): void {
     this.boadForm = new FormGroup({
       title: new FormControl('', [Validators.required]),
@@ -23,6 +26,8 @@ export class BoardCardModalComponent implements OnInit {
 
   createBoard() {
     this.store.dispatch(BoardAction.createBoard({ currentBoard: { title: this.boadForm.value.title } }));
+    this.store.dispatch(BoardAction.getAllBoards());
+    this.store.subscribe(el => console.log(el));
   }
 
 }

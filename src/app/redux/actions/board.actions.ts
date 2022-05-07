@@ -14,10 +14,14 @@ export const createBoardSuccess = createAction(
 );
 
 
-// export const getAllBoards = createAction(
-//   `${actionsSource} GET ALL BOARDS`,
-//   props<{ boards: IBoard[] }>(),
-// );
+export const getAllBoards = createAction(
+  `${actionsSource} GET ALL BOARDS`,
+);
+
+export const getAllBoardsSuccess = createAction(
+  `${actionsSource} GET ALL BOARDS SUCCESS`,
+  props<{ boards: Board[] }>(),
+);
 
 // export const getBoardById = createAction(
 //   `${actionsSource} GET BOARD BY ID`,

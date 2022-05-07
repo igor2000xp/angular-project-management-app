@@ -17,11 +17,12 @@ const reducer = createReducer(
     });
   }),
 
-  // on(BoardAction.getAllBoards, (state) => {
-  //   return ({
-  //     ...state,
-  //   });
-  // }),
+  on(BoardAction.getAllBoardsSuccess, (state, { boards }) => {
+    return ({
+      ...state,
+      boards: boards,
+    });
+  }),
 
   // on(BoardAction.getBoardById, (state) => {
   //   return ({

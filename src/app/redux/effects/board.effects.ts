@@ -26,4 +26,20 @@ export class BoardEffects {
       );
     },
   );
+
+  getAllBoards$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(BoardAction.getAllBoards),
+        mergeMap(() =>  {
+          const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+          return this.apiService.getBoards(currentUser.token);
+        },
+        ),
+        map((boards) => {
+          return BoardAction.getAllBoardsSuccess({ boards });
+        }),
+      );
+    },
+  );
 }
