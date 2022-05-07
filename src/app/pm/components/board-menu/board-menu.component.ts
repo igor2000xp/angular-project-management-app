@@ -7,7 +7,7 @@ import { BoardCardModalComponent } from '../board-card-modal/board-card-modal.co
 @Component({
   selector: 'app-board-menu',
   templateUrl: './board-menu.component.html',
-  styleUrls: ['./board-menu.component.scss']
+  styleUrls: ['./board-menu.component.scss'],
 })
 export class BoardMenuComponent implements OnInit {
 
