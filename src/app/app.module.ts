@@ -12,7 +12,7 @@ import { HeaderComponent } from './core/components/header/header.component';
 import { FooterComponent } from './core/components/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
-// import { metaReducers, reducers } from './redux/reducers';
+import { boardReducer } from './redux/reducers/board.reducer';
 import * as fromUser from './redux/reducers/user.reducer';
 import * as fromTask from './redux/reducers/task.reducer';
 import * as fromBoard from './redux/reducers/board.reducer';
@@ -56,7 +56,7 @@ import { environment } from '../environments/environment';
           strictActionTypeUniqueness: true,
         },
       }),
-    // StoreModule.forFeature('taskState', taskReducer),
+    StoreModule.forFeature('app-state', boardReducer),
     EffectsModule.forRoot([
       UserEffects,
       BoardEffects,
