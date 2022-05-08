@@ -7,7 +7,6 @@ import { ApiService } from 'src/app/auth/services/api.service';
 import { getCurrentUser } from 'src/app/redux/selectors/user.selectors';
 import { NavigationService } from 'src/app/shared/services/navigationService';
 import * as UserAction from '../../../redux/actions/user.actions';
-// import { getCurrentUser } from 'src/app/redux/selectors/user.selectors';
 
 @Component({
   selector: 'app-header',
@@ -23,14 +22,14 @@ export class HeaderComponent implements OnInit {
   currentUser: User;
 
   constructor(private router: Router,
-    private store: Store,
-    private auth: ApiService,
-    private navigation: NavigationService) { }
+              private store: Store,
+              private auth: ApiService,
+              private navigation: NavigationService) { }
 
   ngOnInit(): void {
     this.auth.errors$.subscribe(er => this.error = er);
     this.store.
-      select((getCurrentUser))
+    select((getCurrentUser))
       .subscribe(el => {
         if (el === null) {
           this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
