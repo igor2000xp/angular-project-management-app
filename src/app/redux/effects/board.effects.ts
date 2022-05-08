@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, mergeMap } from 'rxjs';
+import { map, mergeMap, of } from 'rxjs';
 import { ApiService } from 'src/app/auth/services/api.service';
 import * as BoardAction from '../actions/board.actions';
 
@@ -19,11 +19,15 @@ export class BoardEffects {
         // pluck('currentBoard'),
         map((ba) => ba.currentBoard),
         mergeMap((board) => {
-          const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-          return this.apiService.createBoard(currentUser.token, board);
-        },
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            return this.apiService.createBoard(currentUser.token, board);
+          },
         ),
-        map((board) => BoardAction.createBoardSuccess({ currentBoard: board })),
+        map((boards) => {
+          const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+          return this.apiService.getBoards(currentUser.token);
+        }),
+        map((boards) => BoardAction.getAllBoardsSuccess({ boards })),
       );
     },
   );
@@ -49,9 +53,9 @@ export class BoardEffects {
       return this.actions$.pipe(
         ofType(BoardAction.getAllBoards),
         mergeMap(() =>  {
-          const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-          return this.apiService.getBoards(currentUser.token);
-        },
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            return this.apiService.getBoards(currentUser.token);
+          },
         ),
         map((boards) => {
           return BoardAction.getAllBoardsSuccess({ boards });
@@ -59,4 +63,37 @@ export class BoardEffects {
       );
     },
   );
+
+  getBoardById$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(BoardAction.getBoardById),
+        map(v => v.currentBoardId),
+        mergeMap((currentBoardId) => {
+          const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+          console.log(currentBoardId);
+          return this.apiService.getBoardById(currentUser.token, currentBoardId);
+        }),
+        map((currentBoard) => {
+          return BoardAction.getBoardByIdSuccess({ currentBoard });
+        })
+      )
+    }
+  )
+
+  deleteBoard$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(BoardAction.deleteBoard),
+        map(v => v.currentBoardId),
+        mergeMap((currentBoardId) => {
+          const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+          return this.apiService.deleteBoard(currentUser.token, currentBoardId);
+        }),
+        map((currentBoard) => {
+          return BoardAction.deleteBoardSuccess({ currentBoard });
+        })
+      )
+    }
+  )
 }

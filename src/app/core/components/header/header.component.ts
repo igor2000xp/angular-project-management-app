@@ -7,6 +7,7 @@ import { ApiService } from 'src/app/auth/services/api.service';
 import { getCurrentUser } from 'src/app/redux/selectors/user.selectors';
 import { NavigationService } from 'src/app/shared/services/navigationService';
 import * as UserAction from '../../../redux/actions/user.actions';
+import * as BoardAction from '../../../redux/actions/board.actions';
 // import { getCurrentUser } from 'src/app/redux/selectors/user.selectors';
 
 @Component({
@@ -23,14 +24,14 @@ export class HeaderComponent implements OnInit {
   currentUser: User;
 
   constructor(private router: Router,
-    private store: Store,
-    private auth: ApiService,
-    private navigation: NavigationService) { }
+              private store: Store,
+              private auth: ApiService,
+              private navigation: NavigationService) { }
 
   ngOnInit(): void {
     this.auth.errors$.subscribe(er => this.error = er);
     this.store.
-      select((getCurrentUser))
+    select((getCurrentUser))
       .subscribe(el => {
         if (el === null) {
           this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -53,6 +54,9 @@ export class HeaderComponent implements OnInit {
   }
 
   switchPage(page: string) {
+
+    // this.store.dispatch(BoardAction.getBoardById({currentBoardId: 'bdc2d083-de2f-444e-be7e-0b358d89a814'} ));
+    this.store.dispatch(BoardAction.deleteBoard({ currentBoardId: '2916f584-6a6f-46c2-b680-c186474e3e07' }));
     this.router.navigateByUrl(`/${page}`);
   }
 

@@ -30,11 +30,17 @@ const reducer = createReducer(
   //   });
   // }),
 
-  // on(BoardAction.deleteBoard, (state) => {
-  //   return ({
-  //     ...state,
-  //   });
-  // }),
+  on(BoardAction.getBoardByIdSuccess, (state) => {
+    return ({
+      ...state,
+    });
+  }),
+
+  on(BoardAction.deleteBoardSuccess, (state) => {
+    return ({
+      ...state,
+    });
+  }),
 
   // on(BoardAction.updateBoard, (state) => {
   //   return ({
@@ -46,3 +52,4 @@ const reducer = createReducer(
 export function boardReducer(state: IBoardsState, action: Action) {
   return reducer(state, action);
 }
+
