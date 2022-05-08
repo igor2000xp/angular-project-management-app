@@ -4,13 +4,25 @@ import { map, mergeMap, of } from 'rxjs';
 import { ApiService } from 'src/app/auth/services/api.service';
 import * as BoardAction from '../actions/board.actions';
 
+export interface InfoForBoard {
+  boardID?: string,
+  task?: Task,
+  columnID?: string,
+  taskID?: string,
+}
+
 @Injectable()
 export class BoardEffects {
+  info: InfoForBoard;
+
+  currentUser: any;
 
   constructor(
     private actions$: Actions,
     private apiService: ApiService,
-  ) { }
+  ) {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  }
 
   createBoard$ = createEffect(
     () => {
@@ -19,8 +31,8 @@ export class BoardEffects {
         // pluck('currentBoard'),
         map((ba) => ba.currentBoard),
         mergeMap((board) => {
-            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-            return this.apiService.createBoard(currentUser.token, board);
+            // const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            return this.apiService.createBoard(this.currentUser.token, board);
           },
         ),
         map((boards) => {
