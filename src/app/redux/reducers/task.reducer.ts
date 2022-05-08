@@ -26,11 +26,6 @@ const tReducer = createReducer(
     currentTask: task,
     isTaskFetched: false,
   })),
-  on(TaskActions.updateTaskActionSuccess, (state, { task }) => ({
-    ...state,
-    currentTask: task,
-    isTaskFetched: false,
-  })),
 );
 
 export function taskReducer(state: ITasksState, action: Action) {

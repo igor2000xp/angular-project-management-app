@@ -26,10 +26,6 @@ export const updateTaskAction = createAction(
   `${actionSource} UPDATE THE TASK`,
   props<{ info: InfoForTask }>(),
 );
-export const updateTaskActionSuccess = createAction(
-  `${actionSource} UPDATE THE TASK, SUCCESS`,
-  props<{ task:Task }>(),
-);
 export const deleteTaskAction = createAction(
   `${actionSource} DELETE THE TASK`,
   props<{ info: InfoForTask }>(),

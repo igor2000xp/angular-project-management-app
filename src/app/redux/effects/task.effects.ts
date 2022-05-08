@@ -95,7 +95,7 @@ export class BoardEffects {
           return this.apiService.updateTask(this.currentUser.token, this.info.boardID, this.info.columnID, this.info.taskID, this.info.task);
         },
         ),
-        map((task) => TaskActions.updateTaskActionSuccess({ task })),
+        map((task) => TaskActions.getTasksByIdActionSuccess({ task })),
       );
     },
   );
