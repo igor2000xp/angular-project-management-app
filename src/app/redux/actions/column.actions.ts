@@ -15,7 +15,7 @@ export const getColumns = createAction(
 );
 
 export const getColumnsSuccess = createAction(
-  `${actionsColumn} GET ALL COLUMNS`,
+  `${actionsColumn} GET ALL COLUMNS SUCCESS`,
   props<{ columns: Column[] }>(),
 );
 

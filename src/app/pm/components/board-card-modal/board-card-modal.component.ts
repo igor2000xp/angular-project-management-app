@@ -25,14 +25,10 @@ export class BoardCardModalComponent implements OnInit {
   }
 
   createBoard() {
-    // this.store.dispatch(BoardAction.createBoard({ currentBoard: { title: this.boadForm.value.title } }));
     this.store.dispatch(BoardAction.createBoard({ info: { board:
     {
       title: this.boadForm.value.title,
     } } }));
-    this.store.dispatch(BoardAction.getAllBoards());
-
-    this.store.subscribe(el => console.log(el));
   }
 
 }
