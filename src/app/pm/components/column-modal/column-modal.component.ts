@@ -21,7 +21,9 @@ export class ColumnModalComponent implements OnInit {
   ngOnInit(): void {
     this.columnForm = new FormGroup({
       title: new FormControl('', [Validators.required]),
-      order: new FormControl('', [Validators.required]),
+      order: new FormControl('', [
+        Validators.required,
+        this.validators.checkForOrder.bind(this.validators)]),
     });
     const { snapshot: { params: { id } } } = this.route;
     this.boardId = id;
@@ -31,10 +33,15 @@ export class ColumnModalComponent implements OnInit {
   createColumn() {
     this.store.dispatch(ColumnAction.createColumn({
       column:
-        {
-          title: this.columnForm.value.title,
-          order: +this.columnForm.value.order,
-        },
+      {
+        title: this.columnForm.value.title,
+        order: +this.columnForm.value.order,
+      },
     }));
+  }
+
+  cancel() {
+    console.log(this.columnForm);
+    console.log(this.columnForm.get('order').errors?.orderError);
   }
 }

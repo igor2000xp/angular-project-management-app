@@ -1,18 +1,24 @@
 <h2 mat-dialog-title>Create column</h2>
 <form #elseBlock class="login__form" [formGroup]="columnForm">
-    <div class="login__input-wrapper">
-      <label class="login__input">
-        <span>column name</span>
-      </label>
-      <input formControlName="title" class="login__input" name="login" type="login" />
-      <label class="login__input">
-        <span>order</span>
-      </label>
-      <input formControlName="order" class="login__input" name="order" type="order" />
-    </div>
+  <div class="login__input-wrapper">
+    <label class="login__input">
+      <span>column name</span>
+    </label>
+    <input formControlName="title" class="login__input" name="login" type="login" placeholder="Enter column name"/>
+    <p class="order-validate__error" *ngIf="columnForm.get('title').dirty && columnForm.get('title').errors?.required">
+      Please enter a title<br />
+    </p>
+    <label class="login__input">
+      <span>order</span>
+    </label>
+    <input formControlName="order" class="login__input" name="order" type="order" placeholder="Enter the order"/>
+    <p class="order-validate__error" *ngIf="columnForm.get('order').errors?.orderError">
+      Order is already exists<br />
+    </p>
+  </div>
+  <mat-dialog-actions align="end">
+    <button class="login__btn" mat-button mat-dialog-close (click)=" cancel()">Cancel</button>
+    <button class="login__btn" mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="createColumn()" [disabled]="columnForm.invalid">Сonfirm</button>
+  </mat-dialog-actions>
+</form>
 
-  </form>
-<mat-dialog-actions align="end">
-  <button class="login__btn" mat-button mat-dialog-close>Cancel</button>
-  <button class="login__btn" mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="createColumn()">Сonfirm</button>
-</mat-dialog-actions>

@@ -15,17 +15,16 @@ export class ValidatorsService {
   constructor(private store: Store) {
     this.store.select((selectColumns)).subscribe(el => {
       this.columns = el;
+      console.log(this.columns);
+
     });
   }
 
   checkForOrder(control: FormControl) {
-
-    const order = this.columns.filter(el => el.order === control.value);
-    if (!order) {
-      return {
-        lengthError: true,
-      };
-    }
+    const value = this.columns.filter(el => el.order === +control.value);
+    if (value.length !== 0)  return {
+      orderError: true,
+    };
   }
 
   checkForLength(control: FormControl) {
