@@ -21,9 +21,9 @@ export const getUserActionSuccess = createAction(
   `${actionSource} GET USER BY ID, SUCCESS`,
   props<{ user:IUser }>(),
 );
-export const getUserActionFailed = createAction(
-  `${actionSource} GET USER BY ID, FAILED`,
-);
+// export const getUserActionFailed = createAction(
+//   `${actionSource} GET USER BY ID, FAILED`,
+// );
 export const createUserAction = createAction(
   `${actionSource} CREATE A USER RECORD`,
   props<{ currentUser:IUser }>(),
@@ -32,9 +32,9 @@ export const createUsersActionSuccess = createAction(
   `${actionSource} CREATE A USER RECORD, SUCCESS`,
   props<{ currentUser:IUser }>(),
 );
-export const createUsersActionFailed = createAction(
-  `${actionSource} CREATE A USER RECORD, FAILED`,
-);
+// export const createUsersActionFailed = createAction(
+//   `${actionSource} CREATE A USER RECORD, FAILED`,
+// );
 export const createTokenAction = createAction(
   `${actionSource} CREATE A USER TOKEN`,
   props<{ currentUser:IUser }>(),
@@ -51,9 +51,9 @@ export const updateUsersActionSuccess = createAction(
   `${actionSource} UPDATE THE USER RECORD, SUCCESS`,
   props<{ user:IUser }>(),
 );
-export const updateUsersActionFailed = createAction(
-  `${actionSource} UPDATE THE USER RECORD, FAILED`,
-);
+// export const updateUsersActionFailed = createAction(
+//   `${actionSource} UPDATE THE USER RECORD, FAILED`,
+// );
 
 export const deleteUserAction = createAction(
   `${actionSource} DELETE THE USER RECORD`,

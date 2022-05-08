@@ -33,17 +33,17 @@ const usReducer = createReducer(
     user,
     isUserFetched: true,
   })),
-  on(UserAction.getUserActionFailed, (state) => ({
-    ...state,
-  })),
+  // on(UserAction.getUserActionFailed, (state) => ({
+  //   ...state,
+  // })),
   on(UserAction.createUsersActionSuccess, (state, { currentUser }) => ({
     ...state,
     currentUser: currentUser,
     isUserFetched: true,
   })),
-  on(UserAction.createUsersActionFailed, (state) => ({
-    ...state,
-  })),
+  // on(UserAction.createUsersActionFailed, (state) => ({
+  //   ...state,
+  // })),
   on(UserAction.createTokenActionSuccess, (state, { currentUser }) => (
     {
       ...state,
@@ -58,9 +58,9 @@ const usReducer = createReducer(
     user,
     isUserFetched: true,
   })),
-  on(UserAction.updateUsersActionFailed, (state) => ({
-    ...state,
-  })),
+  // on(UserAction.updateUsersActionFailed, (state) => ({
+  //   ...state,
+  // })),
   on(UserAction.deleteUserAction, (state) => ({
     ...state,
   })),

@@ -1,15 +1,25 @@
+import { Board } from '../auth/models/Board.model';
 import { ITasksState } from './reducers';
 
 export interface IAppState {
   users: IUsersState;
   tasks: ITasksState;
+  board: IBoardsState;
+  columns: IColumnState;
 }
 export interface IUsersState {
   users: IUser[] | null;
   currentUser: IUser | null | any;
   isUserFetched: boolean;
 }
-
+export interface IBoardsState {
+  boards: Board[] | null;
+  currentBoard: Board | null;
+}
+export interface IColumnState {
+  columns: IColumn[];
+  currentColumn: IColumn;
+}
 export interface IUser {
   id?: string;
   name?: string;
