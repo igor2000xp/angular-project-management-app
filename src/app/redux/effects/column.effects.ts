@@ -18,6 +18,8 @@ export class ColumnEffects {
 
   currentUser: any;
 
+  actualBoardID: string;
+
   constructor(private actions$: Actions, private apiService: ApiService) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
@@ -26,12 +28,11 @@ export class ColumnEffects {
     () => {
       return this.actions$.pipe(
         ofType(ColumnAction.createColumn),
-        pluck('info'),
-        mergeMap((info) => {
-          this.info = info;
-          return this.apiService.createColumn(this.currentUser.token, info.boardID, info.column);
+        pluck('column'),
+        mergeMap((column) => {
+          return this.apiService.createColumn(this.currentUser.token, this.actualBoardID, column);
         }),
-        mergeMap(() => this.apiService.getColumns(this.currentUser.token, this.info.boardID)),
+        mergeMap(() => this.apiService.getColumns(this.currentUser.token, this.actualBoardID)),
         map((columns) => ColumnAction.getColumnsSuccess({ columns })),
       );
     },
@@ -44,6 +45,7 @@ export class ColumnEffects {
         pluck('info'),
         mergeMap((info) => {
           this.info = info;
+          this.actualBoardID = info.boardID;
           return this.apiService.getColumns(this.currentUser.token, info.boardID);
         }),
         map((columns) => ColumnAction.getColumnsSuccess({ columns })),

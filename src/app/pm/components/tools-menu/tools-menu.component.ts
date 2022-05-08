@@ -6,7 +6,7 @@ import { TaskModalComponent } from '../task-modal/task-modal.component';
 @Component({
   selector: 'app-tools-menu',
   templateUrl: './tools-menu.component.html',
-  styleUrls: ['./tools-menu.component.scss']
+  styleUrls: ['./tools-menu.component.scss'],
 })
 export class ToolsMenuComponent implements OnInit {
 

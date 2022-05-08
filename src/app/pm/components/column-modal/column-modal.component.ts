@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import * as ColumnAction from '../../../redux/actions/column.actions';
 
 @Component({
   selector: 'app-column-modal',
@@ -8,8 +11,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ColumnModalComponent implements OnInit {
 
+  columnForm: FormGroup;
 
-  constructor() {}
+  boardId: string;
 
-  ngOnInit(): void {}
+  constructor(private store: Store, private route: ActivatedRoute) { }
+
+  ngOnInit(): void {
+    this.columnForm = new FormGroup({
+      title: new FormControl('', [Validators.required]),
+    });
+    const { snapshot: { params: { id } } } = this.route;
+    this.boardId = id;
+    console.log(this.route);
+  }
+
+  createColumn() {
+    this.store.dispatch(ColumnAction.createColumn({
+      column:
+        {
+          title: this.columnForm.value.title,
+          order: 2,
+        },
+    }));
+  }
 }

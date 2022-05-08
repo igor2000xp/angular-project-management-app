@@ -24,7 +24,6 @@ export class MainPageComponent implements OnInit {
     this.boardId = id;
     this.store.dispatch(ColumnAction.getColumns({ info: { boardID: id } }));
     this.store.select((selectColumns)).subscribe(el => {
-      console.log(el);
       this.columns = el;
     });
   }

@@ -6,7 +6,7 @@ const actionsColumn = '[COLUMN]';
 
 export const createColumn = createAction(
   `${actionsColumn} CREATE COLUMN`,
-  props<{ info: InfoForColumn }>(),
+  props<{ column: Column }>(),
 );
 
 export const getColumns = createAction(
