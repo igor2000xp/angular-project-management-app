@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DeleteBoardModalComponent } from '../delete-board-modal/delete-board-modal.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Column } from 'src/app/auth/models/Column.model';
 
 @Component({
   selector: 'app-column-card',
@@ -9,11 +10,14 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class ColumnCardComponent implements OnInit {
 
-  public name: string = '';
+  @Input() column:Column;
+
+  columnTitle: string;
 
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.columnTitle = this.column.title;
   }
 
   openDialog() {
