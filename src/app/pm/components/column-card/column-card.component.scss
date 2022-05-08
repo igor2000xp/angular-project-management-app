@@ -9,14 +9,24 @@
   white-space: normal;
   width: 100% !important;
 
+  padding-bottom: 20px;
+
   &__wrapper {
     box-sizing: border-box;
     display: inline-block;
-    height: 100%;
+    height: 70vh;
     margin: 0 4px;
     vertical-align: top;
     white-space: nowrap;
     width: 272px;
+  }
+
+  &__card-container {
+    flex: 1 1 auto;
+    margin: 0 4px;
+    overflow-x: hidden;
+    padding: 0 4px;
+    z-index: 1;
   }
 
   &__wrapper:first-child {
@@ -30,4 +40,21 @@
     display: flex;
     justify-content: space-between;
   }
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
