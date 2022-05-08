@@ -18,7 +18,6 @@ import * as fromTask from './redux/reducers/task.reducer';
 import * as fromBoard from './redux/reducers/board.reducer';
 import * as fromColumn from './redux/reducers/column.reducer';
 import { EffectsModule } from '@ngrx/effects';
-// import { AppEffects } from './redux/effects/app.effects';
 import { UserEffects } from './redux/effects/user.effects';
 import { PmModule } from './pm/pm.module';
 import { BoardEffects } from './redux/effects/board.effects';
@@ -65,7 +64,6 @@ import { environment } from '../environments/environment';
     DragulaModule.forRoot(),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     PmModule,
-    // EffectsModule.forFeature([BoardEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent],
