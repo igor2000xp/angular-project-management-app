@@ -1,4 +1,4 @@
-import { IAppState, IBoardsState } from '../state.models';
+import { IBoardsState } from '../state.models';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 // export const selectBoard = (state:IAppState) => state.board;

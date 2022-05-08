@@ -1,4 +1,7 @@
 <div class="home-page__wrapper">
 <app-board-menu></app-board-menu>
-<app-board-card></app-board-card>
+<div class="board-container">
+  <app-board-card *ngFor="let item of boards"></app-board-card>
+</div>
+
 </div>
