@@ -10,12 +10,6 @@ export const initialBoardState:IBoardsState = {
 
 const reducer = createReducer(
   initialBoardState,
-  on(BoardAction.createBoardSuccess, (state, { currentBoard }) => {
-    return ({
-      ...state,
-      currentBoard: currentBoard,
-    });
-  }),
 
   on(BoardAction.getAllBoardsSuccess, (state, { boards }) => {
     return ({
@@ -24,29 +18,26 @@ const reducer = createReducer(
     });
   }),
 
-  // on(BoardAction.getBoardById, (state) => {
-  //   return ({
-  //     ...state,
-  //   });
-  // }),
-
-  on(BoardAction.getBoardByIdSuccess, (state) => {
+  on(BoardAction.getBoardByIdSuccess, (state, { currentBoard }) => {
     return ({
       ...state,
+      currentBoard: currentBoard,
     });
   }),
 
-  on(BoardAction.deleteBoardSuccess, (state) => {
+  on(BoardAction.deleteBoardSuccess, (state, { board }) => {
     return ({
       ...state,
+      board: board,
     });
   }),
 
-  // on(BoardAction.updateBoard, (state) => {
-  //   return ({
-  //     ...state,
-  //   });
-  // }),
+  on(BoardAction.updateBoardSuccess, (state, { board }) => {
+    return ({
+      ...state,
+      board: board,
+    });
+  }),
 );
 
 export function boardReducer(state: IBoardsState, action: Action) {
