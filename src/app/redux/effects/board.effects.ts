@@ -83,10 +83,9 @@ export class BoardEffects {
     () => {
       return this.actions$.pipe(
         ofType(BoardAction.deleteBoard),
-        map(v => v.info),
-        mergeMap((info) => {
+        mergeMap((board) => {
           // const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-          return this.apiService.deleteBoard(this.currentUser.token, info.board.id);
+          return this.apiService.deleteBoard(this.currentUser.token, board.id);
         }),
         mergeMap(() => this.apiService.getBoards(this.currentUser.token)),
         map((boards) => {

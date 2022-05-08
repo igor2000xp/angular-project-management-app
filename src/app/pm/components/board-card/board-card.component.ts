@@ -4,6 +4,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { DeleteBoardModalComponent } from '../delete-board-modal/delete-board-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Board } from 'src/app/auth/models/Board.model';
+import * as BoardAction from '../../../redux/actions/board.actions';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-board-card',
@@ -12,15 +14,17 @@ import { Board } from 'src/app/auth/models/Board.model';
 })
 export class BoardCardComponent implements OnInit {
 
-  @Input() board:Board;
+  @Input() board: Board;
 
   title: string;
 
-  constructor(public dialog: MatDialog) {}
+  boardId :string;
+
+  constructor(public dialog: MatDialog, private store: Store) { }
 
   ngOnInit(): void {
     this.title = this.board.title;
-
+    this.boardId = this.board.id;
   }
 
   openDialog() {
@@ -28,6 +32,9 @@ export class BoardCardComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
+      if (result) {
+        this.store.dispatch(BoardAction.deleteBoard({ id: this.boardId }));
+      }
     });
   }
 
