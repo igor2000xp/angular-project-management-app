@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Board } from 'src/app/auth/models/Board.model';
 import * as BoardAction from '../../../redux/actions/board.actions';
 import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-board-card',
@@ -20,7 +21,7 @@ export class BoardCardComponent implements OnInit {
 
   boardId :string;
 
-  constructor(public dialog: MatDialog, private store: Store) { }
+  constructor(public dialog: MatDialog, private store: Store, private router: Router) { }
 
   ngOnInit(): void {
     this.title = this.board.title;
@@ -38,4 +39,7 @@ export class BoardCardComponent implements OnInit {
     });
   }
 
+  switchToBoard() {
+    this.router.navigate(['/board', this.board.id]);
+  }
 }

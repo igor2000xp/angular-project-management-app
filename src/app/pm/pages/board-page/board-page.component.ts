@@ -17,7 +17,9 @@ export class BoardPageComponent implements OnInit {
 
   editMode: boolean;
 
-  constructor(private store: Store) {this.store.dispatch(BoardAction.getAllBoards());}
+  constructor(private store: Store) {
+    this.store.dispatch(BoardAction.getAllBoards());
+  }
 
   ngOnInit(): void {
     this.store.select((selectBoards)).subscribe(el => {
