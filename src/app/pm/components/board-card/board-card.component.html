@@ -1,7 +1,8 @@
 <div class="list__wrapper">
   <div class="list">
     <div class="list__header">
-      <h2 contenteditable="true">{{title}}</h2>
+      <h2 *ngIf="true" contenteditable="true">{{title}}</h2>
+      <input *ngIf="false" value={{title}}>
       <button
         mat-icon-button
         [matMenuTriggerFor]="menu"
@@ -14,7 +15,7 @@
           <span>Delete</span>
         </button>
         <button mat-menu-item>
-          <span>Что нибудь 2</span>
+          <span>Update</span>
         </button>
       </mat-menu>
     </div>
