@@ -2,7 +2,7 @@ import { IBoardsState } from '../state.models';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 // export const selectBoard = (state:IAppState) => state.board;
-const selectBoard = createFeatureSelector<IBoardsState>('app-state');
+const selectBoard = createFeatureSelector<IBoardsState>('boards');
 
 export const selectBoards = createSelector(
   selectBoard,

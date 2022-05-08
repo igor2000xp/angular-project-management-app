@@ -23,7 +23,6 @@ export class BoardPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.select((selectBoards)).subscribe(el => {
-      console.log(el);
       this.boards = el;
     });
   }

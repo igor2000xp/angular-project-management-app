@@ -13,7 +13,7 @@ export interface InfoForTask {
 }
 
 @Injectable()
-export class BoardEffects {
+export class TaskEffects {
 
   info: InfoForTask;
 
