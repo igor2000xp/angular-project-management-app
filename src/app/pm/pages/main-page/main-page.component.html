@@ -1,7 +1,7 @@
 <div class="home-page__wrapper">
     <app-tools-menu></app-tools-menu>
     <div class="colum-card-wrapper" *ngFor="let column of columns">
-        <app-column-card [column] ="column"></app-column-card>
+        <app-column-card [column] ="column" [boardID] = "boardId"></app-column-card>
     </div>
 </div>
 

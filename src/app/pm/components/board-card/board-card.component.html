@@ -1,7 +1,11 @@
-<div class="list__wrapper" (click)="switchToBoard()">
+<div class="list__wrapper" >
   <div class="list">
     <div class="list__header">
-      <h2 *ngIf="true" contenteditable="true">{{title}}</h2>
+      <h2 *ngIf="true"
+      contenteditable="true"
+      (click)="switchToBoard()"
+      >{{title}}
+    </h2>
       <input *ngIf="false" value={{title}}>
       <button
         mat-icon-button

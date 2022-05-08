@@ -14,12 +14,14 @@ export class MainPageComponent implements OnInit {
 
   columns: Column[];
 
+  boardId: string;
+
   constructor(private route: ActivatedRoute, private store: Store) {
   }
 
   ngOnInit(): void {
     const { snapshot: { params: { id } } } = this.route;
-    console.log(id);
+    this.boardId = id;
     this.store.dispatch(ColumnAction.getColumns({ info: { boardID: id } }));
     this.store.select((selectColumns)).subscribe(el => {
       console.log(el);
