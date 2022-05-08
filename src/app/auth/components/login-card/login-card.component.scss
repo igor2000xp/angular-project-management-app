@@ -1,0 +1,113 @@
+$gray: #f2f2f2;
+$darkgray: #828282;
+$black: #000000;
+$blue: #2f80ed;
+$white: #ffffff;
+$ligh-blue: #5ea2ff;
+$red: #ff0000;
+$green: #008000;
+
+p {
+  margin: 0;
+}
+
+.login-card__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 0;
+  height: 75.8%;
+}
+
+.login-card__el {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-card__container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.login-card {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  background: $gray;
+  border-radius: 25px;
+}
+
+.login-title {
+  margin: 30px 0 25px 5%;
+  font-size: 23px;
+  font-weight: 700;
+  color: $black;
+}
+
+.input-name {
+  margin-bottom: 2%;
+}
+
+.input-name,
+.login-validate {
+  margin-left: 5%;
+  font-size: 13px;
+  color: $darkgray;
+}
+
+.login-validate {
+  margin-top: 3%;
+  font-weight: 400;
+  color: $ligh-blue;
+}
+
+.valid-login {
+  color: green;
+}
+
+.form-control {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.login-card__btn {
+  align-self: end;
+  margin: 5% 5% 3% 0;
+  width: 180px;
+  height: 40px;
+  background-color: $blue;
+  border-radius: 10px;
+
+  &:hover {
+    background-color: $ligh-blue;
+    cursor: pointer;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.login-card-btn__text {
+  font-weight: 400;
+  font-size: 16px;
+  color: $white;
+}
+
+.has-error {
+  border: 2px solid $red;
+}
+
+.route-reg {
+  margin: 5% 0 0 5%;
+  font-size: 13px;
+  color: $darkgray;
+
+  &:hover {
+    color: $red;
+    cursor: pointer
+  }
+}
+

@@ -1,0 +1,25 @@
+<div class="list__wrapper" dragula="COLUMNS">
+  <div class="list">
+    <div class="list__header">
+      <h2 contenteditable="true">List name</h2>
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="menu"
+        aria-label="Example icon-button with a menu"
+      >
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button (click)="openDialog()" mat-menu-item>
+          <span>Delete</span>
+        </button>
+        <button mat-menu-item>
+          <span>Что нибудь 2</span>
+        </button>
+      </mat-menu>
+    </div>
+    <app-task-card dragula="COLUMNS"></app-task-card>
+    <app-task-card dragula="COLUMNS"></app-task-card>
+    <app-task-card dragula="COLUMNS"></app-task-card>
+  </div>
+</div>
