@@ -28,9 +28,19 @@ export class BoardEffects {
     },
   );
 
-  // createBoard$ = createEffect(
+  // createBoard2$ = createEffect(
   //   () => {
-  //       return localStorage.getItem('')
+  //     this.tokenEffect = JSON.parse(localStorage.getItem('currentUser')).token;
+  //     // this.curUser = new Observable(JSON.parse(localStorage.getItem('currentUser')));
+  //       return this.actions$.pipe(
+  //         ofType(UserActions.get),
+  //         map(v => v),
+  //         switchMap((v) => {
+  //           console.log(v);
+  //           return this.apiService.createBoard(this.tokenEffect, v)
+  //         })
+  //       )
+  //     )
   //   },
   // );
 

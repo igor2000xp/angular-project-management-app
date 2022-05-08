@@ -22,6 +22,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { UserEffects } from './redux/effects/user.effects';
 import { PmModule } from './pm/pm.module';
 import { BoardEffects } from './redux/effects/board.effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -61,6 +63,7 @@ import { BoardEffects } from './redux/effects/board.effects';
       BoardEffects,
     ]),
     DragulaModule.forRoot(),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     PmModule,
     // EffectsModule.forFeature([BoardEffects]),
   ],
