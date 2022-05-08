@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-column-card',
   templateUrl: './column-card.component.html',
-  styleUrls: ['./column-card.component.scss']
+  styleUrls: ['./column-card.component.scss'],
 })
 export class ColumnCardComponent implements OnInit {
 
