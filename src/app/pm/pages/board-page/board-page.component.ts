@@ -13,6 +13,8 @@ export class BoardPageComponent implements OnInit {
 
   boards: Board[];
 
+  boardTitle: string;
+
   constructor(private store: Store) {this.store.dispatch(BoardAction.getAllBoards());}
 
   ngOnInit(): void {
