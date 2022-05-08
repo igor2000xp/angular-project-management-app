@@ -1,8 +1,29 @@
 .home-page__wrapper {
   width: 100%;
   height: calc(100% - 60px);
-  }
+}
 
-  .colum-card-wrapper {
-    display: flex;
-  }
+.colum-card-wrapper {
+  display: flex;
+  height: 76.5vh;
+  flex-direction: row;
+  overflow-y: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
