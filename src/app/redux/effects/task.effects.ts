@@ -36,7 +36,10 @@ export class TaskEffects {
           return this.apiService.createTask(this.currentUser.token, info.boardID, info.columnID, info.task);
         }),
         mergeMap(() => this.apiService.getTasks(this.currentUser.token, this.info.boardID, this.info.columnID)),
-        map((tasks) => TaskActions.getTasksActionSuccess({ tasks })),
+        map((tasks) => {
+          console.log(tasks);
+          return TaskActions.getTasksActionSuccess({ tasks });
+        }),
       );
     },
   );

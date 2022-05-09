@@ -19,8 +19,7 @@
       </mat-menu>
     </div>
     <div class="list__card-container">
-      <app-task-card dragula="COLUMNS"></app-task-card>
-      <app-task-card dragula="COLUMNS"></app-task-card>
+      <app-task-card dragula="COLUMNS" *ngFor="let item of tasks"></app-task-card>
     </div>
     <p (click)="createTask()">Create card</p>
   </div>

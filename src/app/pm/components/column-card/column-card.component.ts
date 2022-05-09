@@ -37,8 +37,12 @@ export class ColumnCardComponent implements OnInit {
       columnID: this.columnId,
     }));
     this.store.select((selectTasks)).subscribe(el => {
-      this.tasks = el;
-      console.log(this.tasks);
+      if (el) {
+        const arr = el.filter(task=> task.columnId == this.columnId);
+        if (arr.length > 0) {
+          this.tasks = [...el];
+        }
+      }
     });
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
@@ -54,6 +58,19 @@ export class ColumnCardComponent implements OnInit {
 
   createTask() {
     this.store.dispatch(TaskAction.createTaskAction({ info: {
+      boardID: this.boardID,
+      columnID: this.columnId,
+      task: {
+        title: 'aaa',
+        order:2,
+        description: 'aaaa123',
+        userId: this.currentUser.id,
+      } } }));
+    console.log(this.columnId);
+  }
+
+  deleteTask() {
+    this.store.dispatch(TaskAction.deleteTaskAction({ info: {
       boardID: this.boardID,
       columnID: this.columnId,
       task: {
