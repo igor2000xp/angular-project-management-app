@@ -6,12 +6,12 @@
     </label>
     <input formControlName="title" class="login__input" name="login" type="login" placeholder="Enter column name"/>
     <p class="order-validate__error" *ngIf="columnForm.get('title').dirty && columnForm.get('title').errors?.required">
-      Please enter a title<br />
+      Please enter a name<br />
     </p>
     <label class="login__input">
       <span>order</span>
     </label>
-    <input formControlName="order" class="login__input" name="order" type="order" placeholder="Enter the order"/>
+    <input formControlName="order" class="login__input" name="order" type="order" placeholder="Enter the"/>
     <p class="order-validate__error" *ngIf="columnForm.get('order').errors?.orderError">
       Order is already exists<br />
     </p>

@@ -4,10 +4,14 @@
     <label class="login__input">
       <span>board name</span>
     </label>
-    <input formControlName="title" class="login__input" name="login" type="login" />
+    <input formControlName="title" class="login__input" name="login" type="login" placeholder="Enter board name"/>
+    <p class="validate__error" *ngIf="boardForm.get('title').dirty && boardForm.get('title').errors?.required">
+      Please enter a name<br />
+    </p>
   </div>
+  <mat-dialog-actions align="end">
+    <button class="login__btn" mat-button mat-dialog-close>Cancel</button>
+    <button class="login__btn" mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="createBoard()" [disabled]="boardForm.invalid">Сonfirm</button>
+  </mat-dialog-actions>
 </form>
-<mat-dialog-actions align="end">
-  <button class="login__btn" mat-button mat-dialog-close>Cancel</button>
-  <button class="login__btn" mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="createBoard()">Сonfirm</button>
-</mat-dialog-actions>
+

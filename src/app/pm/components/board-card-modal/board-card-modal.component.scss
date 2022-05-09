@@ -13,11 +13,11 @@
     &__password {
       width: 93%;
     }
-  
+
     &__password-wrapper {
       margin-top: 10px;
     }
-  
+
     &__btn {
       margin-top: 40px;
       margin-left: 10px;
@@ -25,7 +25,7 @@
       height: 34px;
       background-color: #433147;
       border: none;
-      
+
       outline: none;
       border-radius: 3px;
       box-shadow: 2px 0px 4px #433147;
@@ -34,6 +34,11 @@
       cursor: pointer;
       &:hover {
         background-color: #7b5a82;
+      }
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        color: white;
       }
       float: right;
     }
@@ -50,4 +55,11 @@
     background-color: #efefef;
     height: 30px;
     padding: 0 10px;
+  }
+
+  .validate__error{
+    margin: 0px;
+    padding-top: 5px;
+    color: red;
+    font-size: 12px;
   }
