@@ -1,4 +1,5 @@
 import { Board } from '../auth/models/Board.model';
+import { Column } from '../auth/models/Column.model';
 import { ITasksState } from './reducers';
 
 export interface IAppState {
@@ -17,8 +18,8 @@ export interface IBoardsState {
   currentBoard: Board | null;
 }
 export interface IColumnState {
-  columns: IColumn[];
-  currentColumn: IColumn;
+  columns: Column[];
+  currentColumn: Column;
 }
 export interface IUser {
   id?: string;

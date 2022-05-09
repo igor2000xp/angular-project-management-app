@@ -8,7 +8,7 @@ export const initialBoardState:IBoardsState = {
   currentBoard: null,
 };
 
-const reducer = createReducer(
+export const reducer = createReducer(
   initialBoardState,
 
   on(BoardAction.getAllBoardsSuccess, (state, { boards }) => {

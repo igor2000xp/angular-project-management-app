@@ -35,7 +35,7 @@ export const getBoardByIdSuccess = createAction(
 
 export const deleteBoard = createAction(
   `${ actionsSource } DELETE BOARD`,
-  props<{ info: InfoForBoard }>(),
+  props<{ id: string }>(),
 );
 
 export const deleteBoardSuccess = createAction(

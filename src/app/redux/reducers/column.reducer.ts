@@ -1,3 +1,4 @@
+/* eslint-disable ngrx/on-function-explicit-return-type */
 import { Action, createReducer, on } from '@ngrx/store';
 import { IColumnState } from '../state.models';
 import * as ColumnAction from '../actions/column.actions';
@@ -5,33 +6,21 @@ import * as ColumnAction from '../actions/column.actions';
 const initialReducer:IColumnState = {
   columns: null,
   currentColumn: null,
-}
+};
 
 export const reducer = createReducer(
   initialReducer,
-  on(ColumnAction.createColumn, (state) => {
+
+  on(ColumnAction.getColumnsSuccess, (state, { columns }) => {
     return ({
       ...state,
+      columns: columns,
     });
   }),
-  on(ColumnAction.getAllColumns, (state) => {
+  on(ColumnAction.getColumnByIdSuccess, (state, { column }) => {
     return ({
       ...state,
-    });
-  }),
-  on(ColumnAction.getColumnById, (state) => {
-    return ({
-      ...state,
-    });
-  }),
-  on(ColumnAction.deleteColumn, (state) => {
-    return ({
-      ...state,
-    });
-  }),
-  on(ColumnAction.updateColumn, (state) => {
-    return ({
-      ...state,
+      currentColumn: column,
     });
   }),
 );

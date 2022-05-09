@@ -1,29 +1,40 @@
 import { createAction, props } from '@ngrx/store';
-import { IColumn } from '../state.models';
+import { Column } from 'src/app/auth/models/Column.model';
+import { InfoForColumn } from '../effects/column.effects';
 
 const actionsColumn = '[COLUMN]';
 
 export const createColumn = createAction(
   `${actionsColumn} CREATE COLUMN`,
-  props<{ column: IColumn }>(),
+  props<{ column: Column }>(),
 );
 
-export const getAllColumns = createAction(
+export const getColumns = createAction(
   `${actionsColumn} GET ALL COLUMNS`,
-  props<{ columns: IColumn[] }>(),
+  props<{ info: InfoForColumn }>(),
+);
+
+export const getColumnsSuccess = createAction(
+  `${actionsColumn} GET ALL COLUMNS SUCCESS`,
+  props<{ columns: Column[] }>(),
 );
 
 export const getColumnById = createAction(
   `${actionsColumn} GET COLUMN BY ID`,
-  props<{ column: IColumn }>(),
+  props<{ info: InfoForColumn }>(),
+);
+
+export const getColumnByIdSuccess = createAction(
+  `${actionsColumn} GET COLUMN BY ID SUCCESS`,
+  props<{ column: Column }>(),
 );
 
 export const deleteColumn = createAction(
   `${ actionsColumn } DELETE COLUMN`,
-  props<{ column:IColumn }>(),
+  props<{ info: InfoForColumn  }>(),
 );
 
 export const updateColumn = createAction(
   `${ actionsColumn } UPDATE COLUMN`,
-  props<{ column: IColumn }>(),
+  props<{ info: InfoForColumn }>(),
 );

@@ -33,9 +33,9 @@ export class BoardEffects {
         map((v) => v.info),
         mergeMap((info) => {
           this.info = info;
-            // const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+          // const currentUser = JSON.parse(localStorage.getItem('currentUser'));
           return this.apiService.createBoard(this.currentUser.token, this.info.board);
-          },
+        },
         ),
         mergeMap(() => {
           // const currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -51,9 +51,9 @@ export class BoardEffects {
       return this.actions$.pipe(
         ofType(BoardAction.getAllBoards),
         mergeMap(() =>  {
-            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-            return this.apiService.getBoards(currentUser.token);
-          },
+          const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+          return this.apiService.getBoards(currentUser.token);
+        },
         ),
         map((boards) => {
           return BoardAction.getAllBoardsSuccess({ boards });
@@ -74,27 +74,26 @@ export class BoardEffects {
         }),
         map((currentBoard) => {
           return BoardAction.getBoardByIdSuccess({ currentBoard });
-        })
-      )
-    }
-  )
+        }),
+      );
+    },
+  );
 
   deleteBoard$ = createEffect(
     () => {
       return this.actions$.pipe(
         ofType(BoardAction.deleteBoard),
-        map(v => v.info),
-        mergeMap((info) => {
+        mergeMap((board) => {
           // const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-          return this.apiService.deleteBoard(this.currentUser.token, info.board.id);
+          return this.apiService.deleteBoard(this.currentUser.token, board.id);
         }),
         mergeMap(() => this.apiService.getBoards(this.currentUser.token)),
         map((boards) => {
           return BoardAction.getAllBoardsSuccess({ boards });
-        })
-      )
-    }
-  )
+        }),
+      );
+    },
+  );
 
   updateBoard$ = createEffect(
     () => {
@@ -104,15 +103,15 @@ export class BoardEffects {
         mergeMap((info) => {
           console.log(info);
           return this.apiService.updateBoard(
-              this.currentUser.token,
-              info.boardID,
-              info.board,
-          )
-        }
+            this.currentUser.token,
+            info.boardID,
+            info.board,
+          );
+        },
         ),
         mergeMap(() => this.apiService.getBoards(this.currentUser.token)),
-        map((boards) => BoardAction.getAllBoardsSuccess({ boards })
-      ));
-    }
-  )
+        map((boards) => BoardAction.getAllBoardsSuccess({ boards }),
+        ));
+    },
+  );
 }

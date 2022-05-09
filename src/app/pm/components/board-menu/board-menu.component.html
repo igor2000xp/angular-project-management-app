@@ -1,5 +1,24 @@
 <div class="tools">
     <div class="tools-menu">
       <button (click)="openColumn()" class="admin-btn">create board</button>
+      <button
+      (click)="switchEditMode()"
+       class="admin-btn"
+       [ngClass]="{'edit-btn__active': editMode ==='true'}"
+       >
+       edit boards
+      </button>
+      <button
+      *ngIf="editMode ==='true'"
+      (click)="editFetch('true')"
+      class="admin-btn submit">
+      Submit
+    </button>
+      <button
+      *ngIf="editMode ==='true'"
+      (click)="editFetch('false')"
+      class="admin-btn cancel">
+      Cancel
+    </button>
     </div>
   </div>

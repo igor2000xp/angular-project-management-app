@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { Column } from 'src/app/auth/models/Column.model';
+import { selectColumns } from 'src/app/redux/selectors/column.selector';
 
 @Injectable({
   providedIn: 'root',
@@ -7,7 +10,22 @@ import { FormControl } from '@angular/forms';
 
 export class ValidatorsService {
 
-  constructor() {}
+  columns: Column[];
+
+  constructor(private store: Store) {
+    this.store.select((selectColumns)).subscribe(el => {
+      this.columns = el;
+      console.log(this.columns);
+
+    });
+  }
+
+  checkForOrder(control: FormControl) {
+    const value = this.columns.filter(el => el.order === +control.value);
+    if (value.length !== 0)  return {
+      orderError: true,
+    };
+  }
 
   checkForLength(control: FormControl) {
     if (control.value.length === 0) { return; }

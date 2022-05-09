@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Column } from 'src/app/auth/models/Column.model';
+import { selectColumns } from 'src/app/redux/selectors/column.selector';
+import * as ColumnAction from '../../../redux/actions/column.actions';
 
 @Component({
   selector: 'app-main-page',
@@ -7,9 +12,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainPageComponent implements OnInit {
 
-  constructor() { }
+  columns: Column[];
+
+  boardId: string;
+
+  constructor(private route: ActivatedRoute, private store: Store) {
+  }
 
   ngOnInit(): void {
+    const { snapshot: { params: { id } } } = this.route;
+    this.boardId = id;
+    this.store.dispatch(ColumnAction.getColumns({ info: { boardID: id } }));
+    this.store.select((selectColumns)).subscribe(el => {
+      this.columns = el;
+    });
   }
 
 }

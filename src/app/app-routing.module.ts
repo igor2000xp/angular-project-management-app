@@ -16,6 +16,9 @@ const routes: Routes = [
     loadChildren: () => import('./auth/lazy-modules/login/login.module').then((m) => m.LoginModule),
   },
   { path: 'board', component: BoardPageComponent },
+  { path: 'board/:id',
+    loadChildren: () => import('./pm/pm.module').then((m) => m.PmModule) },
+
 ];
 
 @NgModule({
