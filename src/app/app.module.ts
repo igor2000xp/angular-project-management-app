@@ -13,6 +13,7 @@ import { FooterComponent } from './core/components/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { boardReducer } from './redux/reducers/board.reducer';
+import { taskReducer } from './redux/reducers/task.reducer';
 import { ColumnReducer } from './redux/reducers/column.reducer';
 import * as fromUser from './redux/reducers/user.reducer';
 import * as fromTask from './redux/reducers/task.reducer';
@@ -61,6 +62,7 @@ import { TaskEffects } from './redux/effects/task.effects';
       }),
     StoreModule.forFeature('boards', boardReducer),
     StoreModule.forFeature('columns', ColumnReducer),
+    StoreModule.forFeature('tasks', taskReducer),
     EffectsModule.forRoot([
       UserEffects,
       BoardEffects,
