@@ -72,7 +72,7 @@ export class UserEffects {
             const user: User = Object.assign({}, trueUser[0], this.currentUser, this.userToken);
             localStorage.setItem('currentUser', JSON.stringify(user));
             return UserActions.createTokenActionSuccess({ currentUser: user });
-          } else return UserActions.createTokenActionSuccess({ currentUser:{} });
+          } else return UserActions.createTokenActionSuccess({ currentUser: {} });
 
         }),
       );
@@ -111,7 +111,9 @@ export class UserEffects {
         ofType(UserActions.updateUserAction),
         switchMap((obj) => { return this.apiService.updateUser(obj.token, obj.id, obj.user); }),
         map((user) => {
-          const currentUser = Object.assign({}, user, this.userToken);
+          const prevUser = JSON.parse(localStorage.getItem('currentUser'));
+          this.userToken = prevUser.token;
+          const currentUser = Object.assign({}, user, { token: this.userToken });
           localStorage.setItem('currentUser', JSON.stringify(currentUser));
           return UserActions.createUsersActionSuccess({ currentUser: currentUser });
         }),
