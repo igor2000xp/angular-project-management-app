@@ -11,7 +11,7 @@
       <ng-template #editTitle>
         <form [formGroup]="columnForm">
           <div>
-            <input placeholder={{columnTitle}} [(ngModel)]="actualColumnTitle" formControlName="title">
+            <input placeholder={{columnTitle}} formControlName="title">
             <p class="validate__error" *ngIf="columnForm.get('title').dirty && columnForm.get('title').errors?.required">
               Please enter a title<br />
             </p>

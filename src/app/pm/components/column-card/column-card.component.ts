@@ -30,8 +30,6 @@ export class ColumnCardComponent implements OnInit {
 
   currentUser: any;
 
-  actualColumnTitle: string;
-
   columnForm: FormGroup;
 
   constructor(public dialog: MatDialog, private store: Store) { }
@@ -112,7 +110,7 @@ export class ColumnCardComponent implements OnInit {
         boardID: this.boardID,
         columnID: this.columnId,
         column: {
-          title: this.actualColumnTitle,
+          title: this.columnForm.value.title,
           order: this.column.order,
         },
       },
