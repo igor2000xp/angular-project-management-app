@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { Component, Input, OnInit } from '@angular/core';
 import { DeleteBoardModalComponent } from '../delete-board-modal/delete-board-modal.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -7,6 +8,7 @@ import * as ColumnAction from '../../../redux/actions/column.actions';
 import * as TaskAction from '../../../redux/actions/task.actions';
 import { selectTasks } from 'src/app/redux/selectors/task.selectors';
 import { Task } from 'src/app/auth/models/Task.model';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-column-card',
@@ -15,19 +17,25 @@ import { Task } from 'src/app/auth/models/Task.model';
 })
 export class ColumnCardComponent implements OnInit {
 
-  @Input() column:Column;
+  @Input() column: Column;
 
-  @Input() boardID:string;
+  @Input() boardID: string;
 
   columnTitle: string;
 
-  columnId:string;
+  columnId: string;
 
   tasks: Task[];
 
   currentUser: any;
 
-  constructor(public dialog: MatDialog, private store:Store) { }
+  actualColumnTitle: string;
+
+  columnForm: FormGroup;
+
+  constructor(public dialog: MatDialog, private store: Store) { }
+
+  editMode = true;
 
   ngOnInit(): void {
     this.columnTitle = this.column.title;
@@ -38,13 +46,17 @@ export class ColumnCardComponent implements OnInit {
     }));
     this.store.select((selectTasks)).subscribe(el => {
       if (el) {
-        const arr = el.filter(task=> task.columnId == this.columnId);
+        const arr = el.filter(task => task.columnId == this.columnId);
         if (arr.length > 0) {
           this.tasks = [...el];
         }
       }
     });
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.columnForm = new FormGroup({
+      title: new FormControl('', [
+        Validators.required,
+      ]) });
   }
 
   openDialog() {
@@ -57,28 +69,52 @@ export class ColumnCardComponent implements OnInit {
   }
 
   createTask() {
-    this.store.dispatch(TaskAction.createTaskAction({ info: {
-      boardID: this.boardID,
-      columnID: this.columnId,
-      task: {
-        title: 'aaa',
-        order:2,
-        description: 'aaaa123',
-        userId: this.currentUser.id,
-      } } }));
-    console.log(this.columnId);
+    this.store.dispatch(TaskAction.createTaskAction({
+      info: {
+        boardID: this.boardID,
+        columnID: this.columnId,
+        task: {
+          title: 'aaa',
+          order: 2,
+          description: 'aaaa123',
+          userId: this.currentUser.id,
+        },
+      },
+    }));
+    console.log(this.column);
   }
 
   deleteTask() {
-    this.store.dispatch(TaskAction.deleteTaskAction({ info: {
-      boardID: this.boardID,
-      columnID: this.columnId,
-      task: {
-        title: 'aaa',
-        order:2,
-        description: 'aaaa123',
-        userId: this.currentUser.id,
-      } } }));
+    this.store.dispatch(TaskAction.deleteTaskAction({
+      info: {
+        boardID: this.boardID,
+        columnID: this.columnId,
+        task: {
+          title: 'aaa',
+          order: 2,
+          description: 'aaaa123',
+          userId: this.currentUser.id,
+        },
+      },
+    },
+    ),
+    );
   }
 
+  switchMode() {
+    this.editMode === true ? this.editMode = false : this.editMode = true;
+  }
+
+  updateColumn() {
+    this.store.dispatch(ColumnAction.updateColumn({
+      info: {
+        boardID: this.boardID,
+        columnID: this.columnId,
+        column: {
+          title: this.actualColumnTitle,
+          order: this.column.order,
+        },
+      },
+    }));
+  }
 }
