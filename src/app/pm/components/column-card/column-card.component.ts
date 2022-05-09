@@ -1,3 +1,4 @@
+/* eslint-disable ngrx/no-store-subscription */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import { Component, Input, OnInit } from '@angular/core';
 import { DeleteBoardModalComponent } from '../delete-board-modal/delete-board-modal.component';
