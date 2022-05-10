@@ -6,13 +6,19 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const materialModules = [
-  MatIconModule, MatButtonModule, MatInputModule, MatFormFieldModule, MatCardModule,
+  MatIconModule,
+  MatButtonModule,
+  MatInputModule,
+  MatFormFieldModule,
+  MatCardModule,
+  MatDialogModule,
+  MatFormFieldModule,
 ];
 
 @NgModule({
-  declarations: [],
   imports: [
     CommonModule,
     ...materialModules,
