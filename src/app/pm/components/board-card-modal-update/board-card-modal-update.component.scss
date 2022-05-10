@@ -1,4 +1,5 @@
-.login {
+:host {
+  .login {
     &__form {
       padding: 20px;
       margin: 0 auto;
@@ -63,3 +64,10 @@
     color: red;
     font-size: 12px;
   }
+
+  .button-wrapper {
+    display: flex;
+    flex-direction: row;
+  }
+
+}

@@ -7,6 +7,13 @@ import { Board } from 'src/app/auth/models/Board.model';
 import * as BoardAction from '../../../redux/actions/board.actions';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
+import { BoardCardModalUpdateComponent } from '../board-card-modal-update/board-card-modal-update.component';
+import { InfoForBoard } from '../../../redux/effects/board.effects';
+
+export interface DialogData {
+  title: string;
+  name: string;
+}
 
 @Component({
   selector: 'app-board-card',
@@ -21,6 +28,10 @@ export class BoardCardComponent implements OnInit {
 
   boardId :string;
 
+  name:string;
+
+  infoForBoard:InfoForBoard;
+
   constructor(public dialog: MatDialog, private store: Store, private router: Router) { }
 
   ngOnInit(): void {
@@ -28,15 +39,37 @@ export class BoardCardComponent implements OnInit {
     this.boardId = this.board.id;
   }
 
-  openDialog() {
+  openDialogDelete() {
     const dialogRef = this.dialog.open(DeleteBoardModalComponent);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       if (result) {
         this.store.dispatch(BoardAction.deleteBoard({ id: this.boardId }));
       }
     });
+  }
+
+  openDialogUpdate() {
+
+    const dialogRef = this.dialog.open(BoardCardModalUpdateComponent, {
+      width: '250px',
+      data: {name: this.name, title: this.title},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.title = result;
+      this.infoForBoard = {
+        board:
+          {
+            id: this.boardId,
+            title: this.title,
+          }
+      };
+      this.store.dispatch(BoardAction.updateBoard(
+        {info: this.infoForBoard,}
+      ));
+
+  });
   }
 
   switchToBoard() {
