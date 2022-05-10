@@ -48,7 +48,7 @@ export class ColumnCardComponent implements OnInit {
     }));
     this.store.select((selectTasks)).subscribe(el => {
       if (el) {
-        const arr = el.filter(task => task.columnId == this.columnId);
+        const arr = el.filter(task => task.columnId === this.columnId);
         if (arr.length > 0) {
           this.tasks = [...arr];
         }
