@@ -53,7 +53,7 @@ export class BoardCardComponent implements OnInit {
 
     const dialogRef = this.dialog.open(BoardCardModalUpdateComponent, {
       width: '250px',
-      data: {name: this.name, title: this.title},
+      data: { name: this.name, title: this.title },
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -63,13 +63,14 @@ export class BoardCardComponent implements OnInit {
           {
             id: this.boardId,
             title: this.title,
-          }
+          },
       };
-      this.store.dispatch(BoardAction.updateBoard(
-        {info: this.infoForBoard,}
-      ));
-
-  });
+      if (result !== 'Do nothing') {
+        this.store.dispatch(BoardAction.updateBoard(
+          { info: this.infoForBoard },
+        ));
+      }
+    });
   }
 
   switchToBoard() {
