@@ -15,10 +15,10 @@
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button (click)="openDialog()" mat-menu-item>
+        <button (click)="openDialogDelete()" mat-menu-item>
           <span>Delete</span>
         </button>
-        <button mat-menu-item>
+        <button (click)="openDialogUpdate()" mat-menu-item>
           <span>Update</span>
         </button>
       </mat-menu>

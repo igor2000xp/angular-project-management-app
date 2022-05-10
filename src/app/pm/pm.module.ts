@@ -22,6 +22,9 @@ import { BoardCardModalComponent } from './components/board-card-modal/board-car
 import { BoardCardComponent } from './components/board-card/board-card.component';
 import { DeleteBoardModalComponent } from './components/delete-board-modal/delete-board-modal.component';
 import { DeleteColumModalComponent } from './components/delete-colum-modal/delete-colum-modal.component';
+import { BoardCardModalUpdateComponent } from './components/board-card-modal-update/board-card-modal-update.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 
 
@@ -41,6 +44,7 @@ import { DeleteColumModalComponent } from './components/delete-colum-modal/delet
     BoardCardComponent,
     DeleteBoardModalComponent,
     DeleteColumModalComponent,
+    BoardCardModalUpdateComponent,
   ],
   imports: [
     CommonModule,
@@ -52,6 +56,9 @@ import { DeleteColumModalComponent } from './components/delete-colum-modal/delet
     MatIconModule,
     MatButtonModule,
     DragulaModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatInputModule,
   ],
 })
 export class PmModule { }

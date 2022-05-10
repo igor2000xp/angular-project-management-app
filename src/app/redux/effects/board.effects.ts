@@ -101,14 +101,12 @@ export class BoardEffects {
         ofType(BoardAction.updateBoard),
         map((v) => v.info),
         mergeMap((info) => {
-          console.log(info);
           return this.apiService.updateBoard(
             this.currentUser.token,
-            info.boardID,
-            info.board,
+            info.board.id,
+            {title: info.board.title, },
           );
-        },
-        ),
+        }),
         mergeMap(() => this.apiService.getBoards(this.currentUser.token)),
         map((boards) => BoardAction.getAllBoardsSuccess({ boards }),
         ));
