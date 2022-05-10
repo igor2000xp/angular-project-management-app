@@ -1,4 +1,4 @@
-<div class="list__wrapper" dragula="COLUMNS">
+<div class="list__wrapper">
   <div class="list">
     <div class="list__header">
       <h2 class="columnTitle" *ngIf="editMode;
@@ -27,7 +27,12 @@
       </mat-menu>
     </div>
     <div class="list__card-container">
+<<<<<<< HEAD
       <app-task-card dragula="COLUMNS" *ngFor="let item of tasks"></app-task-card>
+=======
+      <app-task-card></app-task-card>
+      <app-task-card></app-task-card>
+>>>>>>> cdf4d42d342efe7eea68848bb0a7d5c52678d172
     </div>
     <p class="createCard" (click)="openCreateTaskModal()">Add Task</p>
   </div>

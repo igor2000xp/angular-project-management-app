@@ -25,6 +25,8 @@ import { DeleteColumModalComponent } from './components/delete-colum-modal/delet
 import { BoardCardModalUpdateComponent } from './components/board-card-modal-update/board-card-modal-update.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
 
 
 
@@ -59,6 +61,7 @@ import { MatInputModule } from '@angular/material/input';
     MatFormFieldModule,
     FormsModule,
     MatInputModule,
+    DragDropModule,
   ],
 })
 export class PmModule { }
