@@ -1,11 +1,11 @@
 <h2 mat-dialog-title>Create task</h2>
-<form #elseBlock class="login__form" form [formGroup]="createTaskForm">
+<form #elseBlock class="login__form" form [formGroup]="updateTaskForm">
     <div class="login__input-wrapper">
       <label class="login__input">
-        <span>Task name</span>
+        <span>Task title</span>
       </label>
-      <input placeholder="Please enter a name" formControlName="title" class="login__input" name="login" type="login"/>
-      <p class="validate__error" *ngIf="createTaskForm.get('title').dirty && createTaskForm.get('title').errors?.required">
+      <input placeholder={{title}} formControlName="title" class="login__input" name="login" type="login"/>
+      <p class="validate__error" *ngIf="updateTaskForm.get('title').dirty && updateTaskForm.get('title').errors?.required">
         Please enter a title<br />
       </p>
 
@@ -14,13 +14,13 @@
       <label class="login__input">
         <span>Description</span>
       </label>
-      <textarea [(ngModel)]="aaa" ngDefaultControl formControlName="description" class="description-task-area"></textarea>
-      <p class="validate__error" *ngIf="createTaskForm.get('description').dirty && createTaskForm.get('description').errors?.required">
+      <textarea ngDefaultControl formControlName="description" class="description-task-area" placeholder={{description}}></textarea>
+      <p class="validate__error" *ngIf="updateTaskForm.get('description').dirty && updateTaskForm.get('description').errors?.required">
         Please enter a description<br />
       </p>
     </div>
   </form>
 <mat-dialog-actions align="end">
-  <button class="login__btn" mat-button mat-dialog-close>Cancel</button>
-  <button class="login__btn" mat-button [mat-dialog-close]="true" [disabled]="createTaskForm.invalid">Сonfirm</button>
+  <button class="login__btn delete" mat-button mat-dialog-close (click)=" deleteTask()">Delete</button>
+  <button class="login__btn update" mat-button [mat-dialog-close]="true" [disabled]="updateTaskForm.invalid">Сonfirm</button>
 </mat-dialog-actions>

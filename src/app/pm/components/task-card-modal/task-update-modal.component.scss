@@ -61,3 +61,26 @@
     width: 100%;
     height: 40px;
   }
+
+  .delete{
+    background-color: rgb(255, 0, 0);
+    &:hover{
+      cursor: pointer;
+      background-color: rgb(204, 70, 70);
+
+    }
+  }
+
+  .update{
+    background-color: green;
+    &:hover{
+      opacity: 0.8;
+      cursor: pointer;
+      background-color: green;
+    }
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      color: white;
+    }
+  }

@@ -71,23 +71,6 @@ export class ColumnCardComponent implements OnInit {
     });
   }
 
-  deleteTask() {
-    this.store.dispatch(TaskAction.deleteTaskAction({
-      info: {
-        boardID: this.boardID,
-        columnID: this.columnId,
-        task: {
-          title: 'aaa',
-          order: 2,
-          description: 'aaaa123',
-          userId: this.currentUser.id,
-        },
-      },
-    },
-    ),
-    );
-  }
-
   switchMode() {
     this.editMode === true ? this.editMode = false : this.editMode = true;
   }
@@ -107,8 +90,6 @@ export class ColumnCardComponent implements OnInit {
 
   openCreateTaskModal() {
     const dialogRef = this.dialog.open(TaskModalComponent, {
-      width: '330px',
-      height: '400px',
       data: {
         columnId:  this.columnId,
         boardId: this.boardID,
