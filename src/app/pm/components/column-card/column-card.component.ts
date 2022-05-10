@@ -10,6 +10,7 @@ import * as TaskAction from '../../../redux/actions/task.actions';
 import { selectTasks } from 'src/app/redux/selectors/task.selectors';
 import { Task } from 'src/app/auth/models/Task.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { TaskModalComponent } from '../task-modal/task-modal.component';
 
 @Component({
   selector: 'app-column-card',
@@ -25,6 +26,8 @@ export class ColumnCardComponent implements OnInit {
   columnTitle: string;
 
   columnId: string;
+
+  userId: string;
 
   tasks: Task[];
 
@@ -52,6 +55,7 @@ export class ColumnCardComponent implements OnInit {
       }
     });
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.userId = this.currentUser.id;
     this.columnForm = new FormGroup({
       title: new FormControl('', [
         Validators.required,
@@ -65,22 +69,6 @@ export class ColumnCardComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) this.store.dispatch(ColumnAction.deleteColumn({ info: { boardID: this.boardID, columnID: this.columnId } }));
     });
-  }
-
-  createTask() {
-    this.store.dispatch(TaskAction.createTaskAction({
-      info: {
-        boardID: this.boardID,
-        columnID: this.columnId,
-        task: {
-          title: 'aaa',
-          order: 2,
-          description: 'aaaa123',
-          userId: this.currentUser.id,
-        },
-      },
-    }));
-    console.log(this.column);
   }
 
   deleteTask() {
@@ -116,4 +104,22 @@ export class ColumnCardComponent implements OnInit {
       },
     }));
   }
+
+  openCreateTaskModal() {
+    const dialogRef = this.dialog.open(TaskModalComponent, {
+      width: '330px',
+      height: '400px',
+      data: {
+        columnId:  this.columnId,
+        boardId: this.boardID,
+        order: this.column.order,
+        userId: this.userId,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
 }
