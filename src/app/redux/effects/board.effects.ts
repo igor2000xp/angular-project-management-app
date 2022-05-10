@@ -104,7 +104,7 @@ export class BoardEffects {
           return this.apiService.updateBoard(
             this.currentUser.token,
             info.board.id,
-            {title: info.board.title, },
+            { title: info.board.title },
           );
         }),
         mergeMap(() => this.apiService.getBoards(this.currentUser.token)),
