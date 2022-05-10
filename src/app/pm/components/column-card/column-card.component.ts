@@ -55,15 +55,15 @@ export class ColumnCardComponent implements OnInit {
     this.columnForm = new FormGroup({
       title: new FormControl('', [
         Validators.required,
-      ]) });
+      ]),
+    });
   }
 
   openDialog() {
     const dialogRef = this.dialog.open(DeleteBoardModalComponent);
 
     dialogRef.afterClosed().subscribe(result => {
-      this.store.dispatch(ColumnAction.deleteColumn({ info: { boardID: this.boardID, columnID: this.columnId } }));
-      console.log(result);
+      if (result) this.store.dispatch(ColumnAction.deleteColumn({ info: { boardID: this.boardID, columnID: this.columnId } }));
     });
   }
 
