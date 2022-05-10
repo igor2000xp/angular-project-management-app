@@ -10,7 +10,7 @@ import * as TaskAction from '../../../redux/actions/task.actions';
 import { selectTasks } from 'src/app/redux/selectors/task.selectors';
 import { Task } from 'src/app/auth/models/Task.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { TaskModalComponent } from '../task-modal/task-modal.component';
+import { TaskModalComponent } from '../task-modal/task-create-modal.component';
 
 @Component({
   selector: 'app-column-card',

@@ -6,8 +6,8 @@ import * as TaskAction from '../../../redux/actions/task.actions';
 
 @Component({
   selector: 'app-task-modal',
-  templateUrl: './task-modal.component.html',
-  styleUrls: ['./task-modal.component.scss'],
+  templateUrl: './task-create-modal.component.html',
+  styleUrls: ['./task-create-modal.component.scss'],
 })
 export class TaskModalComponent implements OnInit {
 
