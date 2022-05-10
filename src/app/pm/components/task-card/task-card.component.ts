@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Task } from 'src/app/auth/models/Task.model';
-import { TaskCardModalComponent } from '../task-card-modal/task-card-modal.component';
+import { TaskCardModalComponent } from '../task-card-modal/task-update-modal.component';
 
 @Component({
   selector: 'app-task-card',

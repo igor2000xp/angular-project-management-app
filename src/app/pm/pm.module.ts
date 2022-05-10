@@ -15,7 +15,7 @@ import { ColumnModalComponent } from './components/column-modal/column-modal.com
 import { TaskModalComponent } from './components/task-modal/task-create-modal.component';
 import { ColumnCardComponent } from './components/column-card/column-card.component';
 import { TaskCardComponent } from './components/task-card/task-card.component';
-import { TaskCardModalComponent } from './components/task-card-modal/task-card-modal.component';
+import { TaskCardModalComponent } from './components/task-card-modal/task-update-modal.component';
 import { BoardPageComponent } from './pages/board-page/board-page.component';
 import { BoardMenuComponent } from './components/board-menu/board-menu.component';
 import { BoardCardModalComponent } from './components/board-card-modal/board-card-modal.component';

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TaskCardModalComponent } from './task-card-modal.component';
+import { TaskCardModalComponent } from './task-update-modal.component';
 
 describe('TaskCardModalComponent', () => {
   let component: TaskCardModalComponent;
@@ -8,9 +8,9 @@ describe('TaskCardModalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TaskCardModalComponent ]
+      declarations: [ TaskCardModalComponent ],
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
