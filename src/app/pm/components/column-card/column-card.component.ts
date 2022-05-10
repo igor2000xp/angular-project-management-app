@@ -50,7 +50,7 @@ export class ColumnCardComponent implements OnInit {
       if (el) {
         const arr = el.filter(task => task.columnId == this.columnId);
         if (arr.length > 0) {
-          this.tasks = [...el];
+          this.tasks = [...arr];
         }
       }
     });

@@ -68,7 +68,11 @@ export class TaskEffects {
         },
         ),
         mergeMap(() => this.apiService.getTasks(this.currentUser.token, this.info.boardID, this.info.columnID)),
-        map((tasks) => TaskActions.getTasksActionSuccess({ tasks })),
+        map((tasks) => {
+          console.log(tasks);
+          if (tasks.length === 0) return TaskActions.getTasksActionSuccess({ tasks: [] });
+          return TaskActions.getTasksActionSuccess({ tasks });
+        }),
       );
     },
   );
@@ -98,7 +102,8 @@ export class TaskEffects {
           return this.apiService.updateTask(this.currentUser.token, this.info.boardID, this.info.columnID, this.info.taskID, this.info.task);
         },
         ),
-        map((task) => TaskActions.getTasksByIdActionSuccess({ task })),
+        mergeMap(() => this.apiService.getTasks(this.currentUser.token, this.info.boardID, this.info.columnID)),
+        map((tasks) => TaskActions.getTasksActionSuccess({ tasks })),
       );
     },
   );

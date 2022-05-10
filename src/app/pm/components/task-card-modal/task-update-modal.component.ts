@@ -34,26 +34,36 @@ export class TaskCardModalComponent implements OnInit {
   }
 
   deleteTask() {
-    if (this.data) {
-      this.store.dispatch(TaskAction.deleteTaskAction({
-        info: {
-          boardID: this.data.boardID,
-          columnID: this.data.column.id,
-          taskID: this.data.task.id,
+    this.store.dispatch(TaskAction.deleteTaskAction({
+      info: {
+        boardID: this.data.boardID,
+        columnID: this.data.column.id,
+        taskID: this.data.task.id,
+      },
+    },
+    ),
+    );
+  }
+
+  updateTask() {
+    this.store.dispatch(TaskAction.updateTaskAction({
+      info: {
+        boardID: this.data.boardID,
+        columnID: this.data.column.id,
+        taskID: this.data.task.id,
+        task: {
+          title: this.updateTaskForm.value.title,
+          order: this.data.column.order,
+          description: this.updateTaskForm.value.description,
+          userId: this.data.userID,
+          boardId: this.data.boardID,
+          columnId: this.data.column.id,
         },
       },
-      ),
-      );
-    }
+    },
+    ),
+    );
   }
 }
-// update() {
-//   task: {
-//     title: this.data.task.title,
-//     order: this.data.column.order,
-//     description: this.data.task.description,
-//     userId: this.data.userID,
-//   },
-// },
 
 
