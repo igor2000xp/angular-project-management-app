@@ -46,6 +46,7 @@ export class ColumnEffects {
         mergeMap((info) => {
           this.info = info;
           this.actualBoardID = info.boardID;
+          this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
           return this.apiService.getColumns(this.currentUser.token, info.boardID);
         }),
         map((columns) => ColumnAction.getColumnsSuccess({ columns })),

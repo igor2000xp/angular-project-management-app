@@ -98,7 +98,7 @@ export class UserEffects {
         switchMap((currentUser) => { return this.apiService.deleteUser(currentUser.token, currentUser.id); }),
         map(() => {
           localStorage.removeItem('currentUser');
-          return UserActions.deleteUsersActionSuccess({ empty: null });
+          return UserActions.createUsersActionSuccess({ currentUser: {} });
         }),
         catchError(() => of(UserActions.getUsersActionFailed())),
       );

@@ -40,7 +40,12 @@ export class BoardCardComponent implements OnInit {
   }
 
   openDialogDelete() {
-    const dialogRef = this.dialog.open(DeleteBoardModalComponent);
+    console.log(this.title);
+    const dialogRef = this.dialog.open(DeleteBoardModalComponent, {
+      data: {
+        title: this.title,
+      },
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
