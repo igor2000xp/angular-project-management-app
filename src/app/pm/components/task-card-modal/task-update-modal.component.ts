@@ -32,6 +32,7 @@ export class TaskCardModalComponent implements OnInit {
       ]),
       description: new FormControl('', [Validators.required]),
     });
+    this.updateTaskForm.controls.title.setValue(this.title);
     this.updateTaskForm.controls.description.setValue(this.description);
   }
 
