@@ -1,7 +1,6 @@
 /* eslint-disable ngrx/no-store-subscription */
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { User } from '../auth/models/user.model';
 
 @Injectable({
@@ -12,7 +11,7 @@ export class UserLogOutClass implements CanActivate {
 
   currentUser: User;
 
-  constructor(private router: Router, private store: Store) {
+  constructor(private router: Router) {
 
   }
 

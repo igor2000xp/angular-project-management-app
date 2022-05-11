@@ -93,7 +93,10 @@ export class ColumnEffects {
           this.info = info;
           return this.apiService.updateColumn(this.currentUser.token, info.boardID, info.columnID, info.column);
         }),
-        map((column) => ColumnAction.getColumnByIdSuccess({ column })),
+        mergeMap(() => {
+          return this.apiService.getColumns(this.currentUser.token,  this.info.boardID);
+        }),
+        map((columns) => ColumnAction.getColumnsSuccess({ columns })),
       );
     },
   );

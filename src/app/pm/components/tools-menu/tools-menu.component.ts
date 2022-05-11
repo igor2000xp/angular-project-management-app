@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ColumnModalComponent } from '../column-modal/column-modal.component';
-import { TaskModalComponent } from '../task-modal/task-modal.component';
+import { TaskModalComponent } from '../task-modal/task-create-modal.component';
 
 @Component({
   selector: 'app-tools-menu',

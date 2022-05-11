@@ -4,14 +4,14 @@
     <label class="login__input">
       <span>column name</span>
     </label>
-    <input formControlName="title" class="login__input" name="login" type="login" placeholder="Enter column name"/>
+    <input formControlName="title" class="login__input" name="login" type="login" placeholder="Please enter a name"/>
     <p class="order-validate__error" *ngIf="columnForm.get('title').dirty && columnForm.get('title').errors?.required">
       Please enter a name<br />
     </p>
     <label class="login__input">
       <span>order</span>
     </label>
-    <input formControlName="order" class="login__input" name="order" type="order" placeholder="Enter the"/>
+    <input formControlName="order" class="login__input" name="order" type="order" placeholder="Please enter the order"/>
     <p class="order-validate__error" *ngIf="columnForm.get('order').errors?.orderError">
       Order is already exists<br />
     </p>

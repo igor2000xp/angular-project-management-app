@@ -58,3 +58,20 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+.columnTitle{
+  &:hover{
+    cursor: pointer;
+  }
+}
+.createCard{
+  margin: 15px 0 0 15px;
+  &:hover{
+    cursor: pointer;
+  }
+}
+.validate__error{
+  margin: 0px;
+  padding-top: 5px;
+  color: red;
+  font-size: 12px;
+}

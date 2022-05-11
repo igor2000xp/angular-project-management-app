@@ -7,7 +7,7 @@ const actionSource = '[TASK]';
 
 export const getTasksAction = createAction(
   `${actionSource} GET ALL CURRENT TASKS`,
-  props<{ boardID:string, columnID:string, task:Task }>(),
+  props<{ boardID:string, columnID:string }>(),
 );
 export const getTasksActionSuccess = createAction(
   `${actionSource} GET ALL CURRENT USER, SUCCESS`,

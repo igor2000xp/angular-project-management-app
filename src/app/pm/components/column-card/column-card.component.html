@@ -1,26 +1,34 @@
 <div class="list__wrapper">
   <div class="list">
     <div class="list__header">
-      <h2 contenteditable="true">{{columnTitle}}</h2>
-      <button
-        mat-icon-button
-        [matMenuTriggerFor]="menu"
-        aria-label="Example icon-button with a menu"
-      >
+      <h2 class="columnTitle" *ngIf="editMode;
+       else editTitle" contenteditable="false" (click)="switchMode()">
+        {{columnTitle}}
+      </h2>
+      <button *ngIf="editMode" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
         <mat-icon>more_vert</mat-icon>
       </button>
+      <ng-template #editTitle>
+        <form [formGroup]="columnForm">
+          <div>
+            <input placeholder={{columnTitle}} formControlName="title">
+            <p class="validate__error" *ngIf="columnForm.get('title').dirty && columnForm.get('title').errors?.required">
+              Please enter a title<br />
+            </p>
+          </div>
+          <button (click)=" updateColumn()" [disabled]="columnForm.invalid">Submit</button>
+          <button (click)="switchMode()">Cancel</button>
+        </form>
+      </ng-template>
       <mat-menu #menu="matMenu">
         <button (click)="openDialog()" mat-menu-item>
           <span>Delete</span>
         </button>
-        <button mat-menu-item>
-          <span>Что нибудь 2</span>
-        </button>
       </mat-menu>
     </div>
     <div class="list__card-container">
-      <app-task-card></app-task-card>
-      <app-task-card></app-task-card>
+      <app-task-card dragula="COLUMNS" *ngFor="let item of tasks" [task]="item" [column]="column" [userID]="userId" [boardID]="boardID"></app-task-card>
     </div>
+    <p class="createCard" (click)="openCreateTaskModal()">Add Task</p>
   </div>
 </div>

@@ -13,11 +13,11 @@
     &__password {
       width: 93%;
     }
-  
+
     &__password-wrapper {
       margin-top: 10px;
     }
-  
+
     &__btn {
       margin-top: 40px;
       margin-left: 10px;
@@ -25,7 +25,7 @@
       height: 34px;
       background-color: #433147;
       border: none;
-      
+
       outline: none;
       border-radius: 3px;
       box-shadow: 2px 0px 4px #433147;
@@ -36,6 +36,11 @@
         background-color: #7b5a82;
       }
       float: right;
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        color: white;
+      }
     }
   }
 
@@ -50,4 +55,32 @@
     background-color: #efefef;
     height: 30px;
     padding: 0 10px;
+  }
+
+  .description-task-area{
+    width: 100%;
+    height: 40px;
+  }
+
+  .delete{
+    background-color: rgb(255, 0, 0);
+    &:hover{
+      cursor: pointer;
+      background-color: rgb(204, 70, 70);
+
+    }
+  }
+
+  .update{
+    background-color: green;
+    &:hover{
+      opacity: 0.8;
+      cursor: pointer;
+      background-color: green;
+    }
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      color: white;
+    }
   }
