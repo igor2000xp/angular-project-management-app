@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { Subject } from 'rxjs';
 import { Column } from 'src/app/auth/models/Column.model';
 import { selectColumns } from 'src/app/redux/selectors/column.selector';
 
@@ -11,6 +12,8 @@ import { selectColumns } from 'src/app/redux/selectors/column.selector';
 export class ValidatorsService {
 
   columns: Column[];
+
+  columnArr: Subject<{}> = new Subject();
 
   constructor(private store: Store) {
     this.store.select((selectColumns)).subscribe(el => {

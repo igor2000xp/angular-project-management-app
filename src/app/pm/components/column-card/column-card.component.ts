@@ -11,6 +11,7 @@ import { selectTasks } from 'src/app/redux/selectors/task.selectors';
 import { Task } from 'src/app/auth/models/Task.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TaskModalComponent } from '../task-modal/task-create-modal.component';
+import { ValidatorsService } from 'src/app/shared/services/validator.service';
 
 @Component({
   selector: 'app-column-card',
@@ -35,9 +36,11 @@ export class ColumnCardComponent implements OnInit {
 
   columnForm: FormGroup;
 
-  constructor(public dialog: MatDialog, private store: Store) { }
+  constructor(public dialog: MatDialog, private store: Store, private deleteArr: ValidatorsService) { }
 
   editMode = true;
+
+  deletedArr: any;
 
   ngOnInit(): void {
     this.columnTitle = this.column.title;
@@ -46,12 +49,14 @@ export class ColumnCardComponent implements OnInit {
       boardID: this.boardID,
       columnID: this.columnId,
     }));
+    this.deleteArr.columnArr.subscribe((el) => this.deletedArr = el);
     this.store.select((selectTasks)).subscribe(el => {
       if (el) {
         const arr = el.filter(task => task.columnId === this.columnId);
         if (arr.length > 0) {
           this.tasks = [...arr];
         }
+        if (this.deletedArr) (arr.length === 0 && this.deletedArr.columnId === this.columnId) ? this.tasks = [...arr] : null;
       }
     });
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -95,7 +100,7 @@ export class ColumnCardComponent implements OnInit {
   openCreateTaskModal() {
     const dialogRef = this.dialog.open(TaskModalComponent, {
       data: {
-        columnId:  this.columnId,
+        columnId: this.columnId,
         boardId: this.boardID,
         order: this.column.order,
         userId: this.userId,
