@@ -64,7 +64,11 @@ export class ColumnCardComponent implements OnInit {
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(DeleteBoardModalComponent);
+    const dialogRef = this.dialog.open(DeleteBoardModalComponent, {
+      data: {
+        title: this.column.title,
+      },
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) this.store.dispatch(ColumnAction.deleteColumn({ info: { boardID: this.boardID, columnID: this.columnId } }));

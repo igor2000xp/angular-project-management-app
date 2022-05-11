@@ -1,8 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import * as TaskAction from '../../../redux/actions/task.actions';
+import { DeleteBoardModalComponent } from '../delete-board-modal/delete-board-modal.component';
 
 @Component({
   selector: 'app-task-card-modal',
@@ -19,7 +20,8 @@ export class TaskCardModalComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private store: Store) {}
+    private store: Store,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.title = this.data.task.title;
@@ -34,15 +36,24 @@ export class TaskCardModalComponent implements OnInit {
   }
 
   deleteTask() {
-    this.store.dispatch(TaskAction.deleteTaskAction({
-      info: {
-        boardID: this.data.boardID,
-        columnID: this.data.column.id,
-        taskID: this.data.task.id,
+    const dialogRef = this.dialog.open(DeleteBoardModalComponent, {
+      data: {
+        title: this.title,
       },
-    },
-    ),
-    );
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) this.store.dispatch(TaskAction.deleteTaskAction({
+        info: {
+          boardID: this.data.boardID,
+          columnID: this.data.column.id,
+          taskID: this.data.task.id,
+        },
+      },
+      ),
+      );
+    });
+
   }
 
   updateTask() {
