@@ -13,6 +13,7 @@ import { Task } from 'src/app/auth/models/Task.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TaskModalComponent } from '../task-modal/task-create-modal.component';
 import { ValidatorsService } from 'src/app/shared/services/validator.service';
+
 @Component({
   selector: 'app-column-card',
   templateUrl: './column-card.component.html',
