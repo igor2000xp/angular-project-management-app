@@ -5,6 +5,7 @@ import { DeleteBoardModalComponent } from '../delete-board-modal/delete-board-mo
 import { MatDialog } from '@angular/material/dialog';
 import { Column } from 'src/app/auth/models/Column.model';
 import { Store } from '@ngrx/store';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import * as ColumnAction from '../../../redux/actions/column.actions';
 import * as TaskAction from '../../../redux/actions/task.actions';
 import { selectTasks } from 'src/app/redux/selectors/task.selectors';
@@ -12,7 +13,7 @@ import { Task } from 'src/app/auth/models/Task.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TaskModalComponent } from '../task-modal/task-create-modal.component';
 import { ValidatorsService } from 'src/app/shared/services/validator.service';
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+
 
 @Component({
   selector: 'app-column-card',
