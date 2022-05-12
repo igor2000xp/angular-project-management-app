@@ -11,6 +11,7 @@ import { selectTasks } from 'src/app/redux/selectors/task.selectors';
 import { Task } from 'src/app/auth/models/Task.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TaskModalComponent } from '../task-modal/task-create-modal.component';
+import { ValidatorsService } from 'src/app/shared/services/validator.service';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -39,7 +40,7 @@ export class ColumnCardComponent implements OnInit {
 
   columnForm: FormGroup;
 
-  constructor(public dialog: MatDialog, private store: Store) {}
+  constructor(public dialog: MatDialog, private store: Store, private deleteArr: ValidatorsService) { }
 
   editMode = true;
 
@@ -53,6 +54,12 @@ export class ColumnCardComponent implements OnInit {
       }),
     );
     this.store.select(selectTasks).subscribe((el) => {
+      this.store.dispatch(TaskAction.getTasksAction({
+        boardID: this.boardID,
+        columnID: this.columnId,
+      }));
+      this.deleteArr.columnArr.subscribe((el) => this.deletedArr = el);
+      this.store.select((selectTasks)).subscribe(el => {
       if (el) {
         const arr = el.filter((task) => task.columnId === this.columnId);
         if (arr.length > 0) {
