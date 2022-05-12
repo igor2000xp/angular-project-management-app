@@ -43,13 +43,12 @@ export class ColumnCardComponent implements OnInit {
   ngOnInit(): void {
     this.columnTitle = this.column.title;
     this.columnId = this.column.id;
-    this.store.dispatch(
-      TaskAction.getTasksAction({
-        boardID: this.boardID,
-        columnID: this.columnId,
-      }),
-    );
-    this.store.select(selectTasks).subscribe((el) => {
+    this.store.dispatch(TaskAction.getTasksAction({
+      boardID: this.boardID,
+      columnID: this.columnId,
+    }));
+    this.deleteArr.columnArr.subscribe((el) => this.deletedArr = el);
+    this.store.select((selectTasks)).subscribe(el => {
       if (el) {
         const arr = el.filter((task) => task.columnId === this.columnId);
         if (arr.length > 0) {
