@@ -29,16 +29,14 @@ export class BoardEffects {
     () => {
       return this.actions$.pipe(
         ofType(BoardAction.createBoard),
-        // pluck('currentBoard'),
         map((v) => v.info),
         mergeMap((info) => {
           this.info = info;
-          // const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+          this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
           return this.apiService.createBoard(this.currentUser.token, this.info.board);
         },
         ),
         mergeMap(() => {
-          // const currentUser = JSON.parse(localStorage.getItem('currentUser'));
           return this.apiService.getBoards(this.currentUser.token);
         }),
         map((boards) => BoardAction.getAllBoardsSuccess({ boards })),
@@ -69,7 +67,6 @@ export class BoardEffects {
         map(v => v.info),
         mergeMap((info) => {
           const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-          // console.log(currentBoardId);
           return this.apiService.getBoardById(currentUser.token, info.boardID);
         }),
         map((currentBoard) => {
@@ -84,7 +81,7 @@ export class BoardEffects {
       return this.actions$.pipe(
         ofType(BoardAction.deleteBoard),
         mergeMap((board) => {
-          // const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+          this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
           return this.apiService.deleteBoard(this.currentUser.token, board.id);
         }),
         mergeMap(() => this.apiService.getBoards(this.currentUser.token)),
@@ -101,6 +98,7 @@ export class BoardEffects {
         ofType(BoardAction.updateBoard),
         map((v) => v.info),
         mergeMap((info) => {
+          this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
           return this.apiService.updateBoard(
             this.currentUser.token,
             info.board.id,
