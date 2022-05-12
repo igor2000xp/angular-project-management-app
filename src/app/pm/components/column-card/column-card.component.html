@@ -26,8 +26,10 @@
         </button>
       </mat-menu>
     </div>
-    <div class="list__card-container">
-      <app-task-card dragula="COLUMNS" *ngFor="let item of tasks" [task]="item" [column]="column" [userID]="userId" [boardID]="boardID"></app-task-card>
+    <div  class="list__card-container example-list"          cdkDropList
+    [cdkDropListData]="tasks"
+    (cdkDropListDropped)="dropToo($event)">
+      <app-task-card *ngFor="let item of tasks" [task]="item" [column]="column" [userID]="userId" [boardID]="boardID" cdkDrag></app-task-card>
     </div>
     <p class="createCard" (click)="openCreateTaskModal()">Add Task</p>
   </div>

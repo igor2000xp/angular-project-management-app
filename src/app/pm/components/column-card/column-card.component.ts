@@ -5,6 +5,7 @@ import { DeleteBoardModalComponent } from '../delete-board-modal/delete-board-mo
 import { MatDialog } from '@angular/material/dialog';
 import { Column } from 'src/app/auth/models/Column.model';
 import { Store } from '@ngrx/store';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import * as ColumnAction from '../../../redux/actions/column.actions';
 import * as TaskAction from '../../../redux/actions/task.actions';
 import { selectTasks } from 'src/app/redux/selectors/task.selectors';
@@ -19,7 +20,6 @@ import { ValidatorsService } from 'src/app/shared/services/validator.service';
   styleUrls: ['./column-card.component.scss'],
 })
 export class ColumnCardComponent implements OnInit {
-
   @Input() column: Column;
 
   @Input() boardID: string;
@@ -30,7 +30,7 @@ export class ColumnCardComponent implements OnInit {
 
   userId: string;
 
-  tasks: Task[];
+  tasks: Task[] = [];
 
   currentUser: any;
 
@@ -52,9 +52,11 @@ export class ColumnCardComponent implements OnInit {
     this.deleteArr.columnArr.subscribe((el) => this.deletedArr = el);
     this.store.select((selectTasks)).subscribe(el => {
       if (el) {
-        const arr = el.filter(task => task.columnId === this.columnId);
+        const arr = el.filter((task) => task.columnId === this.columnId);
         if (arr.length > 0) {
-          this.tasks = [...arr];
+          this.tasks = [...arr].sort((a, b) => {
+            return a.order - b.order;
+          });
         }
         if (this.deletedArr) (arr.length === 0 && this.deletedArr.columnId === this.columnId) ? this.tasks = [...arr] : null;
       }
@@ -62,9 +64,7 @@ export class ColumnCardComponent implements OnInit {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.userId = this.currentUser.id;
     this.columnForm = new FormGroup({
-      title: new FormControl('', [
-        Validators.required,
-      ]),
+      title: new FormControl('', [Validators.required]),
     });
   }
 
@@ -75,26 +75,33 @@ export class ColumnCardComponent implements OnInit {
       },
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) this.store.dispatch(ColumnAction.deleteColumn({ info: { boardID: this.boardID, columnID: this.columnId } }));
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result)
+        this.store.dispatch(
+          ColumnAction.deleteColumn({
+            info: { boardID: this.boardID, columnID: this.columnId },
+          }),
+        );
     });
   }
 
   switchMode() {
-    this.editMode === true ? this.editMode = false : this.editMode = true;
+    this.editMode === true ? (this.editMode = false) : (this.editMode = true);
   }
 
   updateColumn() {
-    this.store.dispatch(ColumnAction.updateColumn({
-      info: {
-        boardID: this.boardID,
-        columnID: this.columnId,
-        column: {
-          title: this.columnForm.value.title,
-          order: this.column.order,
+    this.store.dispatch(
+      ColumnAction.updateColumn({
+        info: {
+          boardID: this.boardID,
+          columnID: this.columnId,
+          column: {
+            title: this.columnForm.value.title,
+            order: this.column.order,
+          },
         },
-      },
-    }));
+      }),
+    );
   }
 
   openCreateTaskModal() {
@@ -107,9 +114,65 @@ export class ColumnCardComponent implements OnInit {
       },
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
   }
 
+  dropToo(event: CdkDragDrop<Task[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+      this.tasks.forEach((el, index) => {
+        this.store.dispatch(
+          TaskAction.updateTaskAction({
+            info: {
+              boardID: el.boardId,
+              columnID: el.columnId,
+              taskID: el.id,
+              task: {
+                title: el.title,
+                order: index,
+                description: el.description,
+                userId: this.userId,
+                boardId: el.boardId,
+                columnId: el.columnId,
+              },
+            },
+          }),
+        );
+      });
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data || [],
+        event.previousIndex,
+        event.currentIndex,
+      );
+      console.log(this.columnId);
+      this.tasks.forEach((el, index) => {
+        this.store.dispatch(
+          TaskAction.updateTaskAction({
+            info: {
+              boardID: el.boardId,
+              columnID: el.columnId,
+              taskID: el.id,
+              task: {
+                title: el.title,
+                order: index,
+                description: el.description,
+                userId: this.userId,
+                boardId: this.boardID,
+                columnId: this.columnId,
+              },
+            },
+          }),
+        );
+      });
+    }
+  }
 }
+
