@@ -26,6 +26,7 @@ export class BoardCardModalComponent implements OnInit {
     this.store.dispatch(BoardAction.createBoard({ info: { board:
     {
       title: this.boardForm.value.title,
+      description: 'empty',
     } } }));
   }
 

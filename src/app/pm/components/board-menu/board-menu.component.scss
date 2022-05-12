@@ -38,34 +38,3 @@
     background-color: #433147;
   }
 }
-
-.edit-btn__active {
-  background-color: rgb(54, 54, 253);
-  opacity: 0.85;
-
-  &:hover {
-    background-color: #2560e0;
-    opacity: 0.85;
-  }
-}
-
-.submit {
-  background-color: green;
-  opacity: 0.85;
-
-  &:hover {
-    background-color: green;
-    opacity: 0.85;
-    cursor: pointer;
-  }
-}
-
-.cancel{
-  background-color: red;
-  opacity: 0.85;
-  &:hover {
-    background-color: red;
-    opacity: 0.85;
-    cursor: pointer;
-  }
-}

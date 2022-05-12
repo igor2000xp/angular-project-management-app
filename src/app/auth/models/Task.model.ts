@@ -6,4 +6,5 @@ export interface Task {
   userId: string,
   boardId?: string,
   columnId?: string
+  done?:boolean,
 }

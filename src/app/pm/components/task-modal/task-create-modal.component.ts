@@ -39,6 +39,7 @@ export class TaskModalComponent implements OnInit {
           order: this.data.order,
           description: this.createTaskForm.value.description,
           userId: this.data.userId,
+          done: false,
         },
       },
     }));

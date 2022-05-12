@@ -7,7 +7,7 @@ import { Column } from '../models/Column.model';
 import { Task } from '../models/Task.model';
 import { Router } from '@angular/router';
 
-const BASE = 'http://localhost:4000';
+const BASE = 'https://quiet-basin-48217.herokuapp.com';
 const SIGNUP = `${BASE}/signup`;
 const SIGNIN = `${BASE}/signin`;
 const USERS = `${BASE}/users`;

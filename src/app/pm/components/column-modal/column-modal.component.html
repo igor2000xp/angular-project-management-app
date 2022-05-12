@@ -12,7 +12,7 @@
       <span>order</span>
     </label>
     <input formControlName="order" class="login__input" name="order" type="order" placeholder="Please enter the order"/>
-    <p class="order-validate__error" *ngIf="columnForm.get('order').errors?.orderError">
+    <p class="order-validate__error" *ngIf="columnForm.get('order').dirty && columnForm.get('order').errors?.orderError">
       Order is already exists<br />
     </p>
   </div>

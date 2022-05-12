@@ -48,7 +48,7 @@ export class BoardEffects {
     () => {
       return this.actions$.pipe(
         ofType(BoardAction.getAllBoards),
-        mergeMap(() =>  {
+        mergeMap(() => {
           const currentUser = JSON.parse(localStorage.getItem('currentUser'));
           return this.apiService.getBoards(currentUser.token);
         },
@@ -102,7 +102,10 @@ export class BoardEffects {
           return this.apiService.updateBoard(
             this.currentUser.token,
             info.board.id,
-            { title: info.board.title },
+            {
+              title: info.board.title,
+              description: 'empty',
+            },
           );
         }),
         mergeMap(() => this.apiService.getBoards(this.currentUser.token)),

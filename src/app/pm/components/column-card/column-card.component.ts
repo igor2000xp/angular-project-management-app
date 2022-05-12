@@ -140,6 +140,7 @@ export class ColumnCardComponent implements OnInit {
                 userId: this.userId,
                 boardId: el.boardId,
                 columnId: el.columnId,
+                done: false,
               },
             },
           }),
@@ -152,7 +153,6 @@ export class ColumnCardComponent implements OnInit {
         event.previousIndex,
         event.currentIndex,
       );
-      console.log(this.columnId);
       this.tasks.forEach((el, index) => {
         this.store.dispatch(
           TaskAction.updateTaskAction({
@@ -167,6 +167,7 @@ export class ColumnCardComponent implements OnInit {
                 userId: this.userId,
                 boardId: this.boardID,
                 columnId: this.columnId,
+                done: false,
               },
             },
           }),
