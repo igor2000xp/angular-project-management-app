@@ -18,7 +18,7 @@
   </div>
   <mat-dialog-actions align="end">
     <button class="login__btn" mat-button mat-dialog-close (click)=" cancel()">Cancel</button>
-    <button class="login__btn" mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="createColumn()" [disabled]="columnForm.invalid">Сonfirm</button>
+    <button class="login__btn" mat-button [mat-dialog-close]="true" (click)="createColumn()" [disabled]="columnForm.invalid" >Сonfirm</button>
   </mat-dialog-actions>
 </form>
 
