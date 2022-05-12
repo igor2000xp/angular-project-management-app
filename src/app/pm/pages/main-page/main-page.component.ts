@@ -36,7 +36,7 @@ export class MainPageComponent implements OnInit {
   }
 
   
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<any[]>) {
     moveItemInArray(this.columns, event.previousIndex, event.currentIndex);
     const {
       snapshot: {

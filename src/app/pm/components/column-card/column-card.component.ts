@@ -11,6 +11,11 @@ import { selectTasks } from 'src/app/redux/selectors/task.selectors';
 import { Task } from 'src/app/auth/models/Task.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TaskModalComponent } from '../task-modal/task-create-modal.component';
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-column-card',
@@ -18,7 +23,6 @@ import { TaskModalComponent } from '../task-modal/task-create-modal.component';
   styleUrls: ['./column-card.component.scss'],
 })
 export class ColumnCardComponent implements OnInit {
-
   @Input() column: Column;
 
   @Input() boardID: string;
@@ -29,78 +33,143 @@ export class ColumnCardComponent implements OnInit {
 
   userId: string;
 
-  tasks: Task[];
+  tasks: Task[] = [];
 
   currentUser: any;
 
   columnForm: FormGroup;
 
-  constructor(public dialog: MatDialog, private store: Store) { }
+  constructor(public dialog: MatDialog, private store: Store) {}
 
   editMode = true;
 
   ngOnInit(): void {
     this.columnTitle = this.column.title;
     this.columnId = this.column.id;
-    this.store.dispatch(TaskAction.getTasksAction({
-      boardID: this.boardID,
-      columnID: this.columnId,
-    }));
-    this.store.select((selectTasks)).subscribe(el => {
+    this.store.dispatch(
+      TaskAction.getTasksAction({
+        boardID: this.boardID,
+        columnID: this.columnId,
+      }),
+    );
+    this.store.select(selectTasks).subscribe((el) => {
       if (el) {
-        const arr = el.filter(task => task.columnId === this.columnId);
+        const arr = el.filter((task) => task.columnId === this.columnId);
         if (arr.length > 0) {
-          this.tasks = [...arr];
+          this.tasks = [...arr].sort((a, b) => {
+            return a.order - b.order;
+          });
         }
       }
     });
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.userId = this.currentUser.id;
     this.columnForm = new FormGroup({
-      title: new FormControl('', [
-        Validators.required,
-      ]),
+      title: new FormControl('', [Validators.required]),
     });
   }
 
   openDialog() {
     const dialogRef = this.dialog.open(DeleteBoardModalComponent);
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) this.store.dispatch(ColumnAction.deleteColumn({ info: { boardID: this.boardID, columnID: this.columnId } }));
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result)
+        this.store.dispatch(
+          ColumnAction.deleteColumn({
+            info: { boardID: this.boardID, columnID: this.columnId },
+          }),
+        );
     });
   }
 
   switchMode() {
-    this.editMode === true ? this.editMode = false : this.editMode = true;
+    this.editMode === true ? (this.editMode = false) : (this.editMode = true);
   }
 
   updateColumn() {
-    this.store.dispatch(ColumnAction.updateColumn({
-      info: {
-        boardID: this.boardID,
-        columnID: this.columnId,
-        column: {
-          title: this.columnForm.value.title,
-          order: this.column.order,
+    this.store.dispatch(
+      ColumnAction.updateColumn({
+        info: {
+          boardID: this.boardID,
+          columnID: this.columnId,
+          column: {
+            title: this.columnForm.value.title,
+            order: this.column.order,
+          },
         },
-      },
-    }));
+      }),
+    );
   }
 
   openCreateTaskModal() {
     const dialogRef = this.dialog.open(TaskModalComponent, {
       data: {
-        columnId:  this.columnId,
+        columnId: this.columnId,
         boardId: this.boardID,
         order: this.column.order,
         userId: this.userId,
       },
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
   }
 
+  dropToo(event: CdkDragDrop<Task[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+      this.tasks.forEach((el, index) => {
+        this.store.dispatch(
+          TaskAction.updateTaskAction({
+            info: {
+              boardID: el.boardId,
+              columnID: el.columnId,
+              taskID: el.id,
+              task: {
+                title: el.title,
+                order: index,
+                description: el.description,
+                userId: this.userId,
+                boardId: el.boardId,
+                columnId: el.columnId,
+              },
+            },
+          }),
+        );
+      });
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data || [],
+        event.previousIndex,
+        event.currentIndex,
+      );
+      console.log(this.columnId);
+      this.tasks.forEach((el, index) => {
+        this.store.dispatch(
+          TaskAction.updateTaskAction({
+            info: {
+              boardID: el.boardId,
+              columnID: el.columnId,
+              taskID: el.id,
+              task: {
+                title: el.title,
+                order: index,
+                description: el.description,
+                userId: this.userId,
+                boardId: this.boardID,
+                columnId: this.columnId,
+              },
+            },
+          }),
+        );
+      });
+    }
+  }
 }
+
