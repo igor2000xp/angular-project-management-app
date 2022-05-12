@@ -1,39 +1,64 @@
-.tools {
-  width: 100%;
-  background-color: #b07ebb;
-  padding-top: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+//:hover {
+  //display: flex;
 
-  &-menu {
-    margin-top: 35px;
+  .tools {
+    width: 100%;
+    background-color: #b07ebb;
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &-menu {
+      margin-top: 50px;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      .admin-btn {
+        margin: 30px 25px 1px 15px;
+        width: 120px;
+        height: 24px;
+        background-color: #412846;
+        border: none;
+        outline: none;
+        text-transform: uppercase;
+        border-radius: 3px;
+        box-shadow: 2px 0 4px #412846;
+        font-size: 12px;
+        color: #ffffff;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #433147;
+        }
+      }
+      .search-input {
+        margin: 1px 0 0 0;
+        .mat-form-field-wrapper {
+          padding-bottom: 0;
+        }
+        .mat-input-element {
+          padding-bottom: 5px;
+          background-color: rgb(211, 192, 222);
+        }
+
+        mat-icon {
+          margin: 0 auto;
+          font-weight: 600;
+          display: inline-block;
+          vertical-align: middle;
+
+          icon {
+            line-height: 15px;
+
+          }
+          //align-items: self-end;
+          .material-icons.md-18 { font-size: 18px; }
+
+          //font-size: 20px;
+          //height: 20px;
+          //padding: 5px 0 0 0;
+        }
+      }
+    }
   }
-}
-
-.logo {
-  margin-left: 20px;
-  font-size: 25px;
-  color: #ffffff;
-}
-
-.admin-btn {
-  margin-top: 30px;
-  margin-bottom: 10px;
-  margin-right: 25px;
-  margin-left: 15px;
-  width: 120px;
-  height: 24px;
-  background-color: #412846;
-  border: none;
-  outline: none;
-  text-transform: uppercase;
-  border-radius: 3px;
-  box-shadow: 2px 0px 4px #412846;
-  font-size: 12px;
-  color: #ffffff;
-  cursor: pointer;
-  &:hover {
-    background-color: #433147;
-  }
-}
