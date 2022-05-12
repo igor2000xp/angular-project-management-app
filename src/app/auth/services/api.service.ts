@@ -5,6 +5,7 @@ import { User } from '../models/user.model';
 import { Board } from '../models/Board.model';
 import { Column } from '../models/Column.model';
 import { Task } from '../models/Task.model';
+import { Router } from '@angular/router';
 
 const BASE = 'http://localhost:4000';
 const SIGNUP = `${BASE}/signup`;
@@ -19,11 +20,15 @@ const BOARDS = `${BASE}/boards`;
 export class ApiService {
   public errors$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private router: Router) { }
 
 
   privatehandleError<T>(result?: T) {
     return (error: any): Observable<T> => {
+      if (error.status === 401) {
+        this.router.navigateByUrl('/main');
+        return;
+      }
       this.errors$.next(error.error.message);
       return of(result as T);
     };
@@ -81,7 +86,10 @@ export class ApiService {
       .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${token}`);
     return this.httpClient
-      .post<Board>(BOARDS, body, { headers: headers });
+      .post<Board>(BOARDS, body, { headers: headers })
+      .pipe(
+        catchError(this.privatehandleError<any>([])),
+      );
   }
 
   public getBoardById(token: string, id: string): Observable<Board> {
@@ -125,7 +133,10 @@ export class ApiService {
       .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${token}`);
     return this.httpClient
-      .post<Column>(`${BOARDS}/${boardId}/columns`, body, { headers: headers });
+      .post<Column>(`${BOARDS}/${boardId}/columns`, body, { headers: headers })
+      .pipe(
+        catchError(this.privatehandleError<any>([])),
+      );
   }
 
   public getColumnById(token: string, boardId: string, columnId: string): Observable<Column> {
@@ -169,7 +180,10 @@ export class ApiService {
       .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${token}`);
     return this.httpClient
-      .post<Task>(`${BOARDS}/${boardId}/columns/${columnId}/tasks`, body, { headers: headers });
+      .post<Task>(`${BOARDS}/${boardId}/columns/${columnId}/tasks`, body, { headers: headers })
+      .pipe(
+        catchError(this.privatehandleError<any>([])),
+      );
   }
 
   public getTaskById(token: string, boardId: string, columnId: string, taskId: string): Observable<Task> {
