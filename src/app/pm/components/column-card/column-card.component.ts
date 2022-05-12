@@ -12,12 +12,7 @@ import { Task } from 'src/app/auth/models/Task.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TaskModalComponent } from '../task-modal/task-create-modal.component';
 import { ValidatorsService } from 'src/app/shared/services/validator.service';
-
-import {
-  CdkDragDrop,
-  moveItemInArray,
-  transferArrayItem,
-} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-column-card',
