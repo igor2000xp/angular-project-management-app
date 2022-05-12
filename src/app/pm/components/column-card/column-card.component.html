@@ -16,8 +16,8 @@
               Please enter a title<br />
             </p>
           </div>
-          <button (click)=" updateColumn()" [disabled]="columnForm.invalid">Submit</button>
-          <button (click)="switchMode()">Cancel</button>
+          <button (click)=" updateColumn()" [disabled]="columnForm.invalid" type="button">Submit</button>
+          <button (click)="switchMode()" type="button">Cancel</button>
         </form>
       </ng-template>
       <mat-menu #menu="matMenu">
