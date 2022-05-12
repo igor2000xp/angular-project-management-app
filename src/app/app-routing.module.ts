@@ -9,15 +9,21 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./pm/pm.module').then((m) => m.PmModule),
-    canActivate:[UserLogInClass],
+    canActivate: [UserLogInClass],
   },
   {
     path: 'auth',
     loadChildren: () => import('./auth/lazy-modules/login/login.module').then((m) => m.LoginModule),
   },
-  { path: 'board', component: BoardPageComponent },
-  { path: 'board/:id',
-    loadChildren: () => import('./pm/pm.module').then((m) => m.PmModule) },
+  {
+    path: 'board', component: BoardPageComponent,
+    canActivate: [UserLogInClass],
+  },
+  {
+    path: 'board/:id',
+    loadChildren: () => import('./pm/pm.module').then((m) => m.PmModule),
+    canActivate:[UserLogInClass],
+  },
 
 ];
 
