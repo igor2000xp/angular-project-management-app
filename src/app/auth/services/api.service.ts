@@ -76,7 +76,10 @@ export class ApiService {
       .set('accept', 'application/json')
       .set('Authorization', `Bearer ${token}`);
     return this.httpClient
-      .get<Board[]>(BOARDS, { headers: headers });
+      .get<Board[]>(BOARDS, { headers: headers })
+      .pipe(
+        catchError(this.privatehandleError<any>([])),
+      );
   }
 
   public createBoard(token: string, board: Board): Observable<Board> {
@@ -105,7 +108,10 @@ export class ApiService {
       .set('Accept', '*/*')
       .set('Authorization', `Bearer ${token}`);
     return this.httpClient
-      .delete(`${BOARDS}/${id}`, { headers: headers });
+      .delete(`${BOARDS}/${id}`, { headers: headers })
+      .pipe(
+        catchError(this.privatehandleError<any>([])),
+      );
   }
 
   public updateBoard(token: string, id: string, board: Board): Observable<Board> {
@@ -152,7 +158,10 @@ export class ApiService {
       .set('Accept', '*/*')
       .set('Authorization', `Bearer ${token}`);
     return this.httpClient
-      .delete(`${BOARDS}/${boardId}/columns/${columnId}`, { headers: headers });
+      .delete(`${BOARDS}/${boardId}/columns/${columnId}`, { headers: headers })
+      .pipe(
+        catchError(this.privatehandleError<any>([])),
+      );
   }
 
   public updateColumn(token: string, boardId: string, columnId: string, column: Column): Observable<Column> {
@@ -170,7 +179,10 @@ export class ApiService {
       .set('Accept', 'application/json')
       .set('Authorization', `Bearer ${token}`);
     return this.httpClient
-      .get<Task[]>(`${BOARDS}/${boardId}/columns/${columnId}/tasks`, { headers: headers });
+      .get<Task[]>(`${BOARDS}/${boardId}/columns/${columnId}/tasks`, { headers: headers })
+      .pipe(
+        catchError(this.privatehandleError<any>([])),
+      );
   }
 
   public createTask(token: string, boardId: string, columnId: string, task: Task): Observable<Task> {
@@ -199,7 +211,10 @@ export class ApiService {
       .set('Accept', '*/*')
       .set('Authorization', `Bearer ${token}`);
     return this.httpClient
-      .delete(`${BOARDS}/${boardId}/columns/${columnId}/tasks/${taskId}`, { headers: headers });
+      .delete(`${BOARDS}/${boardId}/columns/${columnId}/tasks/${taskId}`, { headers: headers })
+      .pipe(
+        catchError(this.privatehandleError<any>([])),
+      );
   }
 
   public updateTask(token: string, boardId: string, columnId: string, taskId: string, task: Task): Observable<Task> {

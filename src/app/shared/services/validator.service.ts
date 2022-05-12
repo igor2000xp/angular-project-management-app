@@ -18,8 +18,6 @@ export class ValidatorsService {
   constructor(private store: Store) {
     this.store.select((selectColumns)).subscribe(el => {
       this.columns = el;
-      console.log(this.columns);
-
     });
   }
 
