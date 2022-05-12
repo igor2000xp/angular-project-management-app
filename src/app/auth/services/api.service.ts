@@ -25,7 +25,7 @@ export class ApiService {
 
   privatehandleError<T>(result?: T) {
     return (error: any): Observable<T> => {
-      if (error.status === 401) {
+      if (error.status === 500) {
         this.router.navigateByUrl('/main');
         return;
       }
