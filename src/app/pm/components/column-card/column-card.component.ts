@@ -18,6 +18,7 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 
+
 @Component({
   selector: 'app-column-card',
   templateUrl: './column-card.component.html',
@@ -54,12 +55,6 @@ export class ColumnCardComponent implements OnInit {
       }),
     );
     this.store.select(selectTasks).subscribe((el) => {
-      this.store.dispatch(TaskAction.getTasksAction({
-        boardID: this.boardID,
-        columnID: this.columnId,
-      }));
-      this.deleteArr.columnArr.subscribe((el) => this.deletedArr = el);
-      this.store.select((selectTasks)).subscribe(el => {
       if (el) {
         const arr = el.filter((task) => task.columnId === this.columnId);
         if (arr.length > 0) {
