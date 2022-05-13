@@ -30,6 +30,7 @@ export class ColumnEffects {
         ofType(ColumnAction.createColumn),
         pluck('column'),
         mergeMap((column) => {
+          this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
           return this.apiService.createColumn(this.currentUser.token, this.actualBoardID, column);
         }),
         mergeMap(() => this.apiService.getColumns(this.currentUser.token, this.actualBoardID)),
@@ -46,6 +47,7 @@ export class ColumnEffects {
         mergeMap((info) => {
           this.info = info;
           this.actualBoardID = info.boardID;
+          this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
           return this.apiService.getColumns(this.currentUser.token, info.boardID);
         }),
         map((columns) => ColumnAction.getColumnsSuccess({ columns })),
@@ -60,6 +62,7 @@ export class ColumnEffects {
         pluck('info'),
         mergeMap((info) => {
           this.info = info;
+          this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
           return this.apiService.deleteColumn(this.currentUser.token, info.boardID, info.columnID);
         }),
         mergeMap(() => {
@@ -77,6 +80,7 @@ export class ColumnEffects {
         pluck('info'),
         mergeMap((info) => {
           this.info = info;
+          this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
           return this.apiService.getColumnById(this.currentUser.token, info.boardID, info.columnID);
         }),
         map((column) => ColumnAction.getColumnByIdSuccess({ column })),
@@ -91,6 +95,7 @@ export class ColumnEffects {
         pluck('info'),
         mergeMap((info) => {
           this.info = info;
+          this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
           return this.apiService.updateColumn(this.currentUser.token, info.boardID, info.columnID, info.column);
         }),
         mergeMap(() => {

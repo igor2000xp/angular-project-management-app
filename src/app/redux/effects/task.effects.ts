@@ -4,6 +4,7 @@ import { map, mergeMap, pluck } from 'rxjs';
 import { ApiService } from 'src/app/auth/services/api.service';
 import * as TaskActions from '../actions/task.actions';
 import { Task } from 'src/app/auth/models/Task.model';
+import { ValidatorsService } from 'src/app/shared/services/validator.service';
 
 export interface InfoForTask {
   boardID?: string,
@@ -22,6 +23,7 @@ export class TaskEffects {
   constructor(
     private actions$: Actions,
     private apiService: ApiService,
+    private arrDelete: ValidatorsService,
   ) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
@@ -33,11 +35,14 @@ export class TaskEffects {
         pluck('info'),
         mergeMap((info) => {
           this.info = info;
+          this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
           return this.apiService.createTask(this.currentUser.token, info.boardID, info.columnID, info.task);
         }),
         mergeMap(() => this.apiService.getTasks(this.currentUser.token, this.info.boardID, this.info.columnID)),
         map((tasks) => {
-          console.log(tasks);
+          this.arrDelete.columnArr.next({
+            columnId: '',
+          });
           return TaskActions.getTasksActionSuccess({ tasks });
         }),
       );
@@ -49,6 +54,7 @@ export class TaskEffects {
       return this.actions$.pipe(
         ofType(TaskActions.getTasksAction),
         mergeMap((info) => {
+          this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
           return this.apiService.getTasks(this.currentUser.token, info.boardID, info.columnID);
         },
         ),
@@ -64,12 +70,15 @@ export class TaskEffects {
         pluck('info'),
         mergeMap((info) => {
           this.info = info;
+          this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
           return this.apiService.deleteTask(this.currentUser.token, this.info.boardID, this.info.columnID, this.info.taskID);
         },
         ),
         mergeMap(() => this.apiService.getTasks(this.currentUser.token, this.info.boardID, this.info.columnID)),
         map((tasks) => {
-          console.log(tasks);
+          this.arrDelete.columnArr.next({
+            columnId: this.info.columnID,
+          });
           if (tasks.length === 0) return TaskActions.getTasksActionSuccess({ tasks: [] });
           return TaskActions.getTasksActionSuccess({ tasks });
         }),
@@ -84,6 +93,7 @@ export class TaskEffects {
         pluck('info'),
         mergeMap((info) => {
           this.info = info;
+          this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
           return this.apiService.getTaskById(this.currentUser.token, this.info.boardID, this.info.columnID, this.info.taskID);
         },
         ),
@@ -99,6 +109,7 @@ export class TaskEffects {
         pluck('info'),
         mergeMap((info) => {
           this.info = info;
+          this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
           return this.apiService.updateTask(this.currentUser.token, this.info.boardID, this.info.columnID, this.info.taskID, this.info.task);
         },
         ),

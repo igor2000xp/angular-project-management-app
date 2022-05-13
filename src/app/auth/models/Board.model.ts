@@ -6,4 +6,5 @@ export interface Board {
   title?: string,
   columns? : Column[],
   info?:InfoForBoard;
+  description?: string,
 }
