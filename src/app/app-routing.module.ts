@@ -4,13 +4,13 @@ import { UserLogInClass } from './guards/user-login.guard';
 import { BoardPageComponent } from './pm/pages/board-page/board-page.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'main', pathMatch: 'full' },
-  { path: 'main', loadChildren: () => import('./main/main.module').then((m) => m.MainModule) },
-  {
-    path: 'home',
-    loadChildren: () => import('./pm/pm.module').then((m) => m.PmModule),
-    canActivate: [UserLogInClass],
-  },
+  { path: '', redirectTo: 'welcome', pathMatch: 'full' },
+  { path: 'welcome', loadChildren: () => import('./main/main.module').then((m) => m.MainModule) },
+  // {
+  //   path: 'home',
+  //   loadChildren: () => import('./pm/pm.module').then((m) => m.PmModule),
+  //   canActivate: [UserLogInClass],
+  // },
   {
     path: 'auth',
     loadChildren: () => import('./auth/lazy-modules/login/login.module').then((m) => m.LoginModule),
