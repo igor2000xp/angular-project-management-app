@@ -62,15 +62,15 @@ export class BoardCardComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.title = result;
-      this.infoForBoard = {
-        board:
-          {
-            id: this.boardId,
-            title: this.title,
-          },
-      };
-      if (result !== 'Do nothing') {
+      if (result !== 'Do nothing' && result) {
+        this.title = result;
+        this.infoForBoard = {
+          board:
+            {
+              id: this.boardId,
+              title: this.title,
+            },
+        };
         this.store.dispatch(BoardAction.updateBoard(
           { info: this.infoForBoard },
         ));

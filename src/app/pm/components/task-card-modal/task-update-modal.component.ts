@@ -70,6 +70,7 @@ export class TaskCardModalComponent implements OnInit {
           userId: this.data.userID,
           boardId: this.data.boardID,
           columnId: this.data.column.id,
+          done: false,
         },
       },
     },

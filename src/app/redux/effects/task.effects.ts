@@ -35,6 +35,7 @@ export class TaskEffects {
         pluck('info'),
         mergeMap((info) => {
           this.info = info;
+          this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
           return this.apiService.createTask(this.currentUser.token, info.boardID, info.columnID, info.task);
         }),
         mergeMap(() => this.apiService.getTasks(this.currentUser.token, this.info.boardID, this.info.columnID)),
@@ -53,6 +54,7 @@ export class TaskEffects {
       return this.actions$.pipe(
         ofType(TaskActions.getTasksAction),
         mergeMap((info) => {
+          this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
           return this.apiService.getTasks(this.currentUser.token, info.boardID, info.columnID);
         },
         ),
@@ -68,6 +70,7 @@ export class TaskEffects {
         pluck('info'),
         mergeMap((info) => {
           this.info = info;
+          this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
           return this.apiService.deleteTask(this.currentUser.token, this.info.boardID, this.info.columnID, this.info.taskID);
         },
         ),
@@ -90,6 +93,7 @@ export class TaskEffects {
         pluck('info'),
         mergeMap((info) => {
           this.info = info;
+          this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
           return this.apiService.getTaskById(this.currentUser.token, this.info.boardID, this.info.columnID, this.info.taskID);
         },
         ),
@@ -105,6 +109,7 @@ export class TaskEffects {
         pluck('info'),
         mergeMap((info) => {
           this.info = info;
+          this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
           return this.apiService.updateTask(this.currentUser.token, this.info.boardID, this.info.columnID, this.info.taskID, this.info.task);
         },
         ),
