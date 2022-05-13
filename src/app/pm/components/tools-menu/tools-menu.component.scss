@@ -1,5 +1,6 @@
 //:hover {
   //display: flex;
+.mat-form-field-label{display:inline-block;top:-5px;text-align:left}
 
   .tools {
     width: 100%;
@@ -33,13 +34,81 @@
         }
       }
       .search-input {
-        margin: 1px 0 0 0;
-        .mat-form-field-wrapper {
-          padding-bottom: 0;
+        margin: 10px 0 0 0;
+        min-width: 150px;
+        max-width: 500px;
+        width: 100%;
+
+
+        .login-validate {
+          margin: -2px 0 0 0;
+          padding: 0;
+
+          //margin-top: 1%;
+          font-weight: 500;
+          color: red;
+          font-size: 1.7vh;
         }
+        //.mat-form-field-infix {
+        //  position: absolute;
+        //}
+        //.example-form {
+        //  .example-full-width {
+        //    .mat-form-field-label{
+        //      //position: absolute;
+        //      //top: 10px;
+        //
+        //    }
+        //    mat-label {
+        //      //margin: 10px;
+        //      //top: 10px;
+        //      //position: absolute;
+        //      //top:0;
+        //      //.mat-form-field-label-wrapper {
+        //              //padding: 0;
+        //              //top: 10px;
+        //
+        //            //}
+        //    }
+        //  }
+        //}
+
+        .example-full-width {
+          width: 100%;
+
+        }
+
+        .mat-form-field-appearance-fill {
+          background-color: rgb(255 252 252 / 67%);
+          max-height: 80px;
+
+          .mat-form-field{display:inline-block;position:absolute; top: -10px; text-align:left}
+          //margin-top: 10px;
+          //.mat-form-field-label {
+          //  margin: 0;
+          //}
+        }
+        //.mat-form-field{display:inline-block;position:absolute;text-align:left}
+
+
+
+        //.mat-form-field-wrapper {
+        //  padding-bottom: 0;
+        //  .mat-form-field-label {
+        //    top: 1.09375em;
+        //    margin-top: 0;
+        //    .mat-form-field-label-wrapper {
+        //      padding: 0;
+        //      top: 0;
+        //
+        //    }
+        //  }
+        //}
+
         .mat-input-element {
           padding-bottom: 5px;
           background-color: rgb(211, 192, 222);
+
         }
 
         mat-icon {
@@ -50,14 +119,8 @@
 
           icon {
             line-height: 15px;
-
           }
-          //align-items: self-end;
           .material-icons.md-18 { font-size: 18px; }
-
-          //font-size: 20px;
-          //height: 20px;
-          //padding: 5px 0 0 0;
         }
       }
     }
