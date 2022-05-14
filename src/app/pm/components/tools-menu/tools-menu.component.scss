@@ -58,3 +58,21 @@
     background-color: #5d000c;
   }
 }
+
+@media (max-width: 400px) {
+
+  .admin-btn {
+    width: 90px;
+    font-size: 9px;
+  }
+  
+  .back-btn {
+    width: 90px;
+    font-size: 9px;
+  }
+  .tools {
+    &-menu {
+      display: flex;
+    }
+  }
+}

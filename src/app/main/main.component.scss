@@ -34,8 +34,9 @@
     }
 
     &__img img {
-      width: 700px;
-      height: 500px;
+      width: 100%;
+      max-width: 700px;
+      max-height: 500px;
     }
   }
 
@@ -118,5 +119,91 @@ h3 {
 
   &-semyon {
     background-image: url("../../assets/147144.png");
+  }
+}
+@media (max-width: 1200px) {
+  h1 {
+    font-size: 50px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  .main {
+    &-title p {
+      font-size: 15px;
+      width: 40%;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    &-tutorial p {
+      font-size: 15px;
+      width: 40%;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    &-content__team-info {
+      display: flex;
+      width: 80%;
+      margin: 0 auto;
+      justify-content: center;
+      gap: 80px;
+      margin-bottom: 50px;
+      padding-top: 20px;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .main {
+    &-content__team-info {
+      display: flex;
+      flex-direction: column;
+      width: 80%;
+      margin: 0 auto;
+      justify-content: center;
+      gap: 80px;
+      margin-bottom: 50px;
+      padding-top: 20px;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 30px;
+  }
+
+  h2 {
+    font-size: 15px;
+  }
+
+  .main {
+    &-title p {
+      font-size: 10px;
+      width: 40%;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    &-tutorial p {
+      font-size: 10px;
+      width: 40%;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    &-content__team-info {
+      display: flex;
+      width: 80%;
+      margin: 0 auto;
+      justify-content: center;
+      gap: 80px;
+      margin-bottom: 50px;
+      padding-top: 20px;
+    }
   }
 }
