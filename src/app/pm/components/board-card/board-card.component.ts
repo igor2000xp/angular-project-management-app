@@ -11,7 +11,7 @@ import { BoardCardModalUpdateComponent } from '../board-card-modal-update/board-
 import { InfoForBoard } from '../../../redux/effects/board.effects';
 
 export interface DialogData {
-  title: string;
+  returnString: string;
   name: string;
 }
 
@@ -24,7 +24,7 @@ export class BoardCardComponent implements OnInit {
 
   @Input() board: Board;
 
-  title: string;
+  returnString: string;
 
   boardId :string;
 
@@ -35,15 +35,15 @@ export class BoardCardComponent implements OnInit {
   constructor(public dialog: MatDialog, private store: Store, private router: Router) { }
 
   ngOnInit(): void {
-    this.title = this.board.title;
+    this.returnString = this.board.title;
     this.boardId = this.board.id;
   }
 
   openDialogDelete() {
-    console.log(this.title);
+    console.log(this.returnString);
     const dialogRef = this.dialog.open(DeleteBoardModalComponent, {
       data: {
-        title: this.title,
+        returnString: this.returnString,
       },
     });
 
@@ -58,17 +58,17 @@ export class BoardCardComponent implements OnInit {
 
     const dialogRef = this.dialog.open(BoardCardModalUpdateComponent, {
       width: '250px',
-      data: { name: this.name, title: this.title },
+      data: { name: this.name, title: this.returnString },
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result !== 'Do nothing' && result) {
-        this.title = result;
+        this.returnString = result;
         this.infoForBoard = {
           board:
             {
               id: this.boardId,
-              title: this.title,
+              title: this.returnString,
             },
         };
         this.store.dispatch(BoardAction.updateBoard(

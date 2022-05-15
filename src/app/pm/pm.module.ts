@@ -26,9 +26,7 @@ import { BoardCardModalUpdateComponent } from './components/board-card-modal-upd
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-
-
-
+import { SearchModalComponent } from './components/search-modal/search-modal.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +45,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     DeleteBoardModalComponent,
     DeleteColumModalComponent,
     BoardCardModalUpdateComponent,
+    SearchModalComponent,
   ],
   imports: [
     CommonModule,

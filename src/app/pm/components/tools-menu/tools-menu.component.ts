@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ColumnModalComponent } from '../column-modal/column-modal.component';
 import { TaskModalComponent } from '../task-modal/task-create-modal.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { SearchModalComponent } from '../search-modal/search-modal.component';
 
 export interface IValidatorMessages {
   searchString: {
@@ -12,6 +13,10 @@ export interface IValidatorMessages {
   };
 }
 
+export interface DialogData {
+  returnString: string;
+  // name: string;
+}
 
 @Component({
   selector: 'app-tools-menu',
@@ -19,6 +24,9 @@ export interface IValidatorMessages {
   styleUrls: ['./tools-menu.component.scss'],
 })
 export class ToolsMenuComponent implements OnInit {
+  returnString: string;
+
+  // name: string = 'Search';
 
   public adminForm = new FormGroup({
     searchString: new FormControl('', [
@@ -36,25 +44,33 @@ export class ToolsMenuComponent implements OnInit {
     },
   };
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog) {};
 
   handlerSubmit():void {
+    // console.log(this.adminForm.value.searchString);
+    const dialogRef = this.dialog.open(SearchModalComponent, {
+      width: '500px',
+      data: {name: this.adminForm.value.searchString, returnString: this.returnString},
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log('The dialog was closed');
+      // console.log(result);
+      this.returnString = result;
+    });
   }
 
   openColumn() {
     const dialogRef = this.dialog.open(ColumnModalComponent);
-
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      // console.log(`Dialog result: ${result}`);
     });
   }
 
   openTask() {
     const dialogRef = this.dialog.open(TaskModalComponent);
-
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      // console.log(`Dialog result: ${result}`);
     });
   }
 
