@@ -38,6 +38,13 @@ export const reducer = createReducer(
       board: board,
     });
   }),
+
+  on(BoardAction.setCurrentBoard, (state, { currentBoard }) => {
+    return ({
+      ...state,
+      currentBoard: currentBoard,
+    })
+  })
 );
 
 export function boardReducer(state: IBoardsState, action: Action) {

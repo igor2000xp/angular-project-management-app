@@ -4,6 +4,9 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DialogData } from '../board-card/board-card.component';
 import { ToolsMenuComponent } from '../tools-menu/tools-menu.component';
 import { SearchService } from '../../services/search.service';
+import { Store } from '@ngrx/store';
+import { Task } from 'src/app/auth/models/Task.model';
+import  * as TaskSelect from '../../../redux/selectors/task.selectors';
 
 @Component({
   selector: 'app-search-modal',
@@ -17,13 +20,20 @@ export class SearchModalComponent implements OnInit {
 
   name: string;
 
+  allTasks: Task[];
+
   constructor(
+    private store: Store,
     public dialogRef: MatDialogRef<ToolsMenuComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private searchService: SearchService,
   ) { }
 
   searchHandler() {
+    console.log('search');
+
+
+
 
   }
 
@@ -33,6 +43,12 @@ export class SearchModalComponent implements OnInit {
       returnString: new FormControl('', [Validators.required]),
     });
     this.data.returnString = this.data.name;
+
+    this.store.select(TaskSelect.selectTasks).subscribe((tasks) => {
+      console.log(tasks);
+      return this.allTasks = tasks;
+    });
+
   }
 
   noUpdateClick(): void {

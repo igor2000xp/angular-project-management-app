@@ -8,10 +8,10 @@ export const createBoard = createAction(
   `${actionsSource} CREATE BOARD`,
   props<{ info: InfoForBoard }>(),
 );
-// export const createBoardSuccess = createAction(
-//   `${actionsSource} CREATE BOARD, SUCCESS`,
-//   props<{ board: Board }>(),
-// );
+export const setCurrentBoard = createAction(
+  `${actionsSource} CURRENT BOARD, SUCCESS`,
+  props<{ currentBoard: Board }>(),
+);
 
 export const getAllBoards = createAction(
   `${actionsSource} GET ALL BOARDS`,

@@ -5,6 +5,11 @@ import { Store } from '@ngrx/store';
 import { Column } from 'src/app/auth/models/Column.model';
 import { selectColumns } from 'src/app/redux/selectors/column.selector';
 import * as ColumnAction from '../../../redux/actions/column.actions';
+import * as BoardAction from '../../../redux/actions/board.actions';
+import { Task } from 'src/app/auth/models/Task.model';
+import * as TaskAction from '../../../redux/actions/task.actions';
+import { from, map, Observable, switchMap } from 'rxjs';
+import { ApiService } from '../../../auth/services/api.service';
 
 @Component({
   selector: 'app-main-page',
@@ -17,7 +22,28 @@ export class MainPageComponent implements OnInit {
 
   boardId: string;
 
-  constructor(private route: ActivatedRoute, private store: Store) {
+  allTasks:Task[] = [];
+
+  token:string;
+
+
+  constructor(
+    private route: ActivatedRoute,
+    private store: Store,
+    private apiService: ApiService,
+  ) {
+  }
+
+  getTasksList(column:Array<Column>):void {
+    // console.log(column);
+    from(column).pipe(
+      map((it) => {
+        return this.apiService.getTasks(this.token, this.boardId, it.id).subscribe((it) => {
+          this.allTasks = this.allTasks.concat(it);
+          console.log(this.allTasks);
+        });
+      })
+    ).subscribe((item) => item);
   }
 
   ngOnInit(): void {
@@ -26,16 +52,22 @@ export class MainPageComponent implements OnInit {
         params: { id },
       },
     } = this.route;
+    this.token = JSON.parse(localStorage.getItem('currentUser')).token;
+    console.log(JSON.parse(localStorage.getItem('currentUser')).token);
     this.boardId = id;
     this.store.dispatch(ColumnAction.getColumns({ info: { boardID: id } }));
+    this.store.dispatch(BoardAction.getAllBoards());
     this.store.select(selectColumns).subscribe((el) => {
+
       this.columns = JSON.parse(JSON.stringify(el))?.sort(
         (a: { order: number }, b: { order: number }) => a.order - b.order,
       );
+      // console.log(el);
+      if (typeof el !== 'undefined' && el !== null) this.getTasksList(el);
     });
   }
 
-  
+
   drop(event: CdkDragDrop<any[]>) {
     moveItemInArray(this.columns, event.previousIndex, event.currentIndex);
     const {
