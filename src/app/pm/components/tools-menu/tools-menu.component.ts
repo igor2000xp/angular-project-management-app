@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { ColumnModalComponent } from '../column-modal/column-modal.component';
 import { TaskModalComponent } from '../task-modal/task-create-modal.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -28,6 +29,8 @@ export class ToolsMenuComponent implements OnInit {
 
   // name: string = 'Search';
 
+
+  constructor(public dialog: MatDialog, private router: Router) {}
   public adminForm = new FormGroup({
     searchString: new FormControl('', [
       Validators.minLength(3),
@@ -43,8 +46,6 @@ export class ToolsMenuComponent implements OnInit {
       maxLength: 'The search string is too long',
     },
   };
-
-  constructor(public dialog: MatDialog) {};
 
   handlerSubmit():void {
     // console.log(this.adminForm.value.searchString);
@@ -72,6 +73,10 @@ export class ToolsMenuComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       // console.log(`Dialog result: ${result}`);
     });
+  }
+
+  switchPage() {
+    this.router.navigateByUrl('board');
   }
 
   ngOnInit(): void {

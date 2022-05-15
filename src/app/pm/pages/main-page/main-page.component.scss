@@ -5,9 +5,10 @@
 
 .colum-card-wrapper {
   display: flex;
-  height: 76.5vh;
+  // height: 76.5vh;
   flex-direction: row;
   overflow-y: hidden;
+  height: calc(100% - 109px);
 }
 
 ::-webkit-scrollbar {

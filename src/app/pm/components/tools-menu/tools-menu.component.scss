@@ -125,3 +125,42 @@
       }
     }
   }
+
+.back-btn {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  margin-right: 25px;
+  margin-left: 15px;
+  width: 160px;
+  height: 24px;
+  background-color: #a10016;
+  border: none;
+  outline: none;
+  text-transform: uppercase;
+  border-radius: 3px;
+  box-shadow: 2px 0px 4px #5d000c;
+  font-size: 12px;
+  color: #ffffff;
+  cursor: pointer;
+  &:hover {
+    background-color: #5d000c;
+  }
+}
+
+@media (max-width: 400px) {
+
+  .admin-btn {
+    width: 90px;
+    font-size: 9px;
+  }
+
+  .back-btn {
+    width: 90px;
+    font-size: 9px;
+  }
+  .tools {
+    &-menu {
+      display: flex;
+    }
+  }
+}

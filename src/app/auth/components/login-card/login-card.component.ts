@@ -59,7 +59,7 @@ export class LoginCardComponent implements OnInit {
         console.log(el.password.length);
         if (this.error === '') {
           this._snackBar.ngOnDestroy();
-          this.router.navigateByUrl('main');
+          this.router.navigateByUrl('board');
         } else {
           return;
         }
