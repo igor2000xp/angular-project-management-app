@@ -8,7 +8,7 @@ import * as ColumnAction from '../../../redux/actions/column.actions';
 import * as BoardAction from '../../../redux/actions/board.actions';
 import { Task } from 'src/app/auth/models/Task.model';
 import * as TaskAction from '../../../redux/actions/task.actions';
-import { from, map, Observable, switchMap } from 'rxjs';
+import { from, map, mergeMap, Observable, switchMap } from 'rxjs';
 import { ApiService } from '../../../auth/services/api.service';
 
 @Component({
@@ -26,7 +26,6 @@ export class MainPageComponent implements OnInit {
 
   token:string;
 
-
   constructor(
     private route: ActivatedRoute,
     private store: Store,
@@ -41,9 +40,10 @@ export class MainPageComponent implements OnInit {
         return this.apiService.getTasks(this.token, this.boardId, it.id).subscribe((it) => {
           this.allTasks = this.allTasks.concat(it);
           console.log(this.allTasks);
+          // this.store.dispatch(TaskAction.)
         });
       })
-    ).subscribe((item) => item);
+    ).subscribe((item) => item.closed);
   }
 
   ngOnInit(): void {
@@ -53,12 +53,11 @@ export class MainPageComponent implements OnInit {
       },
     } = this.route;
     this.token = JSON.parse(localStorage.getItem('currentUser')).token;
-    console.log(JSON.parse(localStorage.getItem('currentUser')).token);
+    // console.log(JSON.parse(localStorage.getItem('currentUser')).token);
     this.boardId = id;
     this.store.dispatch(ColumnAction.getColumns({ info: { boardID: id } }));
     this.store.dispatch(BoardAction.getAllBoards());
     this.store.select(selectColumns).subscribe((el) => {
-
       this.columns = JSON.parse(JSON.stringify(el))?.sort(
         (a: { order: number }, b: { order: number }) => a.order - b.order,
       );
@@ -66,7 +65,6 @@ export class MainPageComponent implements OnInit {
       if (typeof el !== 'undefined' && el !== null) this.getTasksList(el);
     });
   }
-
 
   drop(event: CdkDragDrop<any[]>) {
     moveItemInArray(this.columns, event.previousIndex, event.currentIndex);
@@ -99,5 +97,4 @@ export class MainPageComponent implements OnInit {
       );
     });
   }
-
 }

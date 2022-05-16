@@ -118,4 +118,14 @@ export class TaskEffects {
       );
     },
   );
+
+  // setTasksFromArray$ = createEffect(
+  //   () => {
+  //     this.actions$.pipe(
+  //       ofType(TaskActions.setTasksFromArray),
+  //       pluck('tasks'),
+  //       map((tasks) => TaskActions.getTasksActionSuccess({ tasks }))
+  //     );
+  //   }
+  // );
 }

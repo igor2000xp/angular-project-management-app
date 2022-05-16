@@ -30,7 +30,11 @@ export class SearchModalComponent implements OnInit {
   ) { }
 
   searchHandler() {
-    console.log('search');
+    this.returnString = this.data.returnString;
+    console.log(this.returnString);
+    const filteredTasks = [...this.allTasks];
+    // filteredTasks.filter((el) => el.title === cons(this.returnString));
+    console.log(filteredTasks);
 
 
 
