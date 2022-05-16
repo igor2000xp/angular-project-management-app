@@ -8,7 +8,7 @@ import * as ColumnAction from '../../../redux/actions/column.actions';
 import * as BoardAction from '../../../redux/actions/board.actions';
 import { Task } from 'src/app/auth/models/Task.model';
 import * as TaskAction from '../../../redux/actions/task.actions';
-import { from, map, mergeMap, Observable, switchMap } from 'rxjs';
+import { from, map } from 'rxjs';
 import { ApiService } from '../../../auth/services/api.service';
 
 @Component({
@@ -34,13 +34,12 @@ export class MainPageComponent implements OnInit {
   }
 
   getTasksList(column:Array<Column>):void {
-    // console.log(column);
     from(column).pipe(
       map((it) => {
         return this.apiService.getTasks(this.token, this.boardId, it.id).subscribe((it) => {
           this.allTasks = this.allTasks.concat(it);
-          console.log(this.allTasks);
-          // this.store.dispatch(TaskAction.)
+          const allTasks = [...this.allTasks];
+          this.store.dispatch(TaskAction.setTasksFromArray({ allTasks }))
         });
       })
     ).subscribe((item) => item.closed);
@@ -52,8 +51,8 @@ export class MainPageComponent implements OnInit {
         params: { id },
       },
     } = this.route;
+    this.allTasks = [];
     this.token = JSON.parse(localStorage.getItem('currentUser')).token;
-    // console.log(JSON.parse(localStorage.getItem('currentUser')).token);
     this.boardId = id;
     this.store.dispatch(ColumnAction.getColumns({ info: { boardID: id } }));
     this.store.dispatch(BoardAction.getAllBoards());
@@ -61,7 +60,6 @@ export class MainPageComponent implements OnInit {
       this.columns = JSON.parse(JSON.stringify(el))?.sort(
         (a: { order: number }, b: { order: number }) => a.order - b.order,
       );
-      // console.log(el);
       if (typeof el !== 'undefined' && el !== null) this.getTasksList(el);
     });
   }

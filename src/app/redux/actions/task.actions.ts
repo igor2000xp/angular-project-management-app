@@ -23,7 +23,11 @@ export const createTaskActionSuccess = createAction(
 );
 export const setTasksFromArray = createAction(
   `${actionSource} SET TASKS FROM ARRAY`,
-  props<{ tasks:Task[] }>(),
+  props<{ allTasks:Task[] }>(),
+);
+export const setTasksFromArraySuccess = createAction(
+  `${actionSource} SET TASKS FROM ARRAY, SUCCESS`,
+  props<{ allTasks:Task[] }>(),
 );
 export const updateTaskAction = createAction(
   `${actionSource} UPDATE THE TASK`,

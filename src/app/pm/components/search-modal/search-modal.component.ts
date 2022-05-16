@@ -36,9 +36,6 @@ export class SearchModalComponent implements OnInit {
     // filteredTasks.filter((el) => el.title === cons(this.returnString));
     console.log(filteredTasks);
 
-
-
-
   }
 
 
@@ -52,12 +49,9 @@ export class SearchModalComponent implements OnInit {
       console.log(tasks);
       return this.allTasks = tasks;
     });
-
   }
 
   noUpdateClick(): void {
     this.dialogRef.close('Do nothing');
   }
-
-
 }

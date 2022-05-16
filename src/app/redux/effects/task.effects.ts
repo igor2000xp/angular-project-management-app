@@ -54,9 +54,9 @@ export class TaskEffects {
       return this.actions$.pipe(
         ofType(TaskActions.getTasksAction),
         mergeMap((info) => {
-          this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-          return this.apiService.getTasks(this.currentUser.token, info.boardID, info.columnID);
-        },
+            this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            return this.apiService.getTasks(this.currentUser.token, info.boardID, info.columnID);
+          },
         ),
         map((tasks) => TaskActions.getTasksActionSuccess({ tasks })),
       );
@@ -69,10 +69,10 @@ export class TaskEffects {
         ofType(TaskActions.deleteTaskAction),
         pluck('info'),
         mergeMap((info) => {
-          this.info = info;
-          this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-          return this.apiService.deleteTask(this.currentUser.token, this.info.boardID, this.info.columnID, this.info.taskID);
-        },
+            this.info = info;
+            this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            return this.apiService.deleteTask(this.currentUser.token, this.info.boardID, this.info.columnID, this.info.taskID);
+          },
         ),
         mergeMap(() => this.apiService.getTasks(this.currentUser.token, this.info.boardID, this.info.columnID)),
         map((tasks) => {
@@ -92,10 +92,10 @@ export class TaskEffects {
         ofType(TaskActions.getTasksByIdAction),
         pluck('info'),
         mergeMap((info) => {
-          this.info = info;
-          this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-          return this.apiService.getTaskById(this.currentUser.token, this.info.boardID, this.info.columnID, this.info.taskID);
-        },
+            this.info = info;
+            this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            return this.apiService.getTaskById(this.currentUser.token, this.info.boardID, this.info.columnID, this.info.taskID);
+          },
         ),
         map((task) => TaskActions.getTasksByIdActionSuccess({ task })),
       );
@@ -108,10 +108,10 @@ export class TaskEffects {
         ofType(TaskActions.updateTaskAction),
         pluck('info'),
         mergeMap((info) => {
-          this.info = info;
-          this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-          return this.apiService.updateTask(this.currentUser.token, this.info.boardID, this.info.columnID, this.info.taskID, this.info.task);
-        },
+            this.info = info;
+            this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            return this.apiService.updateTask(this.currentUser.token, this.info.boardID, this.info.columnID, this.info.taskID, this.info.task);
+          },
         ),
         mergeMap(() => this.apiService.getTasks(this.currentUser.token, this.info.boardID, this.info.columnID)),
         map((tasks) => TaskActions.getTasksActionSuccess({ tasks })),
@@ -119,13 +119,11 @@ export class TaskEffects {
     },
   );
 
-  // setTasksFromArray$ = createEffect(
-  //   () => {
-  //     this.actions$.pipe(
-  //       ofType(TaskActions.setTasksFromArray),
-  //       pluck('tasks'),
-  //       map((tasks) => TaskActions.getTasksActionSuccess({ tasks }))
-  //     );
-  //   }
-  // );
+  setTasksFromArray$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(TaskActions.setTasksFromArray),
+        map((x) => x.allTasks),
+        map((allTasks) => TaskActions.setTasksFromArraySuccess({ allTasks })));
+    });
 }

@@ -5,11 +5,13 @@ import * as TaskActions from '../actions/task.actions';
 
 export interface ITasksState {
   tasks: Task[] | null;
+  allTasks?: Task[];
   currentTask: Task | null;
   isTaskFetched: boolean;
 }
 export const initialTaskState:ITasksState = {
   tasks: null,
+  allTasks: null,
   currentTask: null,
   isTaskFetched: false,
 };
@@ -26,9 +28,12 @@ const tReducer = createReducer(
     currentTask: task,
     isTaskFetched: false,
   })),
+  on(TaskActions.setTasksFromArraySuccess, (state, { allTasks }) => ({
+    ...state,
+    allTasks: allTasks,
+  })),
 );
 
 export function taskReducer(state: ITasksState, action: Action) {
   return tReducer(state, action);
 }
-
