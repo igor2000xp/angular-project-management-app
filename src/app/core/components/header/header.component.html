@@ -1,5 +1,5 @@
 <div class="header">
-  <div class="logo">Project management</div>
+  <div class="logo" (click)="switchPage('welcome')">Project management</div>
   <div *ngIf="!userLogin;else succes">
     <button class="admin-btn"
     (click)="switchAuthPage('authorization')"
