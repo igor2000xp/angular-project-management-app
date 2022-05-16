@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from '../../auth/services/api.service';
+import { Subject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SearchService {
 
-  constructor(
-    private apiService: ApiService,
-  ) { }
+  constructor() { }
+
+  searchValue: Subject<string> = new Subject();
 }

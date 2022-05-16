@@ -27,6 +27,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { SearchModalComponent } from './components/search-modal/search-modal.component';
+import { FilterResultByWord } from '../pipes/filter-result-by-words';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { SearchModalComponent } from './components/search-modal/search-modal.com
     DeleteColumModalComponent,
     BoardCardModalUpdateComponent,
     SearchModalComponent,
+    FilterResultByWord,
   ],
   imports: [
     CommonModule,

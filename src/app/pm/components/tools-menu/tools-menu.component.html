@@ -9,8 +9,8 @@
 <!--          (ngSubmit)="handlerSubmit()"-->
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label class="mat-label-tag">Search field</mat-label>
-            <input matInput type="search" placeholder="search, please" formControlName="searchString" (input)="handlerSubmit()">
-            <mat-icon matSuffix>search</mat-icon>
+            <input matInput type="search" placeholder="enter a task title" formControlName="searchString" #search>
+            <mat-icon matSuffix (click)="searchValue(search.value)">search</mat-icon>
 <!--            class="material-icons md-18"-->
 
             <mat-error

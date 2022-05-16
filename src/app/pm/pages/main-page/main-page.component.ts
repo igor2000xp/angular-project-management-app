@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -7,8 +8,8 @@ import { selectColumns } from 'src/app/redux/selectors/column.selector';
 import * as ColumnAction from '../../../redux/actions/column.actions';
 import * as BoardAction from '../../../redux/actions/board.actions';
 import { Task } from 'src/app/auth/models/Task.model';
-import * as TaskAction from '../../../redux/actions/task.actions';
-import { from, map, mergeMap, Observable, switchMap } from 'rxjs';
+// import * as TaskAction from '../../../redux/actions/task.actions';
+import { from, map } from 'rxjs';
 import { ApiService } from '../../../auth/services/api.service';
 
 @Component({
@@ -22,9 +23,9 @@ export class MainPageComponent implements OnInit {
 
   boardId: string;
 
-  allTasks:Task[] = [];
+  allTasks: Task[] = [];
 
-  token:string;
+  token: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,7 +34,7 @@ export class MainPageComponent implements OnInit {
   ) {
   }
 
-  getTasksList(column:Array<Column>):void {
+  getTasksList(column: Array<Column>): void {
     // console.log(column);
     from(column).pipe(
       map((it) => {
@@ -42,7 +43,7 @@ export class MainPageComponent implements OnInit {
           console.log(this.allTasks);
           // this.store.dispatch(TaskAction.)
         });
-      })
+      }),
     ).subscribe((item) => item.closed);
   }
 

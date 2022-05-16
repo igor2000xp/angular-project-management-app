@@ -13,6 +13,7 @@ import { Task } from 'src/app/auth/models/Task.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TaskModalComponent } from '../task-modal/task-create-modal.component';
 import { ValidatorsService } from 'src/app/shared/services/validator.service';
+import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'app-column-card',
@@ -36,13 +37,18 @@ export class ColumnCardComponent implements OnInit {
 
   columnForm: FormGroup;
 
-  constructor(public dialog: MatDialog, private store: Store, private deleteArr: ValidatorsService) { }
+  searchMode: string;
+
+  searchValue: string;
+
+  constructor(public dialog: MatDialog, private store: Store, private deleteArr: ValidatorsService, private searchService: SearchService ) { }
 
   editMode = true;
 
   deletedArr: any;
 
   ngOnInit(): void {
+    this.searchService.searchValue.subscribe(el => this.searchValue = el);
     this.columnTitle = this.column.title;
     this.columnId = this.column.id;
     this.store.dispatch(TaskAction.getTasksAction({
@@ -66,6 +72,7 @@ export class ColumnCardComponent implements OnInit {
     this.columnForm = new FormGroup({
       title: new FormControl('', [Validators.required]),
     });
+
   }
 
   openDialog() {

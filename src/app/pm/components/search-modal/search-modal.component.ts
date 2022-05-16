@@ -11,7 +11,7 @@ import  * as TaskSelect from '../../../redux/selectors/task.selectors';
 @Component({
   selector: 'app-search-modal',
   templateUrl: './search-modal.component.html',
-  styleUrls: ['./search-modal.component.scss']
+  styleUrls: ['./search-modal.component.scss'],
 })
 export class SearchModalComponent implements OnInit {
   boardForm: FormGroup;
