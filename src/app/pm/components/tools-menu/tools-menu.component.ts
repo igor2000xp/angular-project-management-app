@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -32,10 +33,22 @@ export interface DialogData {
 export class ToolsMenuComponent implements OnInit {
   returnString: string;
 
+  searchTitle: string;
+
   // name: string = 'Search';
 
 
   constructor(public dialog: MatDialog, private router: Router, private searchService: SearchService, private store: Store) { }
+
+  ngOnInit(): void {
+    this.searchService.searchValue.subscribe(el => {
+      this.searchTitle = el;
+      console.log(this.searchTitle);
+    });
+    this.searchTitle ? this.searchTitle = 'title' : null;
+    console.log(this.searchTitle);
+  }
+
 
   public adminForm = new FormGroup({
     searchString: new FormControl('', [
@@ -53,22 +66,12 @@ export class ToolsMenuComponent implements OnInit {
     },
   };
 
-  // handlerSubmit():void {
-  //   // console.log(this.adminForm.value.searchString);
-  //   const dialogRef = this.dialog.open(SearchModalComponent, {
-  //     width: '500px',
-  //     data: { name: this.adminForm.value.searchString, returnString: this.returnString },
-  //   });
-
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     // console.log('The dialog was closed');
-  //     // console.log(result);
-  //     this.returnString = result;
-  //   });
-  // }
-
   searchValue(value: any) {
     this.searchService.searchValue.next(value);
+  }
+
+  searchOption(option: string) {
+    this.searchService.searchMode.next(option);
   }
 
   openColumn() {
@@ -89,7 +92,5 @@ export class ToolsMenuComponent implements OnInit {
     this.router.navigateByUrl('board');
   }
 
-  ngOnInit(): void {
-  }
 
 }

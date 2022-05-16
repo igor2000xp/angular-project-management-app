@@ -8,6 +8,8 @@ export class FilterResultByWord implements PipeTransform {
     if (!(list && list.length)) return [];
     if (!word) return list;
     if (mode === 'title') return list.filter((el) => el.title.includes(word));
+    if (mode === 'id') return list.filter((el) => el.id === word);
+    if (mode === 'description') return list.filter((el) => el.description === word);
 
   }
 }

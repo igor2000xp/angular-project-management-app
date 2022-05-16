@@ -47,7 +47,7 @@
           //margin-top: 1%;
           font-weight: 500;
           color: red;
-          font-size: 1.7vh;
+          font-size: 16px;
         }
         //.mat-form-field-infix {
         //  position: absolute;
@@ -163,4 +163,12 @@
       display: flex;
     }
   }
+}
+.searchMode{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.search_option{
+  cursor: pointer;
 }

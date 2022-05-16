@@ -49,6 +49,7 @@ export class ColumnCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.searchService.searchValue.subscribe(el => this.searchValue = el);
+    this.searchService.searchMode.subscribe(el => this.searchMode = el);
     this.columnTitle = this.column.title;
     this.columnId = this.column.id;
     this.store.dispatch(TaskAction.getTasksAction({

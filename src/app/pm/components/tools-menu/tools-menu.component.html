@@ -1,28 +1,40 @@
-<style>.mat-form-field-label{display:inline-block;top:-15px;text-align:left}</style>
+<style>
+  .mat-form-field-label {
+    display: inline-block;
+    top: -15px;
+    text-align: left
+  }
+</style>
 <div class="tools">
-    <div class="tools-menu">
-      <button class="back-btn" (click)="switchPage()">back on Board Page</button>
-      <button (click)="openColumn()" class="admin-btn">Create Column</button>
+  <div class="tools-menu">
+    <button class="back-btn" (click)="switchPage()">back on Board Page</button>
+    <button (click)="openColumn()" class="admin-btn">Create Column</button>
 
-      <div class="search-input">
-        <form class="example-form" [formGroup]="adminForm">
-<!--          (ngSubmit)="handlerSubmit()"-->
-          <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label class="mat-label-tag">Search field</mat-label>
-            <input matInput type="search" placeholder="enter a task title" formControlName="searchString" #search>
-            <mat-icon matSuffix (click)="searchValue(search.value)">search</mat-icon>
-<!--            class="material-icons md-18"-->
+    <div class="search-input">
+      <form class="example-form" [formGroup]="adminForm">
+        <!--          (ngSubmit)="handlerSubmit()"-->
+        <mat-form-field class="example-full-width" appearance="fill">
 
-            <mat-error
-              class="login-validate"
-              *ngIf="adminForm!.get('searchString')?.invalid">
-              <span *ngIf="adminForm!.get('searchString')?.hasError('required')"> {{validatorMessages.searchString.required}} <br></span>
-              <span *ngIf="adminForm!.get('searchString')?.hasError('minlength')"> {{validatorMessages.searchString.minLength}} <br></span>
-              <span *ngIf="adminForm!.get('searchString')?.hasError('maxlength')"> {{validatorMessages.searchString.maxLength}} <br></span>
-            </mat-error>
-          </mat-form-field>
-        </form>
-      </div>
+          <input matInput type="search" placeholder="enter a search value" formControlName="searchString" #search>
+          <mat-icon matSuffix (click)="searchValue(search.value)">search</mat-icon>
+          <!--            class="material-icons md-18"-->
+<!--
+          <mat-error class="login-validate" *ngIf="adminForm!.get('searchString')?.invalid">
+            <span *ngIf="adminForm!.get('searchString')?.hasError('required')">
+              {{validatorMessages.searchString.required}} <br></span>
+            <span *ngIf="adminForm!.get('searchString')?.hasError('minlength')">
+              {{validatorMessages.searchString.minLength}} <br></span>
+            <span *ngIf="adminForm!.get('searchString')?.hasError('maxlength')">
+              {{validatorMessages.searchString.maxLength}} <br></span>
+          </mat-error> -->
+        </mat-form-field>
+        <div class="searchMode">
+          <div class="search_option" (click)="searchOption('title')">title</div>
+          <div class="search_option" (click)="searchOption('id')">id</div>
+          <div class="search_option" (click)="searchOption('description')">description</div>
+        </div>
+      </form>
     </div>
+  </div>
 
 </div>
