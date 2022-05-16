@@ -22,6 +22,8 @@ export class SearchModalComponent implements OnInit {
 
   allTasks: Task[];
 
+  filteredTask: Task[] = null;
+
   constructor(
     private store: Store,
     public dialogRef: MatDialogRef<ToolsMenuComponent>,
@@ -32,12 +34,9 @@ export class SearchModalComponent implements OnInit {
   searchHandler() {
     this.returnString = this.data.returnString;
     console.log(this.returnString);
-    const filteredTasks = [...this.allTasks];
-    // filteredTasks.filter((el) => el.title === cons(this.returnString));
-    console.log(filteredTasks);
-
+    this.filteredTask = this.allTasks.filter((el) => el.title.includes(this.returnString));
+    console.log(this.filteredTask);
   }
-
 
   ngOnInit(): void {
     this.boardForm = new FormGroup({
@@ -45,9 +44,9 @@ export class SearchModalComponent implements OnInit {
     });
     this.data.returnString = this.data.name;
 
-    this.store.select(TaskSelect.selectTasks).subscribe((tasks) => {
+    this.store.select(TaskSelect.selectAllTasks).subscribe((tasks) => {
       console.log(tasks);
-      return this.allTasks = tasks;
+      return this.allTasks = [...tasks];
     });
   }
 

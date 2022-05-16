@@ -6,6 +6,12 @@
     <input class="board-edit-title" matInput [(ngModel)]="data.returnString" (input)="searchHandler()">
   </mat-form-field>
 </div>
+<div *ngFor="let item of filteredTask" class="search-list">
+  <h3>Task #{{item.order}} Title: {{item.title}}</h3>
+  <p>Description:  "{{item.description}}"</p>
+<!--  {{item.title}}-->
+<!--  {{(filteredTask[1].title) !== null? filteredTask[1].title : ' '}}-->
+</div>
 <div mat-dialog-actions>
   <button mat-button (click)="noUpdateClick()">No Thanks</button>
   <button mat-button [mat-dialog-close]="data.returnString">Ok</button>
