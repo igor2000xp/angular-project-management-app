@@ -19,6 +19,7 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./auth/lazy-modules/login/login.module').then((m) => m.LoginModule),
+    canActivate: [UserLogOutClass],
   },
   {
     path: 'board', component: BoardPageComponent,
