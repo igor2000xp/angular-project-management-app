@@ -16,7 +16,7 @@
       flex-direction: row;
       justify-content: space-between;
       .admin-btn {
-        margin: 30px 25px 1px 15px;
+        margin: 45px 25px 1px 15px;
         width: 120px;
         height: 24px;
         background-color: #412846;
@@ -127,7 +127,7 @@
   }
 
 .back-btn {
-  margin-top: 30px;
+  margin-top: 45px;
   margin-bottom: 10px;
   margin-right: 25px;
   margin-left: 15px;
@@ -170,5 +170,11 @@
   justify-content: space-around;
 }
 .search_option{
+  cursor: pointer;
+}
+.active_btn{
+  color: blue;
+}
+.search_icon{
   cursor: pointer;
 }

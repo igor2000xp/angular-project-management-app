@@ -41,14 +41,18 @@ export class ToolsMenuComponent implements OnInit {
   constructor(public dialog: MatDialog, private router: Router, private searchService: SearchService, private store: Store) { }
 
   ngOnInit(): void {
-    this.searchService.searchValue.subscribe(el => {
+    this.searchService.searchMode.subscribe(el => {
       this.searchTitle = el;
-      console.log(this.searchTitle);
     });
-    this.searchTitle ? this.searchTitle = 'title' : null;
+    if (this.searchTitle === undefined) this.searchTitle = 'title';
     console.log(this.searchTitle);
   }
 
+  checkBtn(value: any) {
+    if (this.searchTitle === value) return true;
+    else { return false; }
+
+  }
 
   public adminForm = new FormGroup({
     searchString: new FormControl('', [
