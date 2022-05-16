@@ -1,11 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UserLogInClass } from './guards/user-login.guard';
+import { UserLogOutClass } from './guards/user-logout.guard';
 import { BoardPageComponent } from './pm/pages/board-page/board-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
-  { path: 'welcome', loadChildren: () => import('./main/main.module').then((m) => m.MainModule) },
+  {
+    path: 'welcome', loadChildren: () => import('./main/main.module').then((m) => m.MainModule),
+    canActivate: [UserLogOutClass],
+  },
   // {
   //   path: 'home',
   //   loadChildren: () => import('./pm/pm.module').then((m) => m.PmModule),
@@ -22,7 +26,7 @@ const routes: Routes = [
   {
     path: 'board/:id',
     loadChildren: () => import('./pm/pm.module').then((m) => m.PmModule),
-    canActivate:[UserLogInClass],
+    canActivate: [UserLogInClass],
   },
 
 ];
