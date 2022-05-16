@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { UserLogInClass } from './guards/user-login.guard';
 import { UserLogOutClass } from './guards/user-logout.guard';
 import { BoardPageComponent } from './pm/pages/board-page/board-page.component';
+import { NotFoundComponent } from './pm/pages/not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
@@ -28,6 +29,7 @@ const routes: Routes = [
     loadChildren: () => import('./pm/pm.module').then((m) => m.PmModule),
     canActivate: [UserLogInClass],
   },
+  { path: '**', component: NotFoundComponent },
 
 ];
 
