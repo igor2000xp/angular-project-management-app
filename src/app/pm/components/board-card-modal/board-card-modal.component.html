@@ -1,17 +1,17 @@
-<h2 mat-dialog-title>Create board</h2>
+<h2 mat-dialog-title>{{ 'BOARD.BOARD_CREATE' | translate }}</h2>
 <form #elseBlock class="login__form" [formGroup]="boardForm">
   <div class="login__input-wrapper">
     <label class="login__input">
-      <span>board name</span>
+      <span>{{ 'BOARD.BOARD_NAME' | translate }}</span>
     </label>
     <input formControlName="title" class="login__input" name="login" type="login" placeholder="Enter board name"/>
     <p class="validate__error" *ngIf="boardForm.get('title').dirty && boardForm.get('title').errors?.required">
-      Please enter a name<br />
+      {{ 'BOARD.BOARD_ERROR' | translate }}<br />
     </p>
   </div>
   <mat-dialog-actions align="end">
-    <button class="login__btn" mat-button mat-dialog-close>Cancel</button>
-    <button class="login__btn" mat-button [mat-dialog-close]="true" (click)="createBoard()" [disabled]="boardForm.invalid">Сonfirm</button>
+    <button class="login__btn" mat-button mat-dialog-close>{{ 'BOARD.BOARD_CANCEL' | translate }}</button>
+    <button class="login__btn" mat-button [mat-dialog-close]="true" (click)="createBoard()" [disabled]="boardForm.invalid">{{ 'BOARD.BOARD_СONFIRM' | translate }}</button>
   </mat-dialog-actions>
 </form>
 

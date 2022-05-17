@@ -1,0 +1,118 @@
+{
+    "HEADER": {
+      "LOGO": "Project management",
+      "TOGGEL": "Language EN",
+      "LOGIN": "log in",
+      "SIGNUP": "sign up",
+      "LOGOUT": "logout"
+    },
+    "HOME": {
+      "TITLE": "Project management",
+      "TITLEP": "Collaborate, manage projects, and reach new productivity peaks. From high rises to the home office, the way your team works is unique—accomplish it all with Project management.",
+      "TITLE_TUTORIAL": "It’s more than work. It’s a way of working together.",
+      "TUTORIAL_P": "Start with a Project managemen board, lists, and cards. Customize andexpand with more features as your teamwork grows. Manage projects, organize tasks, and build team spirit—all in one place.",
+      "TEAM": "OUR TEAM",
+      "ALEKSANDR": "Aleksandr",
+      "DEVELOPER": "Frontend developer",
+      "IGOR": "Igor",
+      "SEMYON": "Semyon"
+    },
+    "AUTH": {
+      "NAME": "Name",
+      "NAME_ERROR": "Please enter a name",
+      "LENGTHERROR": "at least 8 characters",
+      "EMAIL": "E-mail",
+      "EMAIL_ERROR": "Please enter a email",
+      "EMAIL_INVALID": "The email is invalid",
+      "PASSWORD": "Password",
+      "PASSWORD_REQUIRED": "Please enter a password",
+      "PASSWORD_ERROR": "Your password isn't strong enough",
+      "PASSWORD_LENGTHERROR": "at least 8 characters",
+      "PASSWORD_UPPERLOWERERROR": "a mixture of both uppercase and lowercase letters",
+      "PASSWORD_MIXTUREERROR": "a mixture of letters and numbers",
+      "PASSWORD_SPECIALCHARERROR": "inclusion of at least one special character, e.g., ! @ # ? ]",
+      "PASSWORD_NOACCOUNT": "No account yet?",
+      "LOGIN": "Login"
+    },
+    "BOARD": {
+      "DELETE": "Delete",
+      "UPDATE": "Update",
+      "BOARD_NAME": "board name",
+      "BOARD_CREATE": "Create board",
+      "BOARD_ERROR": "Please enter a name",
+      "BOARD_CANCEL": "Cancel",
+      "BOARD_СONFIRM": "Сonfirm",
+      "BOARD_NAMEINPUT": "Enter board name",
+      "BOARD-MENU_CREATE": "create board"
+    },
+    "UPDATEBOARD": {
+      "TITLE": "Update board",
+      "TITLE-NEW": "What's new board title?",
+      "LABEL": "Board Title",
+      "NO": "No Thanks",
+      "OK": "Ok"
+    },
+    "DELETEBOARD": {
+      "WARNING": "Warning",
+      "TITLE": "Are you sure you want to delete ",
+      "NO": "No",
+      "OK": "Yes"
+    },
+    "COLUMNCARD": {
+      "ERROR": "Please enter a title",
+      "DELETE": "Delete",
+      "ADD": "Add Task",
+      "NO": "Cancel",
+      "OK": "Submit"
+    },
+    "COLUMNCARDMODAL": {
+      "CREATE": "Create column",
+      "NAME": "column name",
+      "ERROR": "Please enter a name",
+      "ORDER": "order",
+      "ORDERERROR": "Order is already exists",
+      "NO": "Cancel",
+      "OK": "Сonfirm",
+      "INPUTNAME": "Please enter a name",
+      "INPUTORDER": "Please enter the order"
+    },
+    "COLUMNCARDELETE": {
+      "WARNING": "Warning",
+      "TITLE": "Are you sure you want to delete this colum?",
+      "NO": "No",
+      "OK": "Yes"
+    },
+    "TASKMODAL": {
+      "UPDATETITLE": "Update task",
+      "TITLE": "Task title",
+      "TITLEERROR": "Please enter a title",
+      "DESCRIPTION": "Description",
+      "DESCRIPTIONERROR": "Please enter a description",
+      "DELETE": "Delete",
+      "UPDATE": "Update"
+    },
+    "TASKCREATE": {
+      "TITLE": "Create task",
+      "NAME": "Task name",
+      "TITLEERROR": "Please enter a title",
+      "DESCRIPTION": "Description",
+      "DESCRIPTIONERROR": "Please enter a description",
+      "NO": "Cancel",
+      "OK": "Сonfirm",
+      "INPUTNAME": "Please enter a name",
+      "INPUTORDER": "Please enter a description"
+    },
+    "TOOLSMENU": {
+      "BACK": "Back on Board Page",
+      "CREATE": "Create Column"
+    },
+    "EDITPROFILE": {
+      "PROFILE": "Edit profile",
+      "NAME": "Change name",
+      "LOGIN": "Change login",
+      "PASSWORD": "Change password",
+      "DELETE": "Delete",
+      "BACK": "Back",
+      "OK": "Submit"
+    }
+  }

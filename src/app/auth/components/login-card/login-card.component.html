@@ -4,7 +4,7 @@
       <p class="login-title">{{ formTitle }}</p>
       <div class="login-card__container">
         <div class="login-card__el" *ngIf="checkPage('registration')">
-          <p class="input-name">Name</p>
+          <p class="input-name">{{ 'AUTH.NAME' | translate }}</p>
           <input
             #login
             class="form-control"
@@ -13,15 +13,15 @@
           />
           <div *ngIf="checkError('name')">
             <p class="login-validate" *ngIf="viewError('name', 'required')">
-              Please enter a name
+              {{ 'AUTH.NAME_ERROR' | translate }}
             </p>
             <p class="login-validate" *ngIf="viewError('name', 'lengthError')">
-              at least 8 characters
+              {{ 'AUTH.LENGTHERROR' | translate }}
             </p>
           </div>
         </div>
         <div class="login-card__el">
-          <p class="input-name">E-mail</p>
+          <p class="input-name">{{ 'AUTH.EMAIL' | translate }}</p>
           <input
             #login
             class="form-control"
@@ -30,15 +30,15 @@
           />
           <div *ngIf="checkError('email')">
             <p class="login-validate" *ngIf="viewError('email', 'required')">
-              Please enter a email
+              {{ 'AUTH.EMAIL_ERROR' | translate }}
             </p>
             <p class="login-validate" *ngIf="viewError('email', 'email')">
-              The email is invalid
+              {{ 'AUTH.EMAIL_INVALID' | translate }}
             </p>
           </div>
         </div>
         <div class="login-card__el">
-          <p class="input-name">Password</p>
+          <p class="input-name">{{ 'AUTH.PASSWORD' | translate }}</p>
           <input
             #password
             class="form-control"
@@ -47,7 +47,7 @@
           />
           <div *ngIf="checkError('pass')">
             <div class="login-validate" *ngIf="viewError('pass', 'required')">
-              Please enter a password <br />
+              {{ 'AUTH.PASSWORD_REQUIRED' | translate }} <br />
             </div>
             <div
               class="login-validate"
@@ -58,30 +58,30 @@
                 viewError('pass', 'specialCharError')
               "
             >
-              Your password isn't strong enough<br />
+            {{ 'AUTH.PASSWORD_ERROR' | translate }}<br />
               <p
                 class="login-validate__error"
                 *ngIf="viewError('pass', 'lengthError')"
               >
-                at least 8 characters <br />
+              {{ 'AUTH.PASSWORD_LENGTHERROR' | translate }} <br />
               </p>
               <p
                 class="login-validate__error"
                 *ngIf="viewError('pass', 'upperLowerError')"
               >
-                a mixture of both uppercase and lowercase letters <br />
+              {{ 'AUTH.PASSWORD_UPPERLOWERERROR' | translate }}  <br />
               </p>
               <p
                 class="login-validate__error"
                 *ngIf="viewError('pass', 'mixtureError')"
               >
-                a mixture of letters and numbers <br />
+              {{ 'AUTH.PASSWORD_MIXTUREERROR' | translate }} <br />
               </p>
               <p
                 class="login-validate__error"
                 *ngIf="viewError('pass', 'specialCharError')"
               >
-                inclusion of at least one special character, e.g., ! @ # ? ]
+              {{ 'AUTH.PASSWORD_SPECIALCHARERROR' | translate }}
                 <br />
               </p>
             </div>
@@ -91,11 +91,11 @@
             class="route-reg"
             (click)="goToRegPage()"
           >
-            No account yet?
+          {{ 'AUTH.PASSWORD_NOACCOUNT' | translate }}
           </p>
         </div>
         <button  class="login-card__btn" type="submit" [disabled]="form.invalid">
-          <p class="login-card-btn__text">Login</p>
+          <p class="login-card-btn__text">{{ 'AUTH.LOGIN' | translate }}</p>
         </button>
         <!-- <div *ngIf="error">{{ error }}</div> -->
       </div>
