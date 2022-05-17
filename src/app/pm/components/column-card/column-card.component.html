@@ -12,13 +12,15 @@
         <form [formGroup]="columnForm">
           <div>
             <input class="input-title" placeholder={{columnTitle}} formControlName="title">
-            <p class="validate__error" *ngIf="columnForm.get('title').dirty && columnForm.get('title').errors?.required">
+            <p class="validate__error"
+              *ngIf="columnForm.get('title').dirty && columnForm.get('title').errors?.required">
               Please enter a title<br />
             </p>
           </div>
           <div class="btn-container">
-            <button  (click)="updateColumn()" [disabled]="columnForm.invalid" type="button" class="submit">Submit</button>
-            <button class="input-btn"  (click)="switchMode()" type="button">Cancel</button>
+            <button (click)="updateColumn()" [disabled]="columnForm.invalid" type="button"
+              class="submit">Submit</button>
+            <button class="input-btn" (click)="switchMode()" type="button">Cancel</button>
           </div>
         </form>
       </ng-template>
@@ -28,10 +30,10 @@
         </button>
       </mat-menu>
     </div>
-    <div  class="list__card-container example-list"          cdkDropList
-    [cdkDropListData]="tasks"
-    (cdkDropListDropped)="dropToo($event)">
-      <app-task-card class="example-box" *ngFor="let item of tasks" [task]="item" [column]="column" [userID]="userId" [boardID]="boardID" cdkDrag></app-task-card>
+    <div class="list__card-container example-list" cdkDropList [cdkDropListData]="tasks"
+      (cdkDropListDropped)="dropToo($event)">
+      <app-task-card class="example-box" *ngFor="let item of tasks | filterResultByWord:searchValue:searchMode"
+        [task]="item" [column]="column" [userID]="userId" [boardID]="boardID" cdkDrag></app-task-card>
     </div>
     <p class="createCard" (click)="openCreateTaskModal()">Add Task</p>
   </div>

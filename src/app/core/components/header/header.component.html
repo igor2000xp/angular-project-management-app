@@ -2,14 +2,14 @@
   <div class="logo" (click)="switchPage('welcome')">Project management</div>
   <div *ngIf="!userLogin;else succes">
     <button class="admin-btn"
-    (click)="switchAuthPage('authorization')"
-    [ngClass]="{'admin-btn_active': checkPage('authorization')}">
-    log in
-  </button>
+      (click)="switchAuthPage('authorization')"
+      [ngClass]="{'admin-btn_active': checkPage('authorization')}">
+      log in
+    </button>
     <button class="admin-btn"
-    (click)="switchAuthPage('registration')"
-    [ngClass]="{'admin-btn_active': checkPage('registration')}">
-    sign up
+      (click)="switchAuthPage('registration')"
+      [ngClass]="{'admin-btn_active': checkPage('registration')}">
+      sign up
   </button>
   </div>
   <ng-template #succes>

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -5,6 +6,8 @@ import { Store } from '@ngrx/store';
 import { Column } from 'src/app/auth/models/Column.model';
 import { selectColumns } from 'src/app/redux/selectors/column.selector';
 import * as ColumnAction from '../../../redux/actions/column.actions';
+import * as BoardAction from '../../../redux/actions/board.actions';
+import { Task } from 'src/app/auth/models/Task.model';
 
 @Component({
   selector: 'app-main-page',
@@ -17,7 +20,14 @@ export class MainPageComponent implements OnInit {
 
   boardId: string;
 
-  constructor(private route: ActivatedRoute, private store: Store) {
+  allTasks: Task[] = [];
+
+  token: string;
+
+  constructor(
+    private route: ActivatedRoute,
+    private store: Store,
+  ) {
   }
 
   ngOnInit(): void {
@@ -26,8 +36,10 @@ export class MainPageComponent implements OnInit {
         params: { id },
       },
     } = this.route;
+    this.token = JSON.parse(localStorage.getItem('currentUser')).token;
     this.boardId = id;
     this.store.dispatch(ColumnAction.getColumns({ info: { boardID: id } }));
+    this.store.dispatch(BoardAction.getAllBoards());
     this.store.select(selectColumns).subscribe((el) => {
       this.columns = JSON.parse(JSON.stringify(el))?.sort(
         (a: { order: number }, b: { order: number }) => a.order - b.order,
@@ -35,7 +47,6 @@ export class MainPageComponent implements OnInit {
     });
   }
 
-  
   drop(event: CdkDragDrop<any[]>) {
     moveItemInArray(this.columns, event.previousIndex, event.currentIndex);
     const {
@@ -67,5 +78,4 @@ export class MainPageComponent implements OnInit {
       );
     });
   }
-
 }

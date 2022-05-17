@@ -26,10 +26,10 @@ import { BoardCardModalUpdateComponent } from './components/board-card-modal-upd
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { SearchModalComponent } from './components/search-modal/search-modal.component';
+import { FilterResultByWord } from '../pipes/filter-result-by-words';
+import { MatRadioModule } from '@angular/material/radio';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-
-
-
 
 @NgModule({
   declarations: [
@@ -48,6 +48,8 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     DeleteBoardModalComponent,
     DeleteColumModalComponent,
     BoardCardModalUpdateComponent,
+    SearchModalComponent,
+    FilterResultByWord,
     NotFoundComponent,
   ],
   imports: [
@@ -64,6 +66,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     FormsModule,
     MatInputModule,
     DragDropModule,
+    MatRadioModule,
   ],
 })
 export class PmModule { }

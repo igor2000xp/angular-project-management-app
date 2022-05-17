@@ -7,11 +7,11 @@ const actionSource = '[TASK]';
 
 export const getTasksAction = createAction(
   `${actionSource} GET ALL CURRENT TASKS`,
-  props<{ boardID:string, columnID:string }>(),
+  props<{ boardID: string, columnID: string }>(),
 );
 export const getTasksActionSuccess = createAction(
   `${actionSource} GET ALL CURRENT USER, SUCCESS`,
-  props<{ tasks:Task[] }>(),
+  props<{ tasks: Task[] }>(),
 );
 export const createTaskAction = createAction(
   `${actionSource} CREATE A TASK`,
@@ -19,9 +19,12 @@ export const createTaskAction = createAction(
 );
 export const createTaskActionSuccess = createAction(
   `${actionSource} CREATE A TASK, SUCCESS`,
-  props<{ currentTask:Task }>(),
+  props<{ currentTask: Task }>(),
 );
-
+export const setTasksFromArray = createAction(
+  `${actionSource} SET TASKS FROM ARRAY`,
+  props<{ mode: string, searchValue?: string, id?: string, description?: string }>(),
+);
 export const updateTaskAction = createAction(
   `${actionSource} UPDATE THE TASK`,
   props<{ info: InfoForTask }>(),
@@ -32,7 +35,7 @@ export const deleteTaskAction = createAction(
 );
 export const deleteTaskActionSuccess = createAction(
   `${actionSource} DELETE THE TASK, SUCCESS`,
-  props<{ task:ITask }>(),
+  props<{ task: ITask }>(),
 );
 export const getTasksByIdAction = createAction(
   `${actionSource} GET TASK BY ID`,
@@ -40,5 +43,5 @@ export const getTasksByIdAction = createAction(
 );
 export const getTasksByIdActionSuccess = createAction(
   `${actionSource} GET TASK BY ID SUCCESS`,
-  props<{ task:Task }>(),
+  props<{ task: Task }>(),
 );

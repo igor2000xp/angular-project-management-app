@@ -24,6 +24,8 @@ export class BoardPageComponent implements OnInit {
   ngOnInit(): void {
     this.store.select((selectBoards)).subscribe(el => {
       this.boards = el;
+      // const currentBoard = this.boards[0]
+      // this.store.dispatch(BoardAction.setCurrentBoard({currentBoard}));
     });
   }
 

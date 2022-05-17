@@ -4,9 +4,9 @@
       <h2 *ngIf="true"
       contenteditable="true"
       (click)="switchToBoard()"
-      >{{title}}
+      >{{returnString}}
     </h2>
-      <input *ngIf="false" value={{title}}>
+      <input *ngIf="false" value={{returnString}}>
       <button
         mat-icon-button
         [matMenuTriggerFor]="menu"
