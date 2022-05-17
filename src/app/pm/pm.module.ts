@@ -29,6 +29,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { SearchModalComponent } from './components/search-modal/search-modal.component';
 import { FilterResultByWord } from '../pipes/filter-result-by-words';
 import { MatRadioModule } from '@angular/material/radio';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { MatRadioModule } from '@angular/material/radio';
     BoardCardModalUpdateComponent,
     SearchModalComponent,
     FilterResultByWord,
+    NotFoundComponent,
   ],
   imports: [
     CommonModule,
