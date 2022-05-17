@@ -3,14 +3,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { SearchService } from '../../services/search.service';
 import { ColumnModalComponent } from '../column-modal/column-modal.component';
 import { TaskModalComponent } from '../task-modal/task-create-modal.component';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { SearchModalComponent } from '../search-modal/search-modal.component';
-import { SearchService } from '../../services/search.service';
-import { Store } from '@ngrx/store';
-import { selectTasks } from 'src/app/redux/selectors/task.selectors';
-import * as TaskAction from '../../../redux/actions/task.actions';
 
 export interface IValidatorMessages {
   searchString: {
@@ -22,7 +18,6 @@ export interface IValidatorMessages {
 
 export interface DialogData {
   returnString: string;
-  // name: string;
 }
 
 @Component({
@@ -35,23 +30,21 @@ export class ToolsMenuComponent implements OnInit {
 
   searchTitle: string;
 
-  // name: string = 'Search';
+  toggleSearchingBlock:boolean = false;
 
+  indeterminate = false;
 
-  constructor(public dialog: MatDialog, private router: Router, private searchService: SearchService, private store: Store) { }
+  labelPosition: 'title' | 'id' | 'description' = 'title';
+
+  disabled = false;
+
+  constructor(public dialog: MatDialog, private router: Router, private searchService: SearchService) { }
 
   ngOnInit(): void {
     this.searchService.searchMode.subscribe(el => {
       this.searchTitle = el;
     });
     if (this.searchTitle === undefined) this.searchTitle = 'title';
-    console.log(this.searchTitle);
-  }
-
-  checkBtn(value: any) {
-    if (this.searchTitle === value) return true;
-    else { return false; }
-
   }
 
   public adminForm = new FormGroup({
@@ -74,6 +67,13 @@ export class ToolsMenuComponent implements OnInit {
     this.searchService.searchValue.next(value);
   }
 
+  openOptions() {
+    this.toggleSearchingBlock = true;
+  }
+  closeOptions() {
+    this.toggleSearchingBlock = false;
+  }
+
   searchOption(option: string) {
     this.searchService.searchMode.next(option);
   }
@@ -81,20 +81,16 @@ export class ToolsMenuComponent implements OnInit {
   openColumn() {
     const dialogRef = this.dialog.open(ColumnModalComponent);
     dialogRef.afterClosed().subscribe(result => {
-      // console.log(`Dialog result: ${result}`);
     });
   }
 
   openTask() {
     const dialogRef = this.dialog.open(TaskModalComponent);
     dialogRef.afterClosed().subscribe(result => {
-      // console.log(`Dialog result: ${result}`);
     });
   }
 
   switchPage() {
     this.router.navigateByUrl('board');
   }
-
-
 }

@@ -1,10 +1,3 @@
-<style>
-  .mat-form-field-label {
-    display: inline-block;
-    top: -15px;
-    text-align: left
-  }
-</style>
 <div class="tools">
   <div class="tools-menu">
     <button class="back-btn" (click)="switchPage()">back on Board Page</button>
@@ -12,34 +5,45 @@
 
     <div class="search-input">
       <form class="example-form" [formGroup]="adminForm">
-        <!--          (ngSubmit)="handlerSubmit()"-->
         <mat-form-field class="example-full-width" appearance="fill">
-
-          <input matInput type="search" placeholder="enter a task {{searchTitle}}" formControlName="searchString"
-            #search>
+          <input matInput
+            type="search"
+            placeholder="enter a task {{searchTitle}}"
+            formControlName="searchString"
+            #search
+            (input)="searchValue(search.value)"
+            (focus)="openOptions()"
+          >
           <mat-icon class="search_icon" matSuffix (click)="searchValue(search.value)">search</mat-icon>
-          <!--            class="material-icons md-18"-->
-          <!--
-          <mat-error class="login-validate" *ngIf="adminForm!.get('searchString')?.invalid">
-            <span *ngIf="adminForm!.get('searchString')?.hasError('required')">
-              {{validatorMessages.searchString.required}} <br></span>
-            <span *ngIf="adminForm!.get('searchString')?.hasError('minlength')">
-              {{validatorMessages.searchString.minLength}} <br></span>
-            <span *ngIf="adminForm!.get('searchString')?.hasError('maxlength')">
-              {{validatorMessages.searchString.maxLength}} <br></span>
-          </mat-error> -->
         </mat-form-field>
-        <div class="searchMode">
-          <div class="search_option" [ngClass]="{ 'active_btn': checkBtn('title') }" (click)="searchOption('title')">
-            title
-          </div>
-          <div class="search_option" [ngClass]="{ 'active_btn': checkBtn('id') }" (click)="searchOption('id')">id
-          </div>
-          <div class="search_option" [ngClass]="{ 'active_btn': checkBtn('description') }"
-            (click)="searchOption('description')">description</div>
-        </div>
       </form>
+
+      <div class="searchMode" *ngIf="toggleSearchingBlock">
+        <section class="example-section">
+          <label class="example-margin" style="font-weight: bold">Choose search <br> options:</label>
+          <mat-radio-group [(ngModel)]="labelPosition">
+            <mat-radio-button
+              class="example-margin"
+              value="title"
+              (change)="searchOption('title')"
+            >title</mat-radio-button>
+            <mat-radio-button
+              class="example-margin"
+              value="id"
+              (change)="searchOption('id')"
+            >id</mat-radio-button>
+            <mat-radio-button
+              class="example-margin"
+              value="description"
+              (change)="searchOption('description')"
+            >description</mat-radio-button>
+            <button
+              class="back-btn back-btn-small example-margin"
+              (click)="closeOptions()"
+            >Close section</button>
+          </mat-radio-group>
+        </section>
+      </div>
     </div>
   </div>
-
 </div>

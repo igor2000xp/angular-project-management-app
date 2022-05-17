@@ -28,6 +28,7 @@ import { MatInputModule } from '@angular/material/input';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { SearchModalComponent } from './components/search-modal/search-modal.component';
 import { FilterResultByWord } from '../pipes/filter-result-by-words';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { FilterResultByWord } from '../pipes/filter-result-by-words';
     FormsModule,
     MatInputModule,
     DragDropModule,
+    MatRadioModule,
   ],
 })
 export class PmModule { }
