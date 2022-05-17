@@ -1,25 +1,25 @@
-<h2 mat-dialog-title>Create task</h2>
+<h2 mat-dialog-title>{{ 'TASKCREATE.TITLE' | translate }}</h2>
 <form #elseBlock class="login__form" form [formGroup]="createTaskForm">
     <div class="login__input-wrapper">
       <label class="login__input">
-        <span>Task name</span>
+        <span>{{ 'TASKCREATE.NAME' | translate }}</span>
       </label>
-      <input placeholder="Please enter a name" formControlName="title" class="login__input" name="login" type="login"/>
+      <input placeholder="{{ 'TASKCREATE.INPUTNAME' | translate }}" formControlName="title" class="login__input" name="login" type="login"/>
       <p class="validate__error" *ngIf="createTaskForm.get('title').dirty && createTaskForm.get('title').errors?.required">
-        Please enter a title<br />
+        {{ 'TASKCREATE.TITLEERROR' | translate }}<br />
       </p>
     </div>
     <div class="login__input-wrapper">
       <label class="login__input">
-        <span>description</span>
+        <span>{{ 'TASKCREATE.DESCRIPTION' | translate }}</span>
       </label>
-      <input placeholder="Please enter a description" formControlName="description" class="login__input" name="login" type="login"/>
+      <input placeholder="{{ 'TASKCREATE.INPUTORDER' | translate }}" formControlName="description" class="login__input" name="login" type="login"/>
       <p class="validate__error" *ngIf="createTaskForm.get('description').dirty && createTaskForm.get('description').errors?.required">
-        Please enter a description<br />
+        {{ 'TASKCREATE.DESCRIPTIONERROR' | translate }}<br />
       </p>
     </div>
   </form>
 <mat-dialog-actions align="end">
-  <button class="login__btn" mat-button mat-dialog-close>Cancel</button>
-  <button class="login__btn" mat-button [mat-dialog-close]="true" (click)="createTask()" [disabled]="createTaskForm.invalid">Сonfirm</button>
+  <button class="login__btn" mat-button mat-dialog-close>{{ 'TASKCREATE.NO' | translate }}</button>
+  <button class="login__btn" mat-button [mat-dialog-close]="true" (click)="createTask()" [disabled]="createTaskForm.invalid">{{ 'TASKCREATE.OK' | translate }}</button>
 </mat-dialog-actions>

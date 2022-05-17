@@ -12,6 +12,7 @@ import * as UserAction from '../../../redux/actions/user.actions';
 import { User } from '../../models/user.model';
 import { ApiService } from '../../services/api.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login-card',
@@ -36,6 +37,7 @@ export class LoginCardComponent implements OnInit {
     private validator: ValidatorsService,
     public auth: ApiService,
     private _snackBar: MatSnackBar,
+    public translate: TranslateService,
   ) { }
 
   ngOnInit(): void {
@@ -44,8 +46,13 @@ export class LoginCardComponent implements OnInit {
       this.path === 'registration'
         ? this.createForm('signup')
         : this.createForm('signin');
-    this.formTitle =
-      this.path === 'registration' ? 'Registration' : 'Authorization';
+    if (this.translate.currentLang === 'ru') {
+      this.formTitle =
+          this.path === 'registration' ? 'Регистрация' : 'Авторизация';
+    } else {
+      this.formTitle =
+          this.path === 'registration' ? 'Registration' : 'Authorization';
+    }    
     this.auth.errors$.subscribe((error) => {
       this.error = error;
     });

@@ -1,24 +1,24 @@
-<h2 mat-dialog-title>Create column</h2>
+<h2 mat-dialog-title>{{ 'COLUMNCARDMODAL.CREATE' | translate }}</h2>
 <form #elseBlock class="login__form" [formGroup]="columnForm">
   <div class="login__input-wrapper">
     <label class="login__input">
-      <span>column name</span>
+      <span>{{ 'COLUMNCARDMODAL.NAME' | translate }}</span>
     </label>
-    <input formControlName="title" class="login__input" name="login" type="login" placeholder="Please enter a name"/>
+    <input formControlName="title" class="login__input" name="login" type="login" placeholder="{{ 'COLUMNCARDMODAL.INPUTNAME' | translate }}"/>
     <p class="order-validate__error" *ngIf="columnForm.get('title').dirty && columnForm.get('title').errors?.required">
-      Please enter a name<br />
+      {{ 'COLUMNCARDMODAL.ERROR' | translate }}<br />
     </p>
     <label class="login__input">
-      <span>order</span>
+      <span>{{ 'COLUMNCARDMODAL.ORDER' | translate }}</span>
     </label>
-    <input formControlName="order" class="login__input" name="order" type="order" placeholder="Please enter the order"/>
+    <input formControlName="order" class="login__input" name="order" type="order" placeholder="{{ 'COLUMNCARDMODAL.INPUTORDER' | translate }}"/>
     <p class="order-validate__error" *ngIf="columnForm.get('order').dirty && columnForm.get('order').errors?.orderError">
-      Order is already exists<br />
+      {{ 'COLUMNCARDMODAL.ORDERERROR' | translate }}<br />
     </p>
   </div>
   <mat-dialog-actions align="end">
-    <button class="login__btn" mat-button mat-dialog-close (click)=" cancel()">Cancel</button>
-    <button class="login__btn" mat-button [mat-dialog-close]="true" (click)="createColumn()" [disabled]="columnForm.invalid" >Сonfirm</button>
+    <button class="login__btn" mat-button mat-dialog-close (click)=" cancel()">{{ 'COLUMNCARDMODAL.NO' | translate }}</button>
+    <button class="login__btn" mat-button [mat-dialog-close]="true" (click)="createColumn()" [disabled]="columnForm.invalid" >{{ 'COLUMNCARDMODAL.OK' | translate }}</button>
   </mat-dialog-actions>
 </form>
 
