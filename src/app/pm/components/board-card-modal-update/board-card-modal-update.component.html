@@ -1,12 +1,12 @@
-<h2 mat-dialog-title>Update board</h2>
+<h2 mat-dialog-title>{{ 'UPDATEBOARD.TITLE' | translate }}</h2>
 <div mat-dialog-content>
-  <p>What's new board title?</p>
+  <p>{{ 'UPDATEBOARD.TITLE-NEW' | translate }}</p>
   <mat-form-field appearance="fill">
-    <mat-label>Board Title</mat-label>
+    <mat-label>{{ 'UPDATEBOARD.LABEL' | translate }}</mat-label>
     <input class="board-edit-title" matInput [(ngModel)]="data.title">
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="noUpdateClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.title">Ok</button>
+  <button mat-button (click)="noUpdateClick()">{{ 'UPDATEBOARD.NO' | translate }}</button>
+  <button mat-button [mat-dialog-close]="data.title">{{ 'UPDATEBOARD.OK' | translate }}</button>
 </div>

@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { HeaderComponent } from './core/components/header/header.component';
 import { FooterComponent } from './core/components/footer/footer.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { boardReducer } from './redux/reducers/board.reducer';
 import { taskReducer } from './redux/reducers/task.reducer';
@@ -27,7 +27,13 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { ColumnEffects } from './redux/effects/column.effects';
 import { TaskEffects } from './redux/effects/task.effects';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
+export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,8 +47,16 @@ import { TaskEffects } from './redux/effects/task.effects';
     BrowserModule,
     BrowserAnimationsModule,
     CoreModule,
+    MatSlideToggleModule,
     HttpClientModule,
     MatIconModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
     StoreModule.forRoot(
       {
         tasks: fromTask.taskReducer,
@@ -76,4 +90,8 @@ import { TaskEffects } from './redux/effects/task.effects';
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {
+  constructor(translate: TranslateService) {
+    translate.setDefaultLang('en');
+  }
+}

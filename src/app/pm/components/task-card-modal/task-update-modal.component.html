@@ -1,27 +1,27 @@
 <mat-icon mat-dialog-close class="close">close</mat-icon>
-<h2 mat-dialog-title>Update task</h2>
+<h2 mat-dialog-title>{{ 'TASKMODAL.UPDATETITLE' | translate }}</h2>
 <form #elseBlock class="login__form" form [formGroup]="updateTaskForm">
     <div class="login__input-wrapper">
       <label class="login__input">
-        <span>Task title</span>
+        <span>{{ 'TASKMODAL.TITLE' | translate }}</span>
       </label>
       <input formControlName="title" class="login__input" name="login" type="login"/>
       <p class="validate__error" *ngIf="updateTaskForm.get('title').dirty && updateTaskForm.get('title').errors?.required">
-        Please enter a title<br />
+        {{ 'TASKMODAL.TITLEERROR' | translate }}<br />
       </p>
 
     </div>
     <div class="login__input-wrapper">
       <label class="login__input">
-        <span>Description</span>
+        <span>{{ 'TASKMODAL.DESCRIPTION' | translate }}</span>
       </label>
       <textarea ngDefaultControl formControlName="description" class="description-task-area"></textarea>
       <p class="validate__error" *ngIf="updateTaskForm.get('description').dirty && updateTaskForm.get('description').errors?.required">
-        Please enter a description<br />
+        {{ 'TASKMODAL.DESCRIPTIONERROR' | translate }}<br />
       </p>
     </div>
   </form>
 <mat-dialog-actions align="end">
-  <button class="login__btn delete" mat-button mat-dialog-close (click)=" deleteTask()">Delete</button>
-  <button class="login__btn update" mat-button [mat-dialog-close]="true" [disabled]="updateTaskForm.invalid" (click)=" updateTask()">Update</button>
+  <button class="login__btn delete" mat-button mat-dialog-close (click)=" deleteTask()">{{ 'TASKMODAL.DELETE' | translate }}</button>
+  <button class="login__btn update" mat-button [mat-dialog-close]="true" [disabled]="updateTaskForm.invalid" (click)=" updateTask()">{{ 'TASKMODAL.UPDATE' | translate }}</button>
 </mat-dialog-actions>

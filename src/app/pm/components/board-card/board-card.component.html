@@ -16,10 +16,10 @@
       </button>
       <mat-menu #menu="matMenu">
         <button (click)="openDialogDelete()" mat-menu-item>
-          <span>Delete</span>
+          <span>{{ 'BOARD.DELETE' | translate }}</span>
         </button>
         <button (click)="openDialogUpdate()" mat-menu-item>
-          <span>Update</span>
+          <span>{{ 'BOARD.UPDATE' | translate }}</span>
         </button>
       </mat-menu>
     </div>

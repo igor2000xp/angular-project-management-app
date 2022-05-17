@@ -2,19 +2,19 @@
   <div class="login-card">
     <form [formGroup]="editForm">
 
-      <p class="login-title">Edit profile</p>
+      <p class="login-title">{{ 'EDITPROFILE.PROFILE' | translate }}</p>
       <div class="login-card__container">
         <div class="login-card__el">
-          <p class="input-name">Change name</p>
+          <p class="input-name">{{ 'EDITPROFILE.NAME' | translate }}</p>
           <input #login class="form-control" formControlName="name" />
         </div>
         <div class="login-card__el">
-          <p class="input-name">Change login</p>
+          <p class="input-name">{{ 'EDITPROFILE.LOGIN' | translate }}</p>
           <input #login class="form-control" formControlName="email" />
           <div></div>
         </div>
         <div class="login-card__el">
-          <p class="input-name">Change password</p>
+          <p class="input-name">{{ 'EDITPROFILE.PASSWORD' | translate }}</p>
           <input #password class="form-control" formControlName="pass">
           <div></div>
         </div>
@@ -22,13 +22,13 @@
     </form>
     <div class="button-wrapper">
       <button class="delit-card__btn" (click)="openDialog()">
-        <p class="login-card-btn__text">Delete</p>
+        <p class="login-card-btn__text">{{ 'EDITPROFILE.DELETE' | translate }}</p>
       </button>
       <button class="back-card__btn" (click)=" back()">
-        <p class="login-card-btn__text">Back</p>
+        <p class="login-card-btn__text">{{ 'EDITPROFILE.BACK' | translate }}</p>
       </button>
       <button class="login-card__btn" (click)="edit()">
-        <p class="login-card-btn__text">Submit</p>
+        <p class="login-card-btn__text">{{ 'EDITPROFILE.OK' | translate }}</p>
       </button>
     </div>
   </div>
