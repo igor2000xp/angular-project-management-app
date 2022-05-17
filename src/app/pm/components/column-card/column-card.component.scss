@@ -22,13 +22,8 @@
   }
 
   &__card-container {
-    //flex: 1 1 auto;
     margin: 0 5px;
-    //overflow-x: hidden;
-    //padding: 0 4px;
     z-index: 1;
-    // width: 200px;
-    // height: 200px;
   }
 
   &__wrapper:first-child {
@@ -88,14 +83,10 @@
 }
 
 .example-list {
-  //border: solid 1px #ccc;
   min-height: 60px;
-  background: #ebecf0;
-  //border-radius: 4px;
-  //overflow: hidden;
+  background: white;
   display: block;
   flex-grow: 1;
-  //overflow-y: auto;
 }
 
 .example-box {
@@ -131,7 +122,6 @@
 }
 
 .example-box:last-child {
-  //border: none;
 }
 
 .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
@@ -170,7 +160,6 @@
 }
 
 .input-btn {
-  // width: 120px;
   height: 24px;
   background-color: #b70000;
   border: none;
