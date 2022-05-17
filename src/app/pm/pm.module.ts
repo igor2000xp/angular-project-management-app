@@ -26,6 +26,7 @@ import { BoardCardModalUpdateComponent } from './components/board-card-modal-upd
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 
 
@@ -47,6 +48,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     DeleteBoardModalComponent,
     DeleteColumModalComponent,
     BoardCardModalUpdateComponent,
+    NotFoundComponent,
   ],
   imports: [
     CommonModule,

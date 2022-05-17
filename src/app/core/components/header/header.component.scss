@@ -13,6 +13,11 @@
   margin-left: 20px;
   font-size: 25px;
   color: #ffffff;
+  &:hover{
+    cursor: pointer;
+    color: rgb(0, 17, 255);
+    opacity: 0.8;
+  }
 }
 
 .admin-btn {
@@ -70,7 +75,7 @@
 }
 
 @media (max-width: 600px) {
-  
+
   .logo {
     display: none;
   }

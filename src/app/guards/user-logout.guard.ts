@@ -19,7 +19,7 @@ export class UserLogOutClass implements CanActivate {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (!this.currentUser) return true;
     else {
-      this.router.navigate(['/main']);return false;
+      this.router.navigate(['/board']);return false;
     }
   }
 }
