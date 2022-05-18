@@ -56,7 +56,7 @@ export class MainPageComponent implements OnInit {
       this.error = error;
       if (this.error === 'Task was not founded!') {
         this._snackBar.open('Перетаскивай таск помедленнее! Если видишь это сообщение повторно - обнови страницу', 'OK', {
-          duration: 3000,
+          duration: 6000,
         });
       }
     });
