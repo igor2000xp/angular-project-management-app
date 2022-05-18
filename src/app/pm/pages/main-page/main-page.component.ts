@@ -66,16 +66,19 @@ export class MainPageComponent implements OnInit {
         }),
       );
     });
-    this.columns.forEach((el, index) => {
-      return this.store.dispatch(
-        ColumnAction.updateColumn({
-          info: {
-            boardID: id,
-            column: { title: el.title, order: index },
-            columnID: el.id,
-          },
-        }),
-      );
-    });
+    setTimeout(() => {
+      this.columns.forEach((el, index) => {
+        return this.store.dispatch(
+          ColumnAction.updateColumn({
+            info: {
+              boardID: id,
+              column: { title: el.title, order: index },
+              columnID: el.id,
+            },
+          }),
+        );
+      });
+    }, 100);
+    
   }
 }

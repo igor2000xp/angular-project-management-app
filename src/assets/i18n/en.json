@@ -114,5 +114,13 @@
       "DELETE": "Delete",
       "BACK": "Back",
       "OK": "Submit"
+    },
+    "SEARCH": {
+      "CHOOSE": "Choose search",
+      "OPTION": "options",
+      "TITLE": "title",
+      "ID": "id",
+      "DESCRIPTION": "description",
+      "CLOSE": "Close section"
     }
   }
