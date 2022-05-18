@@ -1,7 +1,10 @@
 <div class="tools">
   <div class="tools-menu">
-    <button class="back-btn" (click)="switchPage()">{{ 'TOOLSMENU.BACK' | translate }}</button>
-    <button (click)="openColumn()" class="admin-btn">{{ 'TOOLSMENU.CREATE' | translate }}</button>
+    <div>
+      <button class="back-btn" (click)="switchPage()">{{ 'TOOLSMENU.BACK' | translate }}</button>
+      <button (click)="openColumn()" class="admin-btn">{{ 'TOOLSMENU.CREATE' | translate }}</button>
+    </div>
+
 
     <div class="search-input">
       <form class="example-form" [formGroup]="adminForm">
@@ -20,13 +23,13 @@
 
       <div class="searchMode" *ngIf="toggleSearchingBlock">
         <section class="example-section">
-          <label class="example-margin" style="font-weight: bold">Choose search <br> options:</label>
+          <label class="example-margin" style="font-weight: bold">{{ 'SEARCH.CHOOSE' | translate }} <br> {{ 'SEARCH.OPTION' | translate }}:</label>
           <mat-radio-group [(ngModel)]="labelPosition">
             <mat-radio-button
               class="example-margin"
               value="title"
               (change)="searchOption('title')"
-            >title</mat-radio-button>
+            >{{ 'SEARCH.TITLE' | translate }}</mat-radio-button>
             <mat-radio-button
               class="example-margin"
               value="id"
@@ -36,11 +39,11 @@
               class="example-margin"
               value="description"
               (change)="searchOption('description')"
-            >description</mat-radio-button>
+            >{{ 'SEARCH.DESCRIPTION' | translate }}</mat-radio-button>
             <button
               class="back-btn back-btn-small example-margin"
               (click)="closeOptions()"
-            >Close section</button>
+            >{{ 'SEARCH.CLOSE' | translate }}</button>
           </mat-radio-group>
         </section>
       </div>
