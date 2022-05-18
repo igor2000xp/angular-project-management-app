@@ -21,10 +21,13 @@ export class TaskCardComponent implements OnInit {
 
   title: string;
 
+  description: string;
+
   constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.title = this.task.title;
+    this.description = this.task.description;
   }
 
   openTask() {

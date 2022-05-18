@@ -11,12 +11,6 @@ export const initialUserState: IUsersState = {
 
 const usReducer = createReducer(
   initialUserState,
-  // on(UserAction.getUsersAction, (state) => {
-  //   console.log('!!! state', state);
-  //   return ({
-  //     ...state,
-  //   });
-  // }),
   on(UserAction.getUsersActionSuccess, (state, { users }) => ({
     ...state,
     users,
@@ -33,17 +27,11 @@ const usReducer = createReducer(
     user,
     isUserFetched: true,
   })),
-  // on(UserAction.getUserActionFailed, (state) => ({
-  //   ...state,
-  // })),
   on(UserAction.createUsersActionSuccess, (state, { currentUser }) => ({
     ...state,
     currentUser: currentUser,
     isUserFetched: true,
   })),
-  // on(UserAction.createUsersActionFailed, (state) => ({
-  //   ...state,
-  // })),
   on(UserAction.createTokenActionSuccess, (state, { currentUser }) => (
     {
       ...state,
@@ -58,9 +46,6 @@ const usReducer = createReducer(
     user,
     isUserFetched: true,
   })),
-  // on(UserAction.updateUsersActionFailed, (state) => ({
-  //   ...state,
-  // })),
   on(UserAction.deleteUserAction, (state) => ({
     ...state,
   })),

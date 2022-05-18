@@ -22,13 +22,8 @@
   }
 
   &__card-container {
-    flex: 1 1 auto;
-    margin: 0 4px;
-    overflow-x: hidden;
-    padding: 0 4px;
+    margin: 0 5px;
     z-index: 1;
-    // width: 200px;
-    // height: 200px;
   }
 
   &__wrapper:first-child {
@@ -73,7 +68,7 @@
   }
 }
 .validate__error{
-  margin: 0px;
+  margin: 0;
   padding-top: 5px;
   color: red;
   font-size: 12px;
@@ -88,19 +83,18 @@
 }
 
 .example-list {
-  border: solid 1px #ccc;
   min-height: 60px;
   background: white;
-  border-radius: 4px;
-  overflow: hidden;
   display: block;
   flex-grow: 1;
-  overflow-y: auto; 
 }
 
 .example-box {
-  padding: 20px 10px;
-  border-bottom: solid 1px #ccc;
+  padding: 0;
+  margin: 2px auto;
+  border: solid 1px #ccc;
+  border-radius: 8px;
+  width: 98%;
   color: rgba(0, 0, 0, 0.87);
   display: flex;
   flex-direction: row;
@@ -128,7 +122,6 @@
 }
 
 .example-box:last-child {
-  border: none;
 }
 
 .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
@@ -157,7 +150,7 @@
   outline: none;
   text-transform: uppercase;
   border-radius: 3px;
-  box-shadow: 2px 0px 4px #007820;
+  box-shadow: 2px 0 4px #007820;
   font-size: 12px;
   color: #ffffff;
   cursor: pointer;
@@ -167,14 +160,13 @@
 }
 
 .input-btn {
-  // width: 120px;
   height: 24px;
   background-color: #b70000;
   border: none;
   outline: none;
   text-transform: uppercase;
   border-radius: 3px;
-  box-shadow: 2px 0px 4px #6b0000;
+  box-shadow: 2px 0 4px #6b0000;
   font-size: 12px;
   color: #ffffff;
   cursor: pointer;

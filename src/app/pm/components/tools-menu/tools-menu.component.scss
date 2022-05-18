@@ -13,7 +13,7 @@
       justify-content: space-between;
       align-items: center;
       .admin-btn {
-        margin: 5px 25px 0px 15px;
+        margin: 5px 25px 0 15px;
         width: 140px;
         height: 24px;
         background-color: #412846;
@@ -70,7 +70,6 @@
             }
         }
         }
-
         .searchMode{
           position: absolute;
           z-index: 100;
@@ -103,7 +102,7 @@
     }
   }
 .back-btn {
-  margin: 5px 25px 0px 15px;
+  margin: 5px 25px 0 15px;
   width: 190px;
   height: 24px;
   background-color: #a10016;
