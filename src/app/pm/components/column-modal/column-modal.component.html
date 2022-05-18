@@ -15,6 +15,9 @@
     <p class="order-validate__error" *ngIf="columnForm.get('order').dirty && columnForm.get('order').errors?.orderError">
       {{ 'COLUMNCARDMODAL.ORDERERROR' | translate }}<br />
     </p>
+    <p class="order-validate__error" *ngIf="columnForm.get('order').dirty && columnForm.get('order').errors?.numberError">
+      {{ 'COLUMNCARDMODAL.NUMBERERROR' | translate }}<br />
+    </p>
   </div>
   <mat-dialog-actions align="end">
     <button class="login__btn" mat-button mat-dialog-close (click)=" cancel()">{{ 'COLUMNCARDMODAL.NO' | translate }}</button>

@@ -23,7 +23,8 @@ export class ColumnModalComponent implements OnInit {
       title: new FormControl('', [Validators.required]),
       order: new FormControl('', [
         Validators.required,
-        this.validators.checkForOrder.bind(this.validators)]),
+        this.validators.checkForOrder.bind(this.validators),
+        this.validators.checkForNumber]),
     });
     const { snapshot: { params: { id } } } = this.route;
     this.boardId = id;

@@ -71,10 +71,12 @@
       "ERROR": "Please enter a name",
       "ORDER": "order",
       "ORDERERROR": "Order is already exists",
+      "NUMBERERROR": "Please enter the number",
       "NO": "Cancel",
       "OK": "Сonfirm",
       "INPUTNAME": "Please enter a name",
       "INPUTORDER": "Please enter the order"
+
     },
     "COLUMNCARDELETE": {
       "WARNING": "Warning",
