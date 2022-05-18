@@ -15,6 +15,8 @@ export class ValidatorsService {
 
   columnArr: Subject<{}> = new Subject();
 
+  dragNdrop: Subject<any> = new Subject();
+
   constructor(private store: Store) {
     this.store.select((selectColumns)).subscribe(el => {
       this.columns = el;
