@@ -1,21 +1,22 @@
 <div class="header">
-  <div class="logo" (click)="switchPage('welcome')">Project management</div>
+  <div class="logo" (click)="switchPage('welcome')">{{ 'HEADER.LOGO' | translate }}</div>
+  <mat-slide-toggle [checked]="checked" (change)="check()">{{ 'HEADER.TOGGEL' | translate }}</mat-slide-toggle>
   <div *ngIf="!userLogin;else succes">
     <button class="admin-btn"
       (click)="switchAuthPage('authorization')"
       [ngClass]="{'admin-btn_active': checkPage('authorization')}">
-      log in
+      {{ 'HEADER.LOGIN' | translate }}
     </button>
     <button class="admin-btn"
       (click)="switchAuthPage('registration')"
       [ngClass]="{'admin-btn_active': checkPage('registration')}">
-      sign up
+      {{ 'HEADER.SIGNUP' | translate }}
   </button>
   </div>
   <ng-template #succes>
     <div class="login-container">
       <div class="login">E-mail: {{userLogin}}</div>
-      <button class="logout-btn admin-btn" (click)="logout()">logout</button>
+      <button class="logout-btn admin-btn" (click)="logout()">{{ 'HEADER.LOGOUT' | translate }}</button>
       <mat-icon class="logout-btn edit" (click)="edit()" >account_box </mat-icon>
       <!-- <button class="logout-btn" (click)="edit()">edit</button> -->
     </div>

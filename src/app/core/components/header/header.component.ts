@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
 import { User } from 'src/app/auth/models/user.model';
 import { ApiService } from 'src/app/auth/services/api.service';
 import { getCurrentUser } from 'src/app/redux/selectors/user.selectors';
@@ -21,7 +22,10 @@ export class HeaderComponent implements OnInit {
 
   currentUser: User;
 
+  checked: boolean = JSON.parse(localStorage.getItem('toggle'));
+
   constructor(private router: Router,
+    public translate: TranslateService,
     private store: Store,
     private auth: ApiService,
     private navigation: NavigationService) { }
@@ -35,6 +39,19 @@ export class HeaderComponent implements OnInit {
         if (this.currentUser) this.userLogin = this.currentUser.login;
         else { this.userLogin = undefined; }
       });
+    this.translate.use(localStorage.getItem('translate') || 'en');
+  }
+
+  check() {
+    this.checked = !this.checked;
+    if (this.checked) {
+      this.translate.use('ru');
+      localStorage.setItem('translate', 'ru');
+    } else {
+      this.translate.use('en');
+      localStorage.setItem('translate', 'en');
+    }
+    localStorage.setItem('toggle', this.checked + '');
 
   }
 

@@ -30,6 +30,7 @@ import { SearchModalComponent } from './components/search-modal/search-modal.com
 import { FilterResultByWord } from '../pipes/filter-result-by-words';
 import { MatRadioModule } from '@angular/material/radio';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     MatInputModule,
     DragDropModule,
     MatRadioModule,
+    TranslateModule,
   ],
 })
 export class PmModule { }
