@@ -9,7 +9,6 @@ import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { BoardCardModalUpdateComponent } from '../board-card-modal-update/board-card-modal-update.component';
 import { InfoForBoard } from '../../../redux/effects/board.effects';
-import { selectBoards } from '../../../redux/selectors/board.selectors';
 
 export interface DialogData {
   returnString: string;
@@ -41,7 +40,6 @@ export class BoardCardComponent implements OnInit {
   }
 
   openDialogDelete() {
-    // console.log(this.returnString);
     const dialogRef = this.dialog.open(DeleteBoardModalComponent, {
       data: {
         returnString: this.returnString,
@@ -80,11 +78,6 @@ export class BoardCardComponent implements OnInit {
   }
 
   switchToBoard() {
-    // let currentBoard:Board;
-    // this.store.select((selectBoards)).subscribe(el => {
-    //   currentBoard = el.find((board) => board.id === this.board.id)
-    // });
-    // this.store.dispatch(BoardAction.setCurrentBoard({currentBoard}));
     localStorage.setItem('currentBoardID', this.board.id);
     this.router.navigate(['/board', this.board.id]);
   }

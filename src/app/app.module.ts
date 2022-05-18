@@ -64,7 +64,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
         boards: fromBoard.boardReducer,
         columns: fromColumn.ColumnReducer,
       }, {
-      // metaReducers,
         runtimeChecks: {
           strictStateImmutability: true,
           strictActionImmutability: true,
@@ -91,7 +90,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule { 
+export class AppModule {
   constructor(translate: TranslateService) {
     translate.setDefaultLang('en');
   }
