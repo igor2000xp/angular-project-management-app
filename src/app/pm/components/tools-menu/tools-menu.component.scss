@@ -15,7 +15,7 @@
       align-items: center;
 
       .admin-btn {
-        margin: 5px 25px 0px 15px;
+        margin: 5px 25px 0 15px;
         width: 140px;
         height: 24px;
         background-color: #412846;
@@ -115,6 +115,23 @@
       }
     }
   }
+.back-btn {
+  margin: 5px 25px 0 15px;
+  width: 190px;
+  height: 24px;
+  background-color: #a10016;
+  border: none;
+  outline: none;
+  text-transform: uppercase;
+  border-radius: 3px;
+  box-shadow: 2px 0 4px #5d000c;
+  font-size: 12px;
+  color: #ffffff;
+  cursor: pointer;
+  &:hover {
+    background-color: #5d000c;
+  }
+}
 
   .searchMode.active {
     opacity: 1 !important;

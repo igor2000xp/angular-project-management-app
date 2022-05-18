@@ -7,8 +7,3 @@ export const getCurrentUser = createSelector(
   getUserStore,
   (state:IUsersState) => state.currentUser,
 );
-
-// export const getUsers = createSelector(
-//   getUserStore,
-//   (state:IAppState) => state.users,
-// );

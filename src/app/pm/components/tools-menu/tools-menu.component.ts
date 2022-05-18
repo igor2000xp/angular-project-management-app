@@ -15,10 +15,10 @@ export interface IValidatorMessages {
     maxLength: string;
   };
 }
-
-export interface DialogData {
-  returnString: string;
-}
+//
+// export interface DialogData {
+//   returnString: string;
+// }
 
 @Component({
   selector: 'app-tools-menu',
@@ -55,13 +55,13 @@ export class ToolsMenuComponent implements OnInit {
     ]),
   });
 
-  public validatorMessages: IValidatorMessages = {
-    searchString: {
-      required: 'Please enter a search string',
-      minLength: 'The search string is too short',
-      maxLength: 'The search string is too long',
-    },
-  };
+  // public validatorMessages: IValidatorMessages = {
+  //   searchString: {
+  //     required: 'Please enter a search string',
+  //     minLength: 'The search string is too short',
+  //     maxLength: 'The search string is too long',
+  //   },
+  // };
 
   searchValue(value: any) {
     this.searchService.searchValue.next(value);
