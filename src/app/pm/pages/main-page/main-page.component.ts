@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-shadow */
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
@@ -8,6 +9,8 @@ import { selectColumns } from 'src/app/redux/selectors/column.selector';
 import * as ColumnAction from '../../../redux/actions/column.actions';
 import * as BoardAction from '../../../redux/actions/board.actions';
 import { Task } from 'src/app/auth/models/Task.model';
+import { ApiService } from 'src/app/auth/services/api.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-main-page',
@@ -24,9 +27,13 @@ export class MainPageComponent implements OnInit {
 
   token: string;
 
+  error: string;
+
   constructor(
     private route: ActivatedRoute,
     private store: Store,
+    public auth: ApiService,
+    private _snackBar: MatSnackBar,
   ) {
   }
 
@@ -45,6 +52,15 @@ export class MainPageComponent implements OnInit {
         (a: { order: number }, b: { order: number }) => a.order - b.order,
       );
     });
+    this.auth.errors$.subscribe((error) => {
+      this.error = error;
+      if (this.error === 'Task was not founded!') {
+        this._snackBar.open('Перетаскивай таск помедленнее! Если видишь это сообщение повторно - обнови страницу', 'OK', {
+          duration: 6000,
+        });
+      }
+    });
+
   }
 
   drop(event: CdkDragDrop<any[]>) {
@@ -79,6 +95,6 @@ export class MainPageComponent implements OnInit {
         );
       });
     }, 100);
-    
+
   }
 }

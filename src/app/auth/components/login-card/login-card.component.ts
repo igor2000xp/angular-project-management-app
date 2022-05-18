@@ -52,7 +52,7 @@ export class LoginCardComponent implements OnInit {
     } else {
       this.formTitle =
           this.path === 'registration' ? 'Registration' : 'Authorization';
-    }    
+    }
     this.auth.errors$.subscribe((error) => {
       this.error = error;
     });
@@ -63,7 +63,6 @@ export class LoginCardComponent implements OnInit {
         });
       }
       if (el && el.token && el.password.length !== 60 && el.name) {
-        console.log(el.password.length);
         if (this.error === '') {
           this._snackBar.ngOnDestroy();
           this.router.navigateByUrl('board');

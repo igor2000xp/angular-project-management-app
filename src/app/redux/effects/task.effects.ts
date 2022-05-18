@@ -11,6 +11,7 @@ export interface InfoForTask {
   task?: Task,
   columnID?: string,
   taskID?: string,
+  dragMode?: boolean,
 }
 
 @Injectable()
@@ -20,6 +21,8 @@ export class TaskEffects {
 
   currentUser: any;
 
+  dragMode: boolean;
+
   constructor(
     private actions$: Actions,
     private apiService: ApiService,
@@ -27,6 +30,10 @@ export class TaskEffects {
   ) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
+
+  prevColumnId = '';
+
+  prevTaskId: any;
 
   createTask$ = createEffect(
     () => {
@@ -110,10 +117,33 @@ export class TaskEffects {
         mergeMap((info) => {
           this.info = info;
           this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-          return this.apiService.updateTask(this.currentUser.token, this.info.boardID, this.info.columnID, this.info.taskID, this.info.task);
+          this.arrDelete.dragNdrop.next(false);
+          if (info.dragMode) {
+            if (this.prevColumnId === '') {
+              this.prevColumnId = this.info.columnID;
+              this.prevTaskId = info.taskID;
+              return this.apiService.updateTask(this.currentUser.token, this.info.boardID, this.info.columnID, this.info.taskID, this.info.task);
+            }
+            if (this.prevColumnId !== '' ) {
+              if (this.prevTaskId === undefined) {
+                this.prevTaskId = this.info.taskID;
+                return this.apiService.updateTask(this.currentUser.token, this.info.boardID, this.info.columnID, this.info.taskID, this.info.task);
+              }
+              if (this.prevTaskId !== info.taskID) {
+                this.prevTaskId = this.info.taskID;
+                return this.apiService.updateTask(this.currentUser.token, this.info.boardID, this.info.columnID, this.info.taskID, this.info.task);
+              }
+              return this.apiService.updateTask(this.currentUser.token, this.info.boardID, this.prevColumnId, this.info.taskID, this.info.task);
+            }
+          } else {
+            return this.apiService.updateTask(this.currentUser.token, this.info.boardID, this.info.columnID, this.info.taskID, this.info.task);
+          }
         },
         ),
-        mergeMap(() => this.apiService.getTasks(this.currentUser.token, this.info.boardID, this.info.columnID)),
+        mergeMap((task) => {
+          this.prevColumnId = task.columnId;
+          return this.apiService.getTasks(this.currentUser.token, this.info.boardID, this.info.columnID);
+        }),
         map((tasks) => TaskActions.getTasksActionSuccess({ tasks })),
       );
     },

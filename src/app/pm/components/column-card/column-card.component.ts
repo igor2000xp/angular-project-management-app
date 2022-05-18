@@ -47,6 +47,8 @@ export class ColumnCardComponent implements OnInit {
 
   deletedArr: any;
 
+  drag: boolean;
+
   ngOnInit(): void {
     this.searchService.searchValue.subscribe(el => this.searchValue = el);
     this.searchService.searchMode.subscribe(el => this.searchMode = el);
@@ -73,7 +75,7 @@ export class ColumnCardComponent implements OnInit {
     this.columnForm = new FormGroup({
       title: new FormControl('', [Validators.required]),
     });
-
+    this.deleteArr.dragNdrop.subscribe(el => this.drag = el);
   }
 
   openDialog() {
@@ -128,7 +130,9 @@ export class ColumnCardComponent implements OnInit {
   }
 
   dropToo(event: CdkDragDrop<Task[]>) {
+
     if (event.previousContainer === event.container) {
+      this.deleteArr.dragNdrop.next(true);
       moveItemInArray(
         event.container.data,
         event.previousIndex,
@@ -138,6 +142,7 @@ export class ColumnCardComponent implements OnInit {
         this.store.dispatch(
           TaskAction.updateTaskAction({
             info: {
+              dragMode: this.drag,
               boardID: el.boardId,
               columnID: el.columnId,
               taskID: el.id,
@@ -161,10 +166,12 @@ export class ColumnCardComponent implements OnInit {
         event.previousIndex,
         event.currentIndex,
       );
+      this.deleteArr.dragNdrop.next(true);
       this.tasks.forEach((el, index) => {
         this.store.dispatch(
           TaskAction.updateTaskAction({
             info: {
+              dragMode: this.drag,
               boardID: el.boardId,
               columnID: el.columnId,
               taskID: el.id,

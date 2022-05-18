@@ -15,6 +15,8 @@ export class ValidatorsService {
 
   columnArr: Subject<{}> = new Subject();
 
+  dragNdrop: Subject<any> = new Subject();
+
   constructor(private store: Store) {
     this.store.select((selectColumns)).subscribe(el => {
       this.columns = el;
@@ -23,9 +25,19 @@ export class ValidatorsService {
 
   checkForOrder(control: FormControl) {
     const value = this.columns.filter(el => el.order === +control.value);
+
     if (value.length !== 0)  return {
       orderError: true,
     };
+  }
+
+  checkForNumber(control: FormControl) {
+    var reg = /^\d+$/;
+    if (!control.value.match(reg)) {
+      return {
+        numberError: true,
+      };
+    }
   }
 
   checkForLength(control: FormControl) {

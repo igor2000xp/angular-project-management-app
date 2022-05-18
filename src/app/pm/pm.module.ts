@@ -31,6 +31,7 @@ import { FilterResultByWord } from '../pipes/filter-result-by-words';
 import { MatRadioModule } from '@angular/material/radio';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { TranslateModule } from '@ngx-translate/core';
     DragDropModule,
     MatRadioModule,
     TranslateModule,
+    MatSnackBarModule,
   ],
 })
 export class PmModule { }

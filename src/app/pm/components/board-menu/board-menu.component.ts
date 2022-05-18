@@ -25,8 +25,7 @@ export class BoardMenuComponent implements OnInit {
   openColumn() {
     const dialogRef = this.dialog.open(BoardCardModalComponent);
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+    dialogRef.afterClosed().subscribe(() => {
     });
   }
 
