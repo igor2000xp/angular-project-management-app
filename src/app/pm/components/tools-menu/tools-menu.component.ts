@@ -58,6 +58,7 @@ export class ToolsMenuComponent implements OnInit {
   openOptions() {
     this.toggleSearchingBlock = true;
   }
+
   closeOptions() {
     this.toggleSearchingBlock = false;
   }

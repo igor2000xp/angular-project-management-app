@@ -43,8 +43,8 @@ export const reducer = createReducer(
     return ({
       ...state,
       currentBoard: currentBoard,
-    })
-  })
+    });
+  }),
 );
 
 export function boardReducer(state: IBoardsState, action: Action) {

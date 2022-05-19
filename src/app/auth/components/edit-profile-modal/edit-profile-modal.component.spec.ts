@@ -8,9 +8,9 @@ describe('EditProfileModalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditProfileModalComponent ]
+      declarations: [ EditProfileModalComponent ],
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
