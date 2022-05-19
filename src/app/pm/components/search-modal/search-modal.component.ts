@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DialogData } from '../board-card/board-card.component';
@@ -6,14 +6,13 @@ import { ToolsMenuComponent } from '../tools-menu/tools-menu.component';
 import { Store } from '@ngrx/store';
 import { Task } from 'src/app/auth/models/Task.model';
 import  * as TaskSelect from '../../../redux/selectors/task.selectors';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-search-modal',
   templateUrl: './search-modal.component.html',
   styleUrls: ['./search-modal.component.scss'],
 })
-export class SearchModalComponent implements OnInit, OnDestroy {
+export class SearchModalComponent implements OnInit {
   boardForm: FormGroup;
 
   returnString: string;
@@ -21,8 +20,6 @@ export class SearchModalComponent implements OnInit, OnDestroy {
   name: string;
 
   allTasks: Task[];
-
-  sub: Subscription;
 
   constructor(
     private store: Store,
@@ -40,7 +37,7 @@ export class SearchModalComponent implements OnInit, OnDestroy {
     });
     this.data.returnString = this.data.name;
 
-    this.sub = this.store.select(TaskSelect.selectTasks).subscribe((tasks) => {
+    this.store.select(TaskSelect.selectTasks).subscribe((tasks) => {
       return this.allTasks = tasks;
     });
   }
@@ -49,7 +46,4 @@ export class SearchModalComponent implements OnInit, OnDestroy {
     this.dialogRef.close('Do nothing');
   }
 
-  ngOnDestroy() {
-    this.sub.unsubscribe();
-  }
 }

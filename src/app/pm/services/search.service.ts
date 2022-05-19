@@ -5,9 +5,6 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class SearchService {
-
-  constructor() { }
-
   searchValue: Subject<string> = new Subject();
 
   searchMode: Subject<any> = new Subject();
