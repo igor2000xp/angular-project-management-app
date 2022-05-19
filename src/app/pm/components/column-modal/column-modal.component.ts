@@ -28,7 +28,6 @@ export class ColumnModalComponent implements OnInit {
     });
     const { snapshot: { params: { id } } } = this.route;
     this.boardId = id;
-    console.log(this.route);
   }
 
   createColumn() {
@@ -42,7 +41,5 @@ export class ColumnModalComponent implements OnInit {
   }
 
   cancel() {
-    console.log(this.columnForm);
-    console.log(this.columnForm.get('order').errors?.orderError);
   }
 }

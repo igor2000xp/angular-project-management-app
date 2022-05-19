@@ -25,12 +25,10 @@ export class SearchModalComponent implements OnInit {
     private store: Store,
     public dialogRef: MatDialogRef<ToolsMenuComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    // private searchService: SearchService,
   ) { }
 
   searchHandler() {
     this.returnString = this.data.returnString;
-    // const filteredTasks = [...this.allTasks];
   }
 
   ngOnInit(): void {

@@ -19,7 +19,6 @@ export class TaskModalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.data);
     this.createTaskForm = new FormGroup({
       title: new FormControl('', [
         Validators.required,
@@ -29,7 +28,6 @@ export class TaskModalComponent implements OnInit {
   }
 
   createTask() {
-    console.log(this.data);
     this.store.dispatch(TaskAction.createTaskAction({
       info: {
         boardID: this.data.boardId,
@@ -43,6 +41,5 @@ export class TaskModalComponent implements OnInit {
         },
       },
     }));
-
   }
 }
