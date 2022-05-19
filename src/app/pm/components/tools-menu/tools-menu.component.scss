@@ -43,8 +43,6 @@
         .login-validate {
           margin: -2px 0 0 0;
           padding: 0;
-
-          //margin-top: 1%;
           font-weight: 500;
           color: red;
           font-size: 16px;
@@ -87,20 +85,20 @@
           display: flex;
           flex-direction: row;
           justify-content: space-around;
-          transition: all 2.5s ease-out;
+          width: 100%;
 
           .example-section {
             display: flex;
             align-content: center;
             align-items: center;
             height: 60px;
-            background-color: rgb(220 202 221);
+            background-color: rgba(233, 220, 234, 0.95);
             width: 100%;
           }
-
           .example-margin {
             margin: 0 10px;
-            font-size: 12px;
+            font-size: 10px;
+            line-height: 11px;
           }
 
           .back-btn-small {
@@ -137,10 +135,8 @@
     opacity: 1 !important;
   }
 
-  ;
-
   .back-btn {
-    margin: 5px 25px 0px 15px;
+    margin: 5px 25px 0 15px;
     width: 190px;
     height: 24px;
     background-color: #a10016;

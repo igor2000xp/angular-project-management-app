@@ -1,8 +1,6 @@
-<!--<h2 mat-dialog-title>{{data.name}}</h2>-->
 <div mat-dialog-content>
   <p>Input search string</p>
   <mat-form-field appearance="fill">
-<!--    <mat-label>Board Title</mat-label>-->
     <input class="board-edit-title" matInput [(ngModel)]="data.returnString" (input)="searchHandler()">
   </mat-form-field>
 </div>
@@ -10,4 +8,3 @@
   <button mat-button (click)="noUpdateClick()">No Thanks</button>
   <button mat-button [mat-dialog-close]="data.returnString">Ok</button>
 </div>
-
