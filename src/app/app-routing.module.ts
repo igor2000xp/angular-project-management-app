@@ -11,15 +11,9 @@ const routes: Routes = [
     path: 'welcome', loadChildren: () => import('./main/main.module').then((m) => m.MainModule),
     canActivate: [UserLogOutClass],
   },
-  // {
-  //   path: 'home',
-  //   loadChildren: () => import('./pm/pm.module').then((m) => m.PmModule),
-  //   canActivate: [UserLogInClass],
-  // },
   {
     path: 'auth',
     loadChildren: () => import('./auth/lazy-modules/login/login.module').then((m) => m.LoginModule),
-    // canActivate: [UserLogOutClass],
   },
   {
     path: 'board', component: BoardPageComponent,

@@ -25,12 +25,10 @@ export class SearchModalComponent implements OnInit {
     private store: Store,
     public dialogRef: MatDialogRef<ToolsMenuComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    // private searchService: SearchService,
   ) { }
 
   searchHandler() {
     this.returnString = this.data.returnString;
-    // const filteredTasks = [...this.allTasks];
   }
 
   ngOnInit(): void {
@@ -38,6 +36,7 @@ export class SearchModalComponent implements OnInit {
       returnString: new FormControl('', [Validators.required]),
     });
     this.data.returnString = this.data.name;
+
     this.store.select(TaskSelect.selectTasks).subscribe((tasks) => {
       return this.allTasks = tasks;
     });
@@ -46,4 +45,5 @@ export class SearchModalComponent implements OnInit {
   noUpdateClick(): void {
     this.dialogRef.close('Do nothing');
   }
+
 }

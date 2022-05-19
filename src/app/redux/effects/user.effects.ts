@@ -66,7 +66,6 @@ export class UserEffects {
           } else {
             this.apiService.errors$.next('User was not founded');
           }
-          console.log(typeof this.userToken);
           if (typeof this.userToken.token === 'string') {
             const trueUser = currentUser.filter((el) => el.login === this.currentUser.login);
             const user: User = Object.assign({}, trueUser[0], this.currentUser, this.userToken);
