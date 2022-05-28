@@ -1,0 +1,13 @@
+.home-page__wrapper {
+  width: 100%;
+  height: calc(100% - 60px);
+}
+
+.colum-card-wrapper {
+  display: flex;
+}
+
+.board-card_el:hover {
+  cursor: pointer;
+  opacity: 0.85;
+}

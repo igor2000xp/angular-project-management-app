@@ -1,0 +1,17 @@
+<div class="home-page__wrapper">
+  <app-tools-menu></app-tools-menu>
+  <div
+    cdkDropList
+    cdkDropListOrientation="horizontal"
+    class="colum-card-wrapper"
+    (cdkDropListDropped)="drop($event)"
+    cdkDropListGroup
+  >
+    <app-column-card
+      *ngFor="let column of columns"
+      [column]="column"
+      [boardID]="boardId"
+      cdkDrag
+    ></app-column-card>
+  </div>
+</div>

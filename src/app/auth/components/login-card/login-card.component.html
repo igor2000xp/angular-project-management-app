@@ -1,0 +1,104 @@
+<div class="login-card__wrapper">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="login-card">
+      <p class="login-title">{{ formTitle }}</p>
+      <div class="login-card__container">
+        <div class="login-card__el" *ngIf="checkPage('registration')">
+          <p class="input-name">{{ 'AUTH.NAME' | translate }}</p>
+          <input
+            #login
+            class="form-control"
+            formControlName="name"
+            [ngClass]="{ 'has-error': checkError('name') }"
+          />
+          <div *ngIf="checkError('name')">
+            <p class="login-validate" *ngIf="viewError('name', 'required')">
+              {{ 'AUTH.NAME_ERROR' | translate }}
+            </p>
+            <p class="login-validate" *ngIf="viewError('name', 'lengthError')">
+              {{ 'AUTH.LENGTHERROR' | translate }}
+            </p>
+          </div>
+        </div>
+        <div class="login-card__el">
+          <p class="input-name">{{ 'AUTH.EMAIL' | translate }}</p>
+          <input
+            #login
+            class="form-control"
+            formControlName="email"
+            [ngClass]="{ 'has-error': checkError('email') }"
+          />
+          <div *ngIf="checkError('email')">
+            <p class="login-validate" *ngIf="viewError('email', 'required')">
+              {{ 'AUTH.EMAIL_ERROR' | translate }}
+            </p>
+            <p class="login-validate" *ngIf="viewError('email', 'email')">
+              {{ 'AUTH.EMAIL_INVALID' | translate }}
+            </p>
+          </div>
+        </div>
+        <div class="login-card__el">
+          <p class="input-name">{{ 'AUTH.PASSWORD' | translate }}</p>
+          <input
+            #password
+            class="form-control"
+            formControlName="pass"
+            [ngClass]="{ 'has-error': checkError('pass') }"
+          />
+          <div *ngIf="checkError('pass')">
+            <div class="login-validate" *ngIf="viewError('pass', 'required')">
+              {{ 'AUTH.PASSWORD_REQUIRED' | translate }} <br />
+            </div>
+            <div
+              class="login-validate"
+              *ngIf="
+                viewError('pass', 'lengthError') ||
+                viewError('pass', 'upperLowerError') ||
+                viewError('pass', 'mixtureError') ||
+                viewError('pass', 'specialCharError')
+              "
+            >
+            {{ 'AUTH.PASSWORD_ERROR' | translate }}<br />
+              <p
+                class="login-validate__error"
+                *ngIf="viewError('pass', 'lengthError')"
+              >
+              {{ 'AUTH.PASSWORD_LENGTHERROR' | translate }} <br />
+              </p>
+              <p
+                class="login-validate__error"
+                *ngIf="viewError('pass', 'upperLowerError')"
+              >
+              {{ 'AUTH.PASSWORD_UPPERLOWERERROR' | translate }}  <br />
+              </p>
+              <p
+                class="login-validate__error"
+                *ngIf="viewError('pass', 'mixtureError')"
+              >
+              {{ 'AUTH.PASSWORD_MIXTUREERROR' | translate }} <br />
+              </p>
+              <p
+                class="login-validate__error"
+                *ngIf="viewError('pass', 'specialCharError')"
+              >
+              {{ 'AUTH.PASSWORD_SPECIALCHARERROR' | translate }}
+                <br />
+              </p>
+            </div>
+          </div>
+          <p
+            *ngIf="checkPage('authorization')"
+            class="route-reg"
+            (click)="goToRegPage()"
+          >
+          {{ 'AUTH.PASSWORD_NOACCOUNT' | translate }}
+          </p>
+        </div>
+        <button  class="login-card__btn" type="submit" [disabled]="form.invalid">
+          <p class="login-card-btn__text">{{ 'AUTH.LOGIN' | translate }}</p>
+        </button>
+        <!-- <div *ngIf="error">{{ error }}</div> -->
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,32 @@
+$darkgray: #828282;
+
+.wrapper {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 0%;
+  width: 100%;
+  margin-top: 8%;
+  height: 75%;
+}
+
+.not-found-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.not-found-page__img {
+  width: 100px;
+  height: 100px;
+  background: url(./assets/error404.svg) no-repeat;
+}
+
+.not-found-page__text {
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 700;
+  color: $darkgray;
+}

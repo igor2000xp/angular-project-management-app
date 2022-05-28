@@ -1,0 +1,40 @@
+.tools {
+  width: 100%;
+  background-color: #b07ebb;
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &-menu {
+    margin-top: 35px;
+  }
+}
+
+.logo {
+  margin-left: 20px;
+  font-size: 25px;
+  color: #ffffff;
+}
+
+.admin-btn {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  margin-right: 25px;
+  margin-left: 15px;
+  width: 125px;
+  height: 24px;
+  background-color: #412846;
+  border: none;
+  outline: none;
+  text-transform: uppercase;
+  border-radius: 3px;
+  box-shadow: 2px 0px 4px #412846;
+  font-size: 12px;
+  color: #ffffff;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #433147;
+  }
+}

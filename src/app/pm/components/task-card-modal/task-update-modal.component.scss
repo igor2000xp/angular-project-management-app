@@ -1,0 +1,98 @@
+.login {
+  &__form {
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 300px;
+    border-radius: 5px;
+    background-color: #e5e5e5;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  &__input,
+  &__password {
+    width: 93%;
+  }
+
+  &__password-wrapper {
+    margin-top: 10px;
+  }
+
+  &__btn {
+    margin-top: 40px;
+    margin-left: 10px;
+    width: 75px;
+    height: 34px;
+    background-color: #433147;
+    border: none;
+
+    outline: none;
+    border-radius: 3px;
+    box-shadow: 2px 0px 4px #433147;
+    font-size: 12px;
+    color: #ffffff;
+    cursor: pointer;
+    &:hover {
+      background-color: #7b5a82;
+    }
+    float: right;
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      color: white;
+    }
+  }
+}
+
+span {
+  display: block;
+  font-size: 12px;
+  padding: 0 0 5px 5px;
+}
+input {
+  color: #000000;
+  border: none;
+  background-color: #efefef;
+  height: 30px;
+  padding: 0 10px;
+}
+
+.description-task-area {
+  width: 100%;
+  height: 40px;
+}
+
+.delete {
+  background-color: rgb(255, 0, 0);
+  &:hover {
+    cursor: pointer;
+    background-color: rgb(204, 70, 70);
+  }
+}
+
+.update {
+  background-color: green;
+  &:hover {
+    opacity: 0.8;
+    cursor: pointer;
+    background-color: green;
+  }
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    color: white;
+  }
+}
+.validate__error {
+  margin: 0;
+  padding-top: 5px;
+  color: red;
+  font-size: 12px;
+}
+
+.close {
+  position: relative;
+  left: 210px;
+  top: -15px;
+  cursor: pointer;
+}

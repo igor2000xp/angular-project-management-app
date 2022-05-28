@@ -1,0 +1,27 @@
+<div class="list__wrapper" >
+  <div class="list">
+    <div class="list__header">
+      <h2 *ngIf="true"
+      contenteditable="true"
+      (click)="switchToBoard()"
+      >{{returnString}}
+    </h2>
+      <input *ngIf="false" value={{returnString}}>
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="menu"
+        aria-label="Example icon-button with a menu"
+      >
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button (click)="openDialogDelete()" mat-menu-item>
+          <span>{{ 'BOARD.DELETE' | translate }}</span>
+        </button>
+        <button (click)="openDialogUpdate()" mat-menu-item>
+          <span>{{ 'BOARD.UPDATE' | translate }}</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+<div class="list__wrapper">
+  <div class="list">
+    <div class="list__header">
+      <h2 class="columnTitle" *ngIf="editMode;
+       else editTitle" contenteditable="false" (click)="switchMode()">
+        {{columnTitle}}
+      </h2>
+      <button *ngIf="editMode" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <ng-template #editTitle>
+        <form [formGroup]="columnForm">
+          <div>
+            <input class="input-title" placeholder={{columnTitle}} formControlName="title">
+            <p class="validate__error"
+              *ngIf="columnForm.get('title').dirty && columnForm.get('title').errors?.required">
+              {{ 'COLUMNCARD.ERROR' | translate }}<br />
+            </p>
+          </div>
+          <div class="btn-container">
+            <button (click)="updateColumn()" [disabled]="columnForm.invalid" type="button"
+              class="submit">{{ 'COLUMNCARD.OK' | translate }}</button>
+            <button class="input-btn" (click)="switchMode()" type="button">{{ 'COLUMNCARD.NO' | translate }}</button>
+          </div>
+        </form>
+      </ng-template>
+      <mat-menu #menu="matMenu">
+        <button (click)="openDialog()" mat-menu-item>
+          <span>{{ 'COLUMNCARD.DELETE' | translate }}</span>
+        </button>
+      </mat-menu>
+    </div>
+    <div class="list__card-container example-list" cdkDropList [cdkDropListData]="tasks"
+      (cdkDropListDropped)="dropToo($event)">
+      <app-task-card class="example-box" *ngFor="let item of tasks | filterResultByWord:searchValue:searchMode"
+        [task]="item" [column]="column" [userID]="userId" [boardID]="boardID" cdkDrag></app-task-card>
+    </div>
+    <p class="createCard" (click)="openCreateTaskModal()">{{ 'COLUMNCARD.ADD' | translate }}</p>
+  </div>
+</div>
