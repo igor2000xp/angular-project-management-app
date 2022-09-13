@@ -30,6 +30,8 @@ export class LoginCardComponent implements OnInit {
 
   error: string;
 
+  hide: boolean = true;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -133,6 +135,7 @@ export class LoginCardComponent implements OnInit {
   submit() {
     const userAction = this.path === 'registration' ? 'signup' : 'signin';
     const currentUser = this.userInfo(userAction);
+    console.log('submit');
     userAction === 'signup'
       ? this.store.dispatch(
         UserAction.createUserAction({ currentUser: currentUser }),

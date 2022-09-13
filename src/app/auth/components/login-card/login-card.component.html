@@ -3,48 +3,74 @@
     <div class="login-card">
       <p class="login-title">{{ formTitle }}</p>
       <div class="login-card__container">
-        <div class="login-card__el" *ngIf="checkPage('registration')">
-          <p class="input-name">{{ 'AUTH.NAME' | translate }}</p>
-          <input
-            #login
-            class="form-control"
-            formControlName="name"
-            [ngClass]="{ 'has-error': checkError('name') }"
-          />
-          <div *ngIf="checkError('name')">
-            <p class="login-validate" *ngIf="viewError('name', 'required')">
-              {{ 'AUTH.NAME_ERROR' | translate }}
-            </p>
-            <p class="login-validate" *ngIf="viewError('name', 'lengthError')">
-              {{ 'AUTH.LENGTHERROR' | translate }}
-            </p>
-          </div>
+
+
+        <div  *ngIf="checkPage('registration')">
+          <mat-form-field appearance="fill" style="width: 100%">
+            <div class="login-card__el">
+              <p class="input-name">{{ 'AUTH.NAME' | translate }}</p>
+<!--              #login-->
+              <input
+                matInput
+                class="form-control"
+                formControlName="name"
+                [ngClass]="{ 'has-error': checkError('name') }"
+              />
+              <div *ngIf="checkError('name')">
+                <p class="login-validate" *ngIf="viewError('name', 'required')">
+                  {{ 'AUTH.NAME_ERROR' | translate }}
+                </p>
+                <p class="login-validate" *ngIf="viewError('name', 'lengthError')">
+                  {{ 'AUTH.LENGTHERROR' | translate }}
+                </p>
+              </div>
+            </div>
+          </mat-form-field>
         </div>
-        <div class="login-card__el">
-          <p class="input-name">{{ 'AUTH.EMAIL' | translate }}</p>
-          <input
-            #login
-            class="form-control"
-            formControlName="email"
-            [ngClass]="{ 'has-error': checkError('email') }"
-          />
-          <div *ngIf="checkError('email')">
-            <p class="login-validate" *ngIf="viewError('email', 'required')">
-              {{ 'AUTH.EMAIL_ERROR' | translate }}
-            </p>
-            <p class="login-validate" *ngIf="viewError('email', 'email')">
-              {{ 'AUTH.EMAIL_INVALID' | translate }}
-            </p>
+
+
+        <mat-form-field appearance="fill">
+          <div class="login-card__el">
+            <p class="input-name">{{ 'AUTH.EMAIL' | translate }}</p>
+<!--            #login-->
+            <input
+
+              matInput
+              class="form-control"
+              formControlName="email"
+              [ngClass]="{ 'has-error': checkError('email') }"
+            />
+          <div class="login-card__el">
+            <div *ngIf="checkError('email')">
+              <p class="login-validate" *ngIf="viewError('email', 'required')">
+                {{ 'AUTH.EMAIL_ERROR' | translate }}
+              </p>
+              <p class="login-validate" *ngIf="viewError('email', 'email')">
+                {{ 'AUTH.EMAIL_INVALID' | translate }}
+              </p>
+            </div>
           </div>
-        </div>
+         </div>
+        </mat-form-field>
+
         <div class="login-card__el">
-          <p class="input-name">{{ 'AUTH.PASSWORD' | translate }}</p>
-          <input
-            #password
-            class="form-control"
-            formControlName="pass"
-            [ngClass]="{ 'has-error': checkError('pass') }"
-          />
+        <mat-form-field appearance="fill">
+<!--              #password-->
+            <p class="input-name">{{ 'AUTH.PASSWORD' | translate }}</p>
+            <input
+              matInput [type]="hide ? 'password' : 'text'"
+              class="form-control"
+              style="margin-left: 15px"
+              formControlName="pass"
+              [ngClass]="{ 'has-error': checkError('pass') }"
+            />
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+
+          </mat-form-field>
+        </div>
+
           <div *ngIf="checkError('pass')">
             <div class="login-validate" *ngIf="viewError('pass', 'required')">
               {{ 'AUTH.PASSWORD_REQUIRED' | translate }} <br />
@@ -93,7 +119,8 @@
           >
           {{ 'AUTH.PASSWORD_NOACCOUNT' | translate }}
           </p>
-        </div>
+
+
         <button  class="login-card__btn" type="submit" [disabled]="form.invalid">
           <p class="login-card-btn__text">{{ 'AUTH.LOGIN' | translate }}</p>
         </button>
